@@ -1,0 +1,53 @@
+name: Deploy to S3
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      - name: Verify Node.js and npm versions
+        run: |
+          node --version
+          npm --version
+
+      - name: Assume AWS Role
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: 'us-west-2'
+          role-to-assume: 'arn:aws:iam::223651443348:role/blackdog-deployment'
+          role-session-name: 'tide-ave-deployment'
+          role-duration-seconds: 3600
+          role-skip-session-tagging: true
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Upload to S3
+        run: |
+          aws s3 sync dist s3://timothydalbey.net/tide-ave/ --delete
+
+      - name: Clear CloudFront Cache
+        run: |
+          aws cloudfront create-invalidation --distribution-id E3IUTYU1IIFKM4 --paths "/tide-ave/*"

@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lani and Tim Build A Coastie House</title>
+<style>
+:root{--primary:#1a5f7a;--primary-light:#2d8cb8;--secondary:#57837b;--warning:#e07b39;--danger:#c0392b;--success:#27ae60;--bg:#f5f7fa;--card-bg:#fff;--text:#2c3e50;--text-light:#7f8c8d;--border:#dce1e8}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+.container{max-width:1200px;margin:0 auto;padding:20px}
+header{background:linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.3)),url('header-bg.jpg') center/cover no-repeat;color:#fff;padding:60px 20px;text-align:center;margin-bottom:30px;position:relative}
+header h1{font-size:2.5rem;margin-bottom:10px;text-shadow:2px 2px 8px rgba(0,0,0,.5)}
+header p{font-size:1.2rem;opacity:.95;text-shadow:1px 1px 4px rgba(0,0,0,.5)}
+.badge{display:inline-block;background:rgba(255,255,255,.2);padding:8px 16px;border-radius:20px;margin-top:15px}
+.card{background:var(--card-bg);border-radius:12px;padding:25px;margin-bottom:25px;box-shadow:0 2px 12px rgba(0,0,0,.08);border:1px solid var(--border)}
+.card h2{color:var(--primary);margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid var(--border)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;align-items:start}
+.form-group{margin-bottom:18px;min-height:85px}
+.form-group label{display:block;font-weight:600;margin-bottom:6px}
+.hint{font-size:.85rem;color:var(--text-light);margin-top:4px;min-height:1.2em}
+input,select{width:100%;padding:12px;border:2px solid var(--border);border-radius:8px;font-size:1rem}
+input:focus,select:focus{outline:none;border-color:var(--primary-light)}
+.input-wrap{position:relative}
+.input-wrap .pre{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--text-light)}
+.input-wrap input{padding-left:28px}
+.input-wrap .suf{position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--text-light)}
+.input-wrap.has-suf input{padding-right:40px}
+.chk-group{display:flex;align-items:center;gap:10px;padding:12px;background:var(--bg);border-radius:8px}
+.chk-group input{width:20px;height:20px}
+.results{background:linear-gradient(135deg,#f8fafc,#eef2f7);border-radius:10px;padding:20px;margin-top:20px}
+.results h3{color:var(--primary);margin-bottom:15px}
+.row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)}
+.row:last-child{border-bottom:none}
+.row.total{font-weight:700;background:var(--primary);color:#fff;margin:15px -20px -20px;padding:15px 20px;border-radius:0 0 10px 10px}
+.row.hl{background:rgba(39,174,96,.1);margin:0 -20px;padding:10px 20px}
+.lbl{color:var(--text-light)}
+.val{font-weight:600}
+.row.total .lbl,.row.total .val{color:#fff}
+.alert{padding:15px 20px;border-radius:8px;margin:15px 0;display:flex;gap:12px}
+.alert-warn{background:rgba(224,123,57,.15);border-left:4px solid var(--warning);color:#8a5a30}
+.alert-info{background:rgba(45,140,184,.15);border-left:4px solid var(--primary-light);color:#1a5570}
+.alert-success{background:rgba(39,174,96,.15);border-left:4px solid var(--success);color:#1a6b3a}
+.lgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.lcard{background:var(--bg);border-radius:10px;padding:20px;border:1px solid var(--border);transition:all .2s}
+.lcard:hover{transform:translateY(-2px);box-shadow:0 4px 15px rgba(0,0,0,.1)}
+.lcard h4{color:var(--primary);margin-bottom:8px}
+.lcard p{font-size:.9rem;color:var(--text-light);margin-bottom:12px}
+.lcard a{color:var(--primary-light);text-decoration:none;font-weight:500}
+.ltype{display:inline-block;font-size:.75rem;padding:4px 10px;border-radius:12px;background:var(--primary);color:#fff;margin-bottom:10px}
+.stat-sec{margin-bottom:30px}
+.stat-sec h3{color:var(--secondary);margin-bottom:15px;text-transform:uppercase;letter-spacing:.5px}
+.stat-item{display:flex;align-items:center;padding:15px;background:var(--bg);border-radius:10px;margin-bottom:10px;cursor:pointer;border:2px solid transparent}
+.stat-item:hover{border-color:var(--primary-light)}
+.stat-item.done{background:rgba(39,174,96,.1);border-color:var(--success)}
+.stat-item.wip{background:rgba(45,140,184,.1);border-color:var(--primary-light)}
+.stat-chk{width:24px;height:24px;border-radius:50%;border:2px solid var(--border);margin-right:15px;display:flex;align-items:center;justify-content:center}
+.stat-item.done .stat-chk{background:var(--success);border-color:var(--success);color:#fff}
+.stat-item.wip .stat-chk{background:var(--primary-light);border-color:var(--primary-light);color:#fff}
+.stat-title{font-weight:600;margin-bottom:4px}
+.stat-note{font-size:.85rem;color:var(--text-light)}
+.tl{padding-left:30px;border-left:3px solid var(--border);margin-left:12px}
+.tl .stat-item{position:relative}
+.tl .stat-item::before{content:"";position:absolute;left:-39px;top:50%;transform:translateY(-50%);width:12px;height:12px;background:var(--border);border-radius:50%}
+.tl .stat-item.done::before{background:var(--success)}
+.tl .stat-item.wip::before{background:var(--primary-light);box-shadow:0 0 0 4px rgba(45,140,184,.3)}
+.step{display:flex;gap:20px;padding:20px;background:var(--bg);border-radius:10px;margin-bottom:15px}
+.step-num{width:40px;height:40px;background:var(--primary);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0}
+.step h4{color:var(--primary);margin-bottom:8px}
+.step p{font-size:.95rem;color:var(--text-light)}
+.rlist{list-style:none}
+.rlist li{padding:12px 0;border-bottom:1px solid var(--border);display:flex;gap:12px}
+.rlist li:last-child{border-bottom:none}
+.rlist .chk{color:var(--success);font-weight:bold}
+.specs{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:15px;margin-top:15px}
+.spec{text-align:center;padding:20px;background:var(--bg);border-radius:10px}
+.spec-val{font-size:1.8rem;font-weight:700;color:var(--primary)}
+.spec-lbl{font-size:.9rem;color:var(--text-light);margin-top:5px}
+.cites{font-size:.9rem}
+.cites ol{padding-left:25px}
+.cites li{padding:8px 0;color:var(--text-light)}
+.cites a{color:var(--primary-light);word-break:break-all}
+.diy-save{display:flex;align-items:center;gap:6px;font-size:.8rem;color:var(--text-light);margin-left:15px}
+.diy-save input[type="checkbox"]{width:14px;height:14px;cursor:pointer}
+.diy-save .diy-amt{display:none;color:var(--success)}
+.diy-save input[type="checkbox"]:checked~.diy-amt{display:inline}
+.diy-save input[type="number"]{width:60px;padding:2px 5px;font-size:.8rem}
+.tabs{display:flex;gap:0;border-bottom:2px solid var(--border);margin-bottom:25px;flex-wrap:nowrap;width:100%}
+.tab{flex:1;padding:10px 8px;background:none;border:none;font-size:.85rem;font-weight:500;color:var(--text-light);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;white-space:nowrap;text-align:center}
+.tab:hover{color:var(--primary)}
+.tab.active{color:var(--primary);border-bottom-color:var(--primary)}
+.tc{display:none}
+.tc.active{display:block}
+footer{text-align:center;padding:30px;color:var(--text-light)}
+@media(max-width:768px){header h1{font-size:1.8rem}.grid{grid-template-columns:1fr}.tab{padding:10px 16px;font-size:.9rem}}
+</style>
+</head>
+<body>
+<header>
+<h1>Lani and Tim Build A Coastie House</h1>
+<p>Our Coastal Home Construction Journey - Finance &amp; Progress Tracker</p>
+<div class="badge">Tillamook County, Oregon</div>
+</header>
+<div class="container">
+<div class="tabs">
+<button class="tab active" onclick="showTab('overview')">Overview</button>
+<button class="tab" onclick="showTab('buildcost')">Build Costs</button>
+<button class="tab" onclick="showTab('calculator')">Finance Calculator</button>
+<button class="tab" onclick="showTab('lenders')">Lenders</button>
+<button class="tab" onclick="showTab('requirements')">Requirements</button>
+<button class="tab" onclick="showTab('process')">Building Process</button>
+<button class="tab" onclick="showTab('status')">Status Tracker</button>
+<button class="tab" onclick="showTab('costs')">Cost Sharing</button>
+</div>
+
+<!-- Overview -->
+<div id="overview" class="tc active">
+<div class="card">
+<h2>🌊 Project Overview</h2>
+<p style="font-size:1.1rem;margin-bottom:20px">The Tide Ave. House is a planned coastal residence in Tillamook County, Oregon. This project involves financing and constructing a single-floor home on an already-owned lot, utilizing a <strong>conventional construction-to-permanent loan</strong>.</p>
+<div class="specs">
+<div class="spec"><div class="spec-val">2</div><div class="spec-lbl">Bedrooms</div></div>
+<div class="spec"><div class="spec-val">2.5</div><div class="spec-lbl">Bathrooms</div></div>
+<div class="spec"><div class="spec-val">1</div><div class="spec-lbl">Story</div></div>
+<div class="spec"><div class="spec-val">$1.2M+</div><div class="spec-lbl">Est. Value</div></div>
+</div>
+</div>
+<div class="card">
+<h2>⚠️ Why Not FHA?</h2>
+<div class="alert alert-warn">
+<span>📊</span>
+<div><strong>FHA Loan Limit Constraint:</strong> Tillamook County's 2026 FHA loan limit is <strong>$541,287</strong> (floor-level, non-metro area). With a total financing need of ~$885,000 (construction + lot payoff), the FHA limit would require over $340,000 in additional cash—making FHA impractical for this project.</div>
+</div>
+<div class="alert alert-success">
+<span>✅</span>
+<div><strong>Conventional Construction Loan Advantages:</strong><br>
+• No government loan limits—can finance the full amount needed<br>
+• No upfront or annual mortgage insurance premium (MIP)<br>
+• PMI can be avoided with 20%+ down payment<br>
+• Often competitive rates for strong credit profiles<br>
+• Your ~$90K lot equity counts toward down payment</div>
+</div>
+</div>
+<div class="grid">
+<div class="card">
+<h2>✅ Completed Pre-Construction</h2>
+<ul class="rlist">
+<li><span class="chk">✓</span><div><strong>Lot Purchased</strong><br><span style="color:var(--text-light)">$402,000 with ~$90,000 down payment</span></div></li>
+<li><span class="chk">✓</span><div><strong>Geotechnical Study</strong><br><span style="color:var(--text-light)">Helical pylons recommended for west side; no elevated foundation required</span></div></li>
+<li><span class="chk">✓</span><div><strong>Septic Permits</strong><br><span style="color:var(--text-light)">Permits obtained</span></div></li>
+<li><span class="chk">✓</span><div><strong>Utilities Arranged</strong><br><span style="color:var(--text-light)">Electrical and water concerns addressed</span></div></li>
+<li><span class="chk">✓</span><div><strong>Architect Engaged</strong><br><span style="color:var(--text-light)">Rough plans complete; final plans in progress</span></div></li>
+</ul>
+</div>
+<div class="card">
+<h2>📋 Project Summary</h2>
+<div class="results">
+<div class="row"><span class="lbl">Lot Value</span><span class="val">$402,000</span></div>
+<div class="row"><span class="lbl">Current Equity in Lot</span><span class="val">~$90,000</span></div>
+<div class="row"><span class="lbl">Estimated Construction Cost</span><span class="val">$550,000 - $600,000</span></div>
+<div class="row"><span class="lbl">Estimated Completed Value</span><span class="val">$1,200,000+</span></div>
+<div class="row hl"><span class="lbl">Projected Equity at Completion</span><span class="val">$200,000 - $250,000+</span></div>
+</div>
+</div>
+</div>
+<div class="card">
+<h2>ℹ️ About Construction-to-Permanent Loans</h2>
+<div class="alert alert-info">
+<span>💡</span>
+<div><strong>How It Works:</strong><br>A construction-to-permanent (CTP) loan combines the construction loan and permanent mortgage into a single loan with one or two closings. During construction, you typically make interest-only payments on drawn funds. After construction completes and you receive the Certificate of Occupancy, the loan converts to a standard amortizing mortgage. Some lenders offer "single-close" products; others require a modification or second closing.</div>
+</div>
+</div>
+</div>
+
+<!-- Build Costs -->
+<div id="buildcost" class="tc">
+<div class="card">
+<h2>🏗️ Construction Cost Estimator</h2>
+<p style="margin-bottom:15px">Detailed cost breakdown for the Tide Ave. House. Based on 2025-2026 Oregon coastal construction rates. Adjust values to match your specifications.</p>
+<div class="alert alert-info"><span>📐</span><div><strong>Home Specs:</strong> 1,600 sq ft single-story | Wood frame | Shed metal roof | Drywall interior | Wood floors & ceiling | Mid-to-high-mid grade finishes | Fiberglass windows</div></div>
+
+<div class="grid" style="margin-top:20px">
+<div>
+<h3 style="margin-bottom:15px;color:var(--secondary)">Base Parameters</h3>
+<div class="form-group"><label>Square Footage</label><div class="input-wrap has-suf"><input type="number" id="sqft" value="1600" onchange="calcBuild()"><span class="suf">sf</span></div></div>
+<div class="form-group"><label>Roof Area (typically 1.1-1.3x floor)</label><div class="input-wrap has-suf"><input type="number" id="roofSqft" value="1800" onchange="calcBuild()"><span class="suf">sf</span></div></div>
+<div class="form-group"><label>Exterior Wall Linear Feet</label><div class="input-wrap has-suf"><input type="number" id="wallLf" value="170" onchange="calcBuild()"><span class="suf">lf</span></div></div>
+<div class="form-group"><label>Wall Height</label><div class="input-wrap has-suf"><input type="number" id="wallHt" value="10" onchange="calcBuild()"><span class="suf">ft</span></div></div>
+</div>
+<div>
+<h3 style="margin-bottom:15px;color:var(--secondary)">Quality Multiplier</h3>
+<div class="form-group"><label>Finish Grade</label><select id="finishGrade" onchange="updateFinishGrade()"><option value="0.85">Budget / Builder Grade</option><option value="1.0">Standard</option><option value="1.15" selected>Mid-to-High-Mid Grade</option><option value="1.35">High-End</option><option value="1.6">Luxury</option></select></div>
+<div id="finishDesc" style="background:var(--bg);padding:12px 15px;border-radius:8px;margin-bottom:15px;font-size:.9rem;line-height:1.6">
+<strong style="color:var(--secondary)">Mid-to-High-Mid Grade:</strong> Quality materials above builder-grade. Includes fiberglass or wood-clad windows, solid-core interior doors, soft-close semi-custom cabinets, quartz/granite counters, mid-tier appliances. Durable hardwood or engineered wood floors.
+</div>
+<div class="form-group"><label>Location Factor (Coastal Oregon)</label><div class="input-wrap has-suf"><input type="number" id="locFactor" value="1.15" step="0.05" onchange="calcBuild()"><span class="suf">x</span></div><div class="hint">Coastal areas typically 10-20% higher</div></div>
+</div>
+</div>
+</div>
+
+<div class="card">
+<h2>📋 Itemized Cost Breakdown</h2>
+<p style="margin-bottom:15px;font-size:.9rem;color:var(--text-light)">Click any row to expand details. Costs editable for custom estimates.</p>
+
+<div class="results">
+<h3>🔨 Site Work & Foundation</h3>
+<div class="row"><span class="lbl">Site Prep (grading already done)</span><div><span class="val" id="sitePrepCost">$0</span><input type="number" id="sitePrep" value="2500" onchange="calcBuild()" style="width:100px;margin-left:10px;padding:4px 8px"></div></div>
+<div class="row"><span class="lbl">Tree Removal (large tree)</span><div><span class="val" id="treeCost">$0</span><input type="number" id="tree" value="3500" onchange="calcBuild()" style="width:100px;margin-left:10px;padding:4px 8px"></div></div>
+<div class="row"><span class="lbl">Retaining Wall</span><div><span class="val" id="retainCost">$0</span><input type="number" id="retaining" value="18000" onchange="calcBuild()" style="width:100px;margin-left:10px;padding:4px 8px"></div></div>
+<div class="row" style="background:rgba(39,174,96,.05)"><span class="lbl" style="padding-left:20px">↳ Neighbor Contribution</span><div><span class="val" id="neighborCost" style="color:var(--success)">-$0</span><input type="number" id="neighborShare" value="0" onchange="calcBuild()" style="width:100px;margin-left:10px;padding:4px 8px"></div></div>
+<div class="row"><span class="lbl">Foundation (crawl space w/ helical pylons west side)</span><div><span class="val" id="foundationCost">$0</span><input type="number" id="foundation" value="42000" onchange="calcBuild()" style="width:100px;margin-left:10px;padding:4px 8px"></div></div>
+<div class="row"><span class="lbl">Septic System (already permitted)</span><div><span class="val" id="septicCost">$0</span><input type="number" id="septic" value="18000" onchange="calcBuild()" style="width:100px;margin-left:10px;padding:4px 8px"></div></div>
+<div class="row"><span class="lbl">Water & Utility Connections</span><div><span class="val" id="utilityCost">$0</span><input type="number" id="utility" value="12000" onchange="calcBuild()" style="width:100px;margin-left:10px;padding:4px 8px"></div></div>
+</div>
+
+<div class="results">
+<h3>🪵 Framing & Structure</h3>
+<div class="row"><span class="lbl">Wood Framing ($/sf: <span id="frameRate">$45</span>)</span><div><span class="val" id="framingCost">$0</span><input type="number" id="framing" value="45" onchange="calcBuild()" style="width:80px;margin-left:10px;padding:4px 8px">/sf</div></div>
+<div class="row"><span class="lbl">Sheathing & House Wrap</span><div><span class="val" id="sheathCost">$0</span><input type="number" id="sheath" value="8500" onchange="calcBuild()" style="width:100px;margin-left:10px;padding:4px 8px"></div></div>
+</div>
+
+<div class="results">
+<h3>🏠 Exterior</h3>
+<div class="row"><span class="lbl">Metal Shed Roof ($/sf: <span id="roofRate">$18</span>)</span><div><span class="val" id="roofCost">$0</span><input type="number" id="roofing" value="18" onchange="calcBuild()" style="width:80px;margin-left:10px;padding:4px 8px">/sf</div></div>
+<div class="row"><span class="lbl">Exterior Siding & Trim</span><div><span class="val" id="sidingCost">$0</span><input type="number" id="siding" value="28000" onchange="calcBuild()" style="width:100px;margin-left:10px;padding:4px 8px"></div></div>
+<div class="row"><span class="lbl">Fiberglass Windows (8-10 windows)</span><div><span class="val" id="windowCost">$0</span><input type="number" id="windows" value="18000" onchange="calcBuild()" style="width:100px;margin-left:10px;padding:4px 8px"></div></div>
+<div class="row"><span class="lbl">Exterior Doors (mid-high grade, 3 doors)</span><div><span class="val" id="extDoorCost">$0</span><input type="number" id="extDoors" value="6500" onchange="calcBuild()" style="width:100px;margin-left:10px;padding:4px 8px"></div></div>
+<div class="row"><span class="lbl">Gutters & Downspouts</span><div><span class="val" id="gutterCost">$0</span><input type="number" id="gutters" value="3200" onchange="calcBuild()" style="width:100px;margin-left:10px;padding:4px 8px"></div></div>
+</div>
+
+<div class="results">
+<h3>⚡ Mechanical, Electrical, Plumbing (MEP)</h3>
+<div class="row"><span class="lbl">Electrical (panel, wiring, fixtures)</span><div><span class="val" id="electricCost">$0</span><input type="number" id="electric" value="28000" onchange="calcBuild()" style="width:100px;margin-left:10px;padding:4px 8px"></div></div>
+<div class="row"><span class="lbl">Plumbing (2.5 bath, kitchen, laundry)</span><div><span class="val" id="plumbingCost">$0</span><input type="number" id="plumbing" value="32000" onchange="calcBuild()" style="width:100px;margin-left:10px;padding:4px 8px"></div></div>
+<div class="row"><span class="lbl">HVAC (heat pump / mini-split)</span><div><span class="val" id="hvacCost">$0</span><input type="number" id="hvac" value="18000" onchange="calcBuild()" style="width:100px;margin-left:10px;padding:4px 8px"></div></div>
+</div>
+
+<div class="results">
+<h3>🧱 Insulation & Drywall</h3>
+<div class="row"><span class="lbl">Insulation (walls, ceiling, floor)</span><div><span class="val" id="insulCost">$0</span><input type="number" id="insulation" value="14000" onchange="calcBuild()" style="width:100px;margin-left:10px;padding:4px 8px"></div></div>
+<div class="row"><span class="lbl">Drywall (install, tape, texture)</span><div><span class="val" id="drywallCost">$0</span><input type="number" id="drywall" value="22000" onchange="calcBuild()" style="width:100px;margin-left:10px;padding:4px 8px"></div></div>
+<div class="row"><span class="lbl">Interior Painting</span><div style="display:flex;align-items:center;flex-wrap:wrap"><span class="val" id="paintCost">$0</span><input type="number" id="paint" value="6000" onchange="calcBuild()" style="width:100px;margin-left:10px;padding:4px 8px"><label class="diy-save"><input type="checkbox" id="diyPaint" onchange="calcBuild()">DIY<span class="diy-amt">: -$<input type="number" id="diyPaintSave" value="4500" onchange="calcBuild()"></span></label></div></div>
+</div>
+
+<div class="results">
+<h3>🪟 Interior Finishes</h3>
+<div class="row"><span class="lbl">Wood Flooring ($/sf: <span id="floorRate">$12</span>)</span><div style="display:flex;align-items:center;flex-wrap:wrap"><span class="val" id="flooringCost">$0</span><input type="number" id="flooring" value="12" onchange="calcBuild()" style="width:80px;margin-left:10px;padding:4px 8px">/sf<label class="diy-save"><input type="checkbox" id="diyFlooring" onchange="calcBuild()">DIY<span class="diy-amt">: -$<input type="number" id="diyFlooringSave" value="4" onchange="calcBuild()" style="width:40px">/sf</span></label></div></div>
+<div class="row"><span class="lbl">Wood Ceiling ($/sf: <span id="ceilRate">$14</span>)</span><div style="display:flex;align-items:center;flex-wrap:wrap"><span class="val" id="ceilingCost">$0</span><input type="number" id="ceiling" value="14" onchange="calcBuild()" style="width:80px;margin-left:10px;padding:4px 8px">/sf<label class="diy-save"><input type="checkbox" id="diyCeiling" onchange="calcBuild()">DIY<span class="diy-amt">: -$<input type="number" id="diyCeilingSave" value="5" onchange="calcBuild()" style="width:40px">/sf</span></label></div></div>
+<div class="row"><span class="lbl">Interior Doors (mid-high grade, 8 doors)</span><div style="display:flex;align-items:center;flex-wrap:wrap"><span class="val" id="intDoorCost">$0</span><input type="number" id="intDoors" value="4800" onchange="calcBuild()" style="width:100px;margin-left:10px;padding:4px 8px"><label class="diy-save"><input type="checkbox" id="diyDoors" onchange="calcBuild()">DIY<span class="diy-amt">: -$<input type="number" id="diyDoorsSave" value="1600" onchange="calcBuild()"></span></label></div></div>
+<div class="row"><span class="lbl">Trim & Millwork (base, casing, crown)</span><div style="display:flex;align-items:center;flex-wrap:wrap"><span class="val" id="trimCost">$0</span><input type="number" id="trim" value="12000" onchange="calcBuild()" style="width:100px;margin-left:10px;padding:4px 8px"><label class="diy-save"><input type="checkbox" id="diyTrim" onchange="calcBuild()">DIY<span class="diy-amt">: -$<input type="number" id="diyTrimSave" value="5000" onchange="calcBuild()"></span></label></div></div>
+</div>
+
+<div class="results">
+<h3>🍳 Kitchen & Bath</h3>
+<div class="row"><span class="lbl">Kitchen Cabinets (mid-high grade)</span><div style="display:flex;align-items:center;flex-wrap:wrap"><span class="val" id="cabinetCost">$0</span><input type="number" id="cabinets" value="22000" onchange="calcBuild()" style="width:100px;margin-left:10px;padding:4px 8px"><label class="diy-save"><input type="checkbox" id="diyCabinets" onchange="calcBuild()">DIY<span class="diy-amt">: -$<input type="number" id="diyCabinetsSave" value="4000" onchange="calcBuild()"></span></label></div></div>
+<div class="row"><span class="lbl">Countertops (quartz/granite)</span><div><span class="val" id="counterCost">$0</span><input type="number" id="counters" value="9500" onchange="calcBuild()" style="width:100px;margin-left:10px;padding:4px 8px"></div></div>
+<div class="row"><span class="lbl">Appliances (mid-high grade package)</span><div><span class="val" id="applianceCost">$0</span><input type="number" id="appliances" value="12000" onchange="calcBuild()" style="width:100px;margin-left:10px;padding:4px 8px"></div></div>
+<div class="row"><span class="lbl">Bathroom Fixtures & Tile (2.5 bath)</span><div><span class="val" id="bathCost">$0</span><input type="number" id="bathFixtures" value="18000" onchange="calcBuild()" style="width:100px;margin-left:10px;padding:4px 8px"></div></div>
+</div>
+
+<div class="results">
+<h3>📄 Soft Costs & Fees</h3>
+<div class="row"><span class="lbl">Permits & Fees (Tillamook County)</span><div><span class="val" id="permitCost">$0</span><input type="number" id="permits" value="8500" onchange="calcBuild()" style="width:100px;margin-left:10px;padding:4px 8px"></div></div>
+<div class="row"><span class="lbl">Architect/Design (already paid separately)</span><div><span class="val">$0</span><span style="margin-left:10px;color:var(--text-light)">Tracked in Cost Sharing</span></div></div>
+<div class="row"><span class="lbl">Builder's Risk Insurance</span><div><span class="val" id="insuranceCost">$0</span><input type="number" id="insurance" value="4500" onchange="calcBuild()" style="width:100px;margin-left:10px;padding:4px 8px"></div></div>
+<div class="row"><span class="lbl">General Contractor Fee (% of hard costs)</span><div><span class="val" id="gcFeeCost">$0</span><input type="number" id="gcFee" value="15" onchange="calcBuild()" style="width:80px;margin-left:10px;padding:4px 8px">%</div></div>
+<div class="row" style="background:var(--bg)"><span class="lbl"><input type="checkbox" id="ownerBuilder" onchange="calcBuild()" style="margin-right:8px"><label for="ownerBuilder" style="cursor:pointer">Owner-Builder (eliminate GC fee)</label></span><span class="val" id="gcSavings" style="color:var(--success)"></span></div>
+</div>
+
+<div class="card" id="gcDutiesCard">
+<h3 style="cursor:pointer" onclick="document.getElementById('gcDetails').style.display=document.getElementById('gcDetails').style.display==='none'?'block':'none';this.querySelector('span').textContent=document.getElementById('gcDetails').style.display==='none'?'Click to expand':'Click to collapse'">What Does a General Contractor Do? <span style="float:right;font-size:.8rem;color:var(--primary)">Click to expand</span></h3>
+<div id="gcDetails" class="gc-details" style="display:none">
+<p style="margin:15px 0">A GC manages the entire construction process. Here's what they handle:</p>
+
+<div class="grid">
+<div>
+<h4 style="color:var(--secondary);margin-bottom:10px">📅 Project Management</h4>
+<ul style="margin-left:20px;line-height:1.8">
+<li>Create and maintain construction schedule</li>
+<li>Coordinate all subcontractors</li>
+<li>Sequence work (foundation → framing → MEP → finishes)</li>
+<li>Handle schedule conflicts and delays</li>
+<li>Manage material deliveries and staging</li>
+</ul>
+
+<h4 style="color:var(--secondary);margin:15px 0 10px">📞 Subcontractor Coordination</h4>
+<ul style="margin-left:20px;line-height:1.8">
+<li>Hire and vet all subs (plumber, electrician, HVAC, etc.)</li>
+<li>Negotiate pricing and contracts</li>
+<li>Schedule inspections between trades</li>
+<li>Ensure work meets code and specs</li>
+<li>Handle disputes and quality issues</li>
+</ul>
+</div>
+<div>
+<h4 style="color:var(--secondary);margin-bottom:10px">💰 Financial Management</h4>
+<ul style="margin-left:20px;line-height:1.8">
+<li>Manage construction budget</li>
+<li>Process draw requests to lender</li>
+<li>Pay subcontractors</li>
+<li>Track change orders</li>
+<li>Maintain lien waivers</li>
+</ul>
+
+<h4 style="color:var(--secondary);margin:15px 0 10px">📋 Administrative</h4>
+<ul style="margin-left:20px;line-height:1.8">
+<li>Pull permits and schedule inspections</li>
+<li>Maintain insurance and bonding</li>
+<li>Handle code compliance</li>
+<li>Manage punch list at completion</li>
+<li>Provide warranties</li>
+</ul>
+</div>
+</div>
+
+<div class="alert alert-info" style="margin-top:20px"><span></span><div>
+<strong>Can You Be an Owner-Builder?</strong><br>
+Yes, but consider:
+<ul style="margin:10px 0 0 20px">
+<li><strong>Pros:</strong> Save 10-20% GC fee, direct control, learn the process</li>
+<li><strong>Cons:</strong> Full-time job during build (6-12 months), need to know all trades' work, scheduling is complex, subs may charge more or prioritize GC jobs, lender may require more oversight</li>
+<li><strong>Middle ground:</strong> Hire a "construction manager" at 5-8% to advise while you do legwork</li>
+</ul>
+</div></div>
+
+<div class="alert alert-warn" style="margin-top:15px"><span></span><div>
+<strong>Owner-Builder Financing is Very Limited</strong><br>
+Most construction lenders <strong>require a licensed GC</strong>, especially with less than 20% down. Here's why:
+<ul style="margin:10px 0 0 20px">
+<li><strong>Risk to lender:</strong> Owner-builders have higher failure/delay rates</li>
+<li><strong>No warranty:</strong> GCs provide workmanship warranties; owner-builders don't</li>
+<li><strong>Draw management:</strong> Lenders trust GCs to manage funds properly</li>
+<li><strong>Insurance gaps:</strong> Builder's risk policies may not cover owner-builders</li>
+</ul>
+<p style="margin-top:10px"><strong>Bottom line:</strong> If you need financing (especially &lt;20% down), plan on hiring a GC. Owner-builder typically only works with cash builds or very high equity positions (40%+).</p>
+</div></div>
+</div>
+</div>
+<style>.gc-details{display:none}.expanded .gc-details{display:block}</style>
+
+<div class="results">
+<h3>🌳 Site Finishing</h3>
+<div class="row"><span class="lbl">Gravel Driveway & Parking</span><div><span class="val" id="driveCost">$0</span><input type="number" id="driveway" value="4500" onchange="calcBuild()" style="width:100px;margin-left:10px;padding:4px 8px"></div></div>
+<div class="row"><span class="lbl">Basic Landscaping</span><div style="display:flex;align-items:center;flex-wrap:wrap"><span class="val" id="landscapeCost">$0</span><input type="number" id="landscape" value="6000" onchange="calcBuild()" style="width:100px;margin-left:10px;padding:4px 8px"><label class="diy-save"><input type="checkbox" id="diyLandscape" onchange="calcBuild()">DIY<span class="diy-amt">: -$<input type="number" id="diyLandscapeSave" value="4500" onchange="calcBuild()"></span></label></div></div>
+<div class="row"><span class="lbl">Deck/Patio (if included)</span><div style="display:flex;align-items:center;flex-wrap:wrap"><span class="val" id="deckCost">$0</span><input type="number" id="deck" value="15000" onchange="calcBuild()" style="width:100px;margin-left:10px;padding:4px 8px"><label class="diy-save"><input type="checkbox" id="diyDeck" onchange="calcBuild()">DIY<span class="diy-amt">: -$<input type="number" id="diyDeckSave" value="8000" onchange="calcBuild()"></span></label></div></div>
+</div>
+
+<div class="results">
+<h3>📉 Cost Reductions</h3>
+<div class="row"><span class="lbl">Single-Story Accessibility Savings</span><div><span class="val" id="accessSaveCost">-$0</span><input type="number" id="accessSave" value="8000" onchange="calcBuild()" style="width:100px;margin-left:10px;padding:4px 8px"></div></div>
+<div class="hint" style="margin-top:5px;padding-left:10px">Single-level = no stairs, simpler framing, easier trade access, reduced scaffolding</div>
+<div class="row" id="diyTotalRow" style="margin-top:10px;display:none"><span class="lbl">Owner Labor Savings (DIY)</span><span class="val" id="totalDiySavings" style="color:var(--success)">-$0</span></div>
+</div>
+</div>
+
+<div class="card">
+<h2>📊 Cost Summary</h2>
+<div class="grid">
+<div class="results">
+<h3>By Category</h3>
+<div class="row"><span class="lbl">Site Work & Foundation</span><span class="val" id="catSite">$0</span></div>
+<div class="row"><span class="lbl">Framing & Structure</span><span class="val" id="catFrame">$0</span></div>
+<div class="row"><span class="lbl">Exterior (roof, siding, windows, doors)</span><span class="val" id="catExt">$0</span></div>
+<div class="row"><span class="lbl">MEP (electrical, plumbing, HVAC)</span><span class="val" id="catMep">$0</span></div>
+<div class="row"><span class="lbl">Insulation & Drywall</span><span class="val" id="catInsul">$0</span></div>
+<div class="row"><span class="lbl">Interior Finishes</span><span class="val" id="catInt">$0</span></div>
+<div class="row"><span class="lbl">Kitchen & Bath</span><span class="val" id="catKb">$0</span></div>
+<div class="row"><span class="lbl">Soft Costs & GC Fee</span><span class="val" id="catSoft">$0</span></div>
+<div class="row"><span class="lbl">Site Finishing</span><span class="val" id="catFinish">$0</span></div>
+<div class="row" style="color:var(--success)"><span class="lbl">Total Savings (Single-Story + DIY Labor)</span><span class="val" id="catSavings">-$0</span></div>
+</div>
+<div class="results">
+<h3>Totals</h3>
+<div class="row"><span class="lbl">Base Construction Cost</span><span class="val" id="baseTotal">$0</span></div>
+<div class="row" style="font-size:.85rem;color:var(--text-light)"><span class="lbl">↳ Finish grade applied to line items (windows, cabinets, flooring, etc.)</span><span class="val"></span></div>
+<div class="row"><span class="lbl">Location Factor (Coastal)</span><span class="val" id="locAdj">$0</span></div>
+<div class="row total"><span class="lbl">Total Estimated Build Cost</span><span class="val" id="grandTotal">$0</span></div>
+<div class="row hl" style="margin-top:15px"><span class="lbl">Cost Per Square Foot</span><span class="val" id="costPerSf">$0</span></div>
+</div>
+</div>
+<div class="alert alert-success" style="margin-top:20px"><span>💰</span><div><strong>This estimate feeds into the Finance Calculator.</strong> The total build cost is used as the default construction cost. <a href="#" onclick="applyBuildCost();return false;" style="color:var(--success);font-weight:600">→ Apply to Finance Calculator</a></div></div>
+</div>
+</div>
+
+<!-- Calculator -->
+<div id="calculator" class="tc">
+<div class="card">
+<h2>🧮 Construction Finance Calculator</h2>
+<div class="grid">
+<div>
+<h3 style="margin-bottom:20px;color:var(--secondary)">Property &amp; Lot Details</h3>
+<div class="form-group"><label>Lot Purchase Price</label><div class="input-wrap"><span class="pre">$</span><input type="number" id="lotPrice" value="402000" onchange="calc()"></div></div>
+<div class="form-group"><label>Lot Equity (Your Down Payment)</label><div class="input-wrap"><span class="pre">$</span><input type="number" id="lotEquity" value="90000" onchange="calc()"></div><div class="hint">Your equity in the lot (counts toward down payment)</div></div>
+<div class="form-group"><label>Estimated Construction Cost</label><div class="input-wrap"><span class="pre">$</span><input type="number" id="constCost" value="575000" onchange="calc()"></div><div class="hint">Range: $550,000 - $600,000</div></div>
+<div class="form-group"><label>Value Gain on Completion</label><select id="valueGain" onchange="calcAutoValue()"><option value="1.20">20% above cost</option><option value="1.25">25% above cost</option><option value="1.30">30% above cost</option><option value="1.35" selected>35% above cost</option><option value="1.40">40% above cost</option></select><div class="hint">Typical new construction equity gain</div></div>
+<div class="form-group"><label>Estimated Completed Value (Appraisal)</label><div class="input-wrap"><span class="pre">$</span><input type="number" id="estValue" value="1200000" onchange="calc()"></div><div class="hint">Auto-calculated from costs + gain, or override</div></div>
+<div class="form-group"><label>Additional Cash at Closing</label><div class="input-wrap"><span class="pre">$</span><input type="number" id="addCash" value="0" onchange="calc()"></div><div class="hint">Extra cash to reduce loan / meet down payment</div></div>
+</div>
+<div>
+<h3 style="margin-bottom:20px;color:var(--secondary)">Loan Terms</h3>
+<div class="form-group"><label>Interest Rate</label><div class="input-wrap has-suf"><input type="number" id="rate" value="6.5" step="0.125" onchange="calc()"><span class="suf">%</span></div><div class="hint">Current conventional rates ~6.0% - 7.0%</div></div>
+<div class="form-group"><label>Loan Term</label><select id="term" onchange="calc()"><option value="30" selected>30 Years</option><option value="25">25 Years</option><option value="20">20 Years</option><option value="15">15 Years</option></select></div>
+<div class="form-group"><label>Required Down Payment %</label><div class="input-wrap has-suf"><input type="number" id="downPct" value="20" step="5" onchange="calc()"><span class="suf">%</span></div><div class="hint">Typical: 10-20% for construction loans</div></div>
+<div class="form-group"><label>Closing Costs</label><div class="input-wrap has-suf"><input type="number" id="closePct" value="3" step="0.5" onchange="calc()"><span class="suf">%</span></div><div class="hint">Typically 2% - 5% of loan amount</div></div>
+<div class="form-group"><label>PMI Rate (if LTV &gt; 80%)</label><div class="input-wrap has-suf"><input type="number" id="pmiRate" value="0.5" step="0.1" onchange="calc()"><span class="suf">%</span></div><div class="hint">Private Mortgage Insurance if down &lt; 20%</div></div>
+</div>
+</div>
+<div id="ltvWarn" class="alert alert-warn" style="display:none"><span>⚠️</span><div id="warnTxt"></div></div>
+<div id="ltvOk" class="alert alert-success" style="display:none"><span>✅</span><div id="okTxt"></div></div>
+<div class="grid" style="margin-top:25px">
+<div class="results">
+<h3>📊 Loan Calculation</h3>
+<div class="row"><span class="lbl">Total Acquisition Cost</span><span class="val" id="totAcq">$0</span></div>
+<div class="row"><span class="lbl">Lot Mortgage Payoff Required</span><span class="val" id="lotPay">$0</span></div>
+<div class="row"><span class="lbl">Total Financing Needed</span><span class="val" id="finNeed">$0</span></div>
+<div class="row"><span class="lbl">Required Down Payment</span><span class="val" id="reqDown">$0</span></div>
+<div class="row"><span class="lbl">Your Lot Equity</span><span class="val" id="lotEqDisp">$0</span></div>
+<div class="row"><span class="lbl">Additional Cash</span><span class="val" id="addCashDisp">$0</span></div>
+<div class="row"><span class="lbl">Total Down Payment</span><span class="val" id="totDown">$0</span></div>
+<div class="row total"><span class="lbl">Loan Amount</span><span class="val" id="loanAmt">$0</span></div>
+</div>
+<div class="results">
+<h3>💵 Cash Required at Closing</h3>
+<div class="row"><span class="lbl">Down Payment Gap (if any)</span><span class="val" id="downGap">$0</span></div>
+<div class="row"><span class="lbl">Closing Costs</span><span class="val" id="closeCost">$0</span></div>
+<div class="row total" id="cashRow"><span class="lbl">Total Cash Needed</span><span class="val" id="totCash">$0</span></div>
+</div>
+</div>
+<div class="grid" style="margin-top:20px">
+<div class="results">
+<h3>Monthly Payment Breakdown (PITI)</h3>
+<p style="font-size:.85rem;color:var(--text-light);margin-bottom:15px"><strong>PITI</strong> = Principal + Interest + Taxes + Insurance. This is your total monthly housing cost that lenders use to calculate debt-to-income ratio.</p>
+<div class="row"><span class="lbl">Principal &amp; Interest</span><span class="val" id="mPI">$0</span></div>
+<div class="row"><span class="lbl">PMI (if applicable)</span><span class="val" id="mPMI">$0</span></div>
+<div class="row"><span class="lbl">Est. Property Tax (1.0%)</span><span class="val" id="mTax">$0</span></div>
+<div class="row"><span class="lbl">Est. Homeowner's Insurance</span><span class="val" id="mIns">$0</span></div>
+<div class="row total"><span class="lbl">Total Monthly PITI</span><span class="val" id="mTot">$0</span></div>
+</div>
+<div class="results">
+<h3>📈 Equity &amp; Value</h3>
+<div class="row"><span class="lbl">Estimated Completed Value</span><span class="val" id="compVal">$0</span></div>
+<div class="row"><span class="lbl">Final Loan Amount</span><span class="val" id="loanAmt2">$0</span></div>
+<div class="row"><span class="lbl">Loan-to-Value (LTV)</span><span class="val" id="ltv">0%</span></div>
+<div class="row hl"><span class="lbl">Instant Equity at Completion</span><span class="val" id="eqComp">$0</span></div>
+<div class="row hl"><span class="lbl">Equity % of Value</span><span class="val" id="eqPct">0%</span></div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Lenders -->
+<div id="lenders" class="tc">
+<div class="card">
+<h2>🏦 Construction Loan Providers</h2>
+<p style="margin-bottom:20px">The following lenders offer conventional construction-to-permanent loans that may serve Tillamook County, Oregon.</p>
+<div class="alert alert-info"><span>💡</span><div><strong>Tip:</strong> For conventional construction loans, shop both large national banks and local/regional lenders. Credit unions often offer competitive rates for members.</div></div>
+<div class="lgrid">
+<div class="lcard"><span class="ltype">Regional Bank</span><h4>Columbia Bank</h4><p>Pacific Northwest regional bank with strong construction loan program in Oregon.</p><a href="https://www.columbiabank.com/" target="_blank">Visit Website →</a></div>
+<div class="lcard"><span class="ltype">National Bank</span><h4>US Bank</h4><p>Major national bank with Oregon branches and construction lending.</p><a href="https://www.usbank.com/home-loans/construction-loans.html" target="_blank">Visit Website →</a></div>
+<div class="lcard"><span class="ltype">National Bank</span><h4>Wells Fargo</h4><p>Large national lender with construction-to-permanent options.</p><a href="https://www.wellsfargo.com/mortgage/construction-loan/" target="_blank">Visit Website →</a></div>
+<div class="lcard"><span class="ltype">Credit Union</span><h4>OnPoint Community CU</h4><p>Portland-based credit union offering home construction financing.</p><a href="https://www.onpointcu.com/" target="_blank">Visit Website →</a></div>
+<div class="lcard"><span class="ltype">National Lender</span><h4>Guild Mortgage</h4><p>Strong presence in Pacific Northwest, offers construction loans.</p><a href="https://www.guildmortgage.com/" target="_blank">Visit Website →</a></div>
+<div class="lcard"><span class="ltype">Credit Union</span><h4>Oregon State CU</h4><p>Oregon-based credit union with construction loan options.</p><a href="https://www.oregonstatecu.com/" target="_blank">Visit Website →</a></div>
+<div class="lcard"><span class="ltype">Regional Bank</span><h4>Banner Bank</h4><p>Pacific Northwest regional bank with construction lending.</p><a href="https://www.bannerbank.com/" target="_blank">Visit Website →</a></div>
+<div class="lcard"><span class="ltype">National Lender</span><h4>Rocket Mortgage</h4><p>Major online lender with construction loan products.</p><a href="https://www.rocketmortgage.com/" target="_blank">Visit Website →</a></div>
+</div>
+</div>
+</div>
+
+<!-- Requirements -->
+<div id="requirements" class="tc">
+<div class="card">
+<h2>📋 Conventional Construction Loan Requirements</h2>
+<div class="grid">
+<div>
+<h3 style="margin-bottom:15px;color:var(--secondary)">Credit &amp; Financial</h3>
+<ul class="rlist">
+<li><span>•</span><div><strong>Credit Score: 680+ typically required</strong><br><span style="color:var(--text-light)">720+ for best rates; some accept 660+</span></div></li>
+<li><span>•</span><div><strong>Down Payment: 10-20% typical</strong><br><span style="color:var(--text-light)">Land equity counts; 20% avoids PMI</span></div></li>
+<li><span>•</span><div><strong>Debt-to-Income: 43-45% maximum</strong><br><span style="color:var(--text-light)">Based on projected housing payment</span></div></li>
+<li><span>•</span><div><strong>Cash Reserves: 6-12 months PITI</strong><br><span style="color:var(--text-light)">Lenders want contingency funds</span></div></li>
+<li><span>•</span><div><strong>Employment: 2 years stable history</strong></div></li>
+</ul>
+</div>
+<div>
+<h3 style="margin-bottom:15px;color:var(--secondary)">Property &amp; Builder</h3>
+<ul class="rlist">
+<li><span>•</span><div><strong>Primary or Second Home</strong><br><span style="color:var(--text-light)">Investment properties harder to finance</span></div></li>
+<li><span>•</span><div><strong>Licensed General Contractor</strong><br><span style="color:var(--text-light)">Must be approved by lender</span></div></li>
+<li><span>•</span><div><strong>Fixed-price construction contract</strong><br><span style="color:var(--text-light)">Detailed specs and draw schedule</span></div></li>
+<li><span>•</span><div><strong>Builder's Risk Insurance</strong><br><span style="color:var(--text-light)">Coverage during construction</span></div></li>
+<li><span>•</span><div><strong>Plans &amp; Permits Required</strong><br><span style="color:var(--text-light)">Approved before closing</span></div></li>
+</ul>
+</div>
+</div>
+<div class="alert alert-success" style="margin-top:25px"><span>✅</span><div><strong>No Loan Limit!</strong> Unlike FHA, conventional loans have no government-imposed loan limits. The limit is based on the lender's own guidelines, your qualifications, and the appraised value of the completed home.</div></div>
+</div>
+<div class="card">
+<h2>📊 Conventional vs FHA Comparison</h2>
+<div class="results">
+<div class="row"><span class="lbl">Loan Limit</span><span class="val">None (Conventional) vs $541,287 (FHA Tillamook)</span></div>
+<div class="row"><span class="lbl">Down Payment</span><span class="val">10-20% (Conv) vs 3.5% (FHA)</span></div>
+<div class="row"><span class="lbl">Upfront MIP</span><span class="val">None (Conv) vs 1.75% (FHA)</span></div>
+<div class="row"><span class="lbl">Annual MIP/PMI</span><span class="val">PMI drops at 80% LTV (Conv) vs MIP for loan life (FHA)</span></div>
+<div class="row"><span class="lbl">Credit Score</span><span class="val">680+ typical (Conv) vs 580+ (FHA)</span></div>
+<div class="row hl"><span class="lbl">Best For This Project</span><span class="val">Conventional ✓</span></div>
+</div>
+</div>
+</div>
+
+<!-- Process -->
+<div id="process" class="tc">
+<div class="card">
+<h2>🔨 Construction-to-Permanent Loan Process</h2>
+<div class="step"><div class="step-num">1</div><div><h4>Pre-Qualification (1-2 weeks)</h4><p>Submit financial documents, credit check, income verification. Get pre-qualified amount.</p></div></div>
+<div class="step"><div class="step-num">2</div><div><h4>Builder Selection &amp; Approval (2-4 weeks)</h4><p>Select licensed contractor. Lender reviews builder credentials, license, insurance, and financials.</p></div></div>
+<div class="step"><div class="step-num">3</div><div><h4>Plans, Specs &amp; Contract</h4><p>Submit finalized architectural drawings, specifications, and fixed-price construction contract.</p></div></div>
+<div class="step"><div class="step-num">4</div><div><h4>Appraisal</h4><p>"Subject to completion" appraisal based on plans. Confirms projected value.</p></div></div>
+<div class="step"><div class="step-num">5</div><div><h4>Underwriting &amp; Closing (4-6 weeks)</h4><p>Full underwriting. Single close (or first of two). Rate may lock or float during construction.</p></div></div>
+<div class="step"><div class="step-num">6</div><div><h4>Construction Phase (6-9 months)</h4><p>Draw requests as milestones completed. Inspections before each draw. Interest-only on drawn funds.</p></div></div>
+<div class="step"><div class="step-num">7</div><div><h4>Conversion to Permanent Mortgage</h4><p>After C.O., loan converts. Some products require modification closing; others are automatic.</p></div></div>
+</div>
+<div class="card">
+<h2>🏗️ Construction Timeline</h2>
+<p style="margin-bottom:20px">Estimated for 2-bed, 2.5-bath single-floor coastal home:</p>
+<div class="grid">
+<div class="results">
+<div class="row"><span class="lbl">Site Preparation</span><span class="val">1-2 weeks</span></div>
+<div class="row"><span class="lbl">Foundation (w/ helical pylons)</span><span class="val">2-4 weeks</span></div>
+<div class="row"><span class="lbl">Framing</span><span class="val">3-4 weeks</span></div>
+<div class="row"><span class="lbl">Roofing</span><span class="val">1-2 weeks</span></div>
+<div class="row"><span class="lbl">Rough-ins (MEP)</span><span class="val">3-4 weeks</span></div>
+</div>
+<div class="results">
+<div class="row"><span class="lbl">Insulation</span><span class="val">1 week</span></div>
+<div class="row"><span class="lbl">Drywall</span><span class="val">2-3 weeks</span></div>
+<div class="row"><span class="lbl">Interior Finishes</span><span class="val">4-6 weeks</span></div>
+<div class="row"><span class="lbl">Exterior Finishes</span><span class="val">2-3 weeks</span></div>
+<div class="row"><span class="lbl">Final Inspections</span><span class="val">1-2 weeks</span></div>
+<div class="row total"><span class="lbl">Total Estimated</span><span class="val">6-9 months</span></div>
+</div>
+</div>
+</div>
+<div class="card">
+<h2>📞 Tillamook County Resources</h2>
+<div class="grid">
+<div><h4>Community Development</h4><p><strong>Address:</strong> 1510-B Third Street, Tillamook, OR 97141<br><strong>Phone:</strong> (503) 842-3408<br><strong>Hours:</strong> Mon-Fri, 8:00 AM - 4:00 PM<br><strong>Inspections:</strong> (503) 842-1815</p></div>
+<div><h4>Permit Notes</h4><ul style="padding-left:20px"><li>Appointments required for submittals</li><li>Digital submission requires coordination</li><li>Flood zone properties need pre-app meeting</li></ul><p style="margin-top:10px"><a href="https://www.tillamookcounty.gov/commdev" target="_blank">Visit County Website →</a></p></div>
+</div>
+</div>
+</div>
+
+<!-- Status -->
+<div id="status" class="tc">
+<div class="card">
+<h2>📊 Project Status Tracker</h2>
+<p style="margin-bottom:5px">Click items to toggle status. Progress saved automatically.</p>
+<p style="margin-bottom:20px;font-size:.9rem;color:var(--text-light)"><span style="color:var(--success)">●</span> Completed <span style="color:var(--primary-light)">●</span> In Progress <span style="color:var(--border)">●</span> Not Started</p>
+<div class="stat-sec"><h3>Pre-Construction Phase</h3><div class="tl">
+<div class="stat-item done" data-id="lot" onclick="toggle(this)"><div class="stat-chk">✓</div><div><div class="stat-title">Lot Purchased</div><div class="stat-note">$402,000 with ~$90,000 down</div></div></div>
+<div class="stat-item done" data-id="geo" onclick="toggle(this)"><div class="stat-chk">✓</div><div><div class="stat-title">Geotechnical Study</div><div class="stat-note">Helical pylons recommended for west side</div></div></div>
+<div class="stat-item done" data-id="sep" onclick="toggle(this)"><div class="stat-chk">✓</div><div><div class="stat-title">Septic Permits</div><div class="stat-note">Permits obtained</div></div></div>
+<div class="stat-item done" data-id="util" onclick="toggle(this)"><div class="stat-chk">✓</div><div><div class="stat-title">Utilities Arranged</div><div class="stat-note">Electrical and water handled</div></div></div>
+<div class="stat-item done" data-id="rough" onclick="toggle(this)"><div class="stat-chk">✓</div><div><div class="stat-title">Architect Rough Plans</div><div class="stat-note">Initial design complete</div></div></div>
+<div class="stat-item wip" data-id="final" onclick="toggle(this)"><div class="stat-chk">●</div><div><div class="stat-title">Final Architectural Plans</div><div class="stat-note">Currently in progress</div></div></div>
+</div></div>
+<div class="stat-sec"><h3>Financing Phase</h3><div class="tl">
+<div class="stat-item" data-id="lres" onclick="toggle(this)"><div class="stat-chk"></div><div><div class="stat-title">Research &amp; Select Lender</div><div class="stat-note">Compare conventional construction loan options</div></div></div>
+<div class="stat-item" data-id="preap" onclick="toggle(this)"><div class="stat-chk"></div><div><div class="stat-title">Loan Pre-Qualification</div><div class="stat-note">Submit financial documents</div></div></div>
+<div class="stat-item" data-id="bsel" onclick="toggle(this)"><div class="stat-chk"></div><div><div class="stat-title">Builder Selection</div><div class="stat-note">Select licensed general contractor</div></div></div>
+<div class="stat-item" data-id="bapp" onclick="toggle(this)"><div class="stat-chk"></div><div><div class="stat-title">Builder Lender Approval</div><div class="stat-note">Lender reviews builder credentials</div></div></div>
+<div class="stat-item" data-id="appr" onclick="toggle(this)"><div class="stat-chk"></div><div><div class="stat-title">Appraisal</div><div class="stat-note">Subject to completion appraisal</div></div></div>
+<div class="stat-item" data-id="close" onclick="toggle(this)"><div class="stat-chk"></div><div><div class="stat-title">Loan Closing</div><div class="stat-note">Sign documents, fund construction</div></div></div>
+</div></div>
+<div class="stat-sec"><h3>Construction Phase</h3><div class="tl">
+<div class="stat-item" data-id="site" onclick="toggle(this)"><div class="stat-chk"></div><div><div class="stat-title">Site Preparation</div><div class="stat-note">Clearing, grading</div></div></div>
+<div class="stat-item" data-id="found" onclick="toggle(this)"><div class="stat-chk"></div><div><div class="stat-title">Foundation</div><div class="stat-note">Helical pylons on west side</div></div></div>
+<div class="stat-item" data-id="frame" onclick="toggle(this)"><div class="stat-chk"></div><div><div class="stat-title">Framing</div><div class="stat-note">Structure and roof</div></div></div>
+<div class="stat-item" data-id="roof" onclick="toggle(this)"><div class="stat-chk"></div><div><div class="stat-title">Roofing</div><div class="stat-note">Installation and waterproofing</div></div></div>
+<div class="stat-item" data-id="mep" onclick="toggle(this)"><div class="stat-chk"></div><div><div class="stat-title">Rough-Ins (MEP)</div><div class="stat-note">Mechanical, electrical, plumbing</div></div></div>
+<div class="stat-item" data-id="ins" onclick="toggle(this)"><div class="stat-chk"></div><div><div class="stat-title">Insulation</div><div class="stat-note">Wall and ceiling</div></div></div>
+<div class="stat-item" data-id="dry" onclick="toggle(this)"><div class="stat-chk"></div><div><div class="stat-title">Drywall</div><div class="stat-note">Installation, taping, finishing</div></div></div>
+<div class="stat-item" data-id="int" onclick="toggle(this)"><div class="stat-chk"></div><div><div class="stat-title">Interior Finishes</div><div class="stat-note">Cabinets, flooring, fixtures</div></div></div>
+<div class="stat-item" data-id="ext" onclick="toggle(this)"><div class="stat-chk"></div><div><div class="stat-title">Exterior Finishes</div><div class="stat-note">Siding, paint, landscaping</div></div></div>
+</div></div>
+<div class="stat-sec"><h3>Completion Phase</h3><div class="tl">
+<div class="stat-item" data-id="finsp" onclick="toggle(this)"><div class="stat-chk"></div><div><div class="stat-title">Final Inspections</div><div class="stat-note">All trades and compliance</div></div></div>
+<div class="stat-item" data-id="co" onclick="toggle(this)"><div class="stat-chk"></div><div><div class="stat-title">Certificate of Occupancy</div><div class="stat-note">Final approval from county</div></div></div>
+<div class="stat-item" data-id="conv" onclick="toggle(this)"><div class="stat-chk"></div><div><div class="stat-title">Loan Conversion</div><div class="stat-note">Construction to permanent mortgage</div></div></div>
+<div class="stat-item" data-id="move" onclick="toggle(this)"><div class="stat-chk"></div><div><div class="stat-title">Move In! 🎉</div><div class="stat-note">Welcome home</div></div></div>
+</div></div>
+<div style="margin-top:25px;padding-top:20px;border-top:1px solid var(--border)"><button onclick="resetStat()" style="padding:10px 20px;background:var(--text-light);color:#fff;border:none;border-radius:6px;cursor:pointer">Reset All Status</button></div>
+</div>
+</div>
+
+<!-- Cost Sharing -->
+<div id="costs" class="tc">
+<div class="card">
+<h2>Project Funding Breakdown</h2>
+<p style="margin-bottom:20px">How the project costs break down and what each party needs to contribute based on the finance calculator.</p>
+
+<div class="grid">
+<div class="results">
+<h3>Total Project Costs</h3>
+<div class="row"><span class="lbl">Lot Purchase Price</span><span class="val" id="shareLotPrice">$0</span></div>
+<div class="row"><span class="lbl">Construction Cost</span><span class="val" id="shareConstCost">$0</span></div>
+<div class="row"><span class="lbl">Closing Costs</span><span class="val" id="shareCloseCost">$0</span></div>
+<div class="row total"><span class="lbl">Total Acquisition Cost</span><span class="val" id="shareTotAcq">$0</span></div>
+</div>
+
+<div class="results">
+<h3>Funding Sources</h3>
+<div class="row"><span class="lbl">Construction Loan</span><span class="val" id="shareLoanAmt">$0</span></div>
+<div class="row"><span class="lbl">Lot Equity (already paid)</span><span class="val" id="shareLotEquity">$0</span></div>
+<div class="row"><span class="lbl">Additional Cash at Closing</span><span class="val" id="shareAddCash">$0</span></div>
+<div class="row total"><span class="lbl">Total Cash Required</span><span class="val" id="shareTotCash">$0</span></div>
+</div>
+</div>
+
+<div class="results" style="margin-top:20px">
+<h3>Per-Person Contribution (50/50 Split)</h3>
+<div class="grid">
+<div>
+<div class="row hl"><span class="lbl"><strong>Tim's Required Contribution</strong></span><span class="val" id="timRequired">$0</span></div>
+<div class="row"><span class="lbl">Tim's Lot Equity Paid</span><span class="val" id="timLotEquity">$0</span></div>
+<div class="row"><span class="lbl">Tim's Other Paid (pre-const)</span><span class="val" id="timOtherPaid">$0</span></div>
+<div class="row"><span class="lbl">Tim's Cash at Closing</span><span class="val" id="timClosingCash">$0</span></div>
+<div class="row" style="background:rgba(26,95,122,.1)"><span class="lbl"><strong>Tim Still Needs to Bring</strong></span><span class="val" id="timStillOwes" style="color:var(--primary)">$0</span></div>
+</div>
+<div>
+<div class="row hl"><span class="lbl"><strong>Lani's Required Contribution</strong></span><span class="val" id="laniRequired">$0</span></div>
+<div class="row"><span class="lbl">Lani's Lot Equity Paid</span><span class="val" id="laniLotEquity">$0</span></div>
+<div class="row"><span class="lbl">Lani's Other Paid (pre-const)</span><span class="val" id="laniOtherPaid">$0</span></div>
+<div class="row"><span class="lbl">Lani's Cash at Closing</span><span class="val" id="laniClosingCash">$0</span></div>
+<div class="row" style="background:rgba(87,131,123,.1)"><span class="lbl"><strong>Lani Still Needs to Bring</strong></span><span class="val" id="laniStillOwes" style="color:var(--secondary)">$0</span></div>
+</div>
+</div>
+</div>
+
+<div class="alert alert-info" style="margin-top:20px"><span></span><div>
+<strong>How This Works:</strong> The total cash required (lot equity + closing costs + any down payment gap) is split 50/50. Each person's prior contributions count toward their share. The "Still Needs to Bring" amount is what each person owes at closing to achieve equal contribution.
+</div></div>
+</div>
+
+<div class="card">
+<h2 style="cursor:pointer;margin-bottom:0" onclick="document.getElementById('whoOwesSection').style.display=document.getElementById('whoOwesSection').style.display==='none'?'block':'none';this.querySelector('span').textContent=document.getElementById('whoOwesSection').style.display==='none'?'▶ Show Details':'▼ Hide Details'">Contribution Details <span style="float:right;font-size:.8rem;color:var(--primary);font-weight:400">▶ Show Details</span></h2>
+<div id="whoOwesSection" style="display:none">
+<p style="margin:20px 0">Tracking contributions to ensure equitable cost sharing. Updates dynamically based on finance calculator values.</p>
+
+<div class="grid">
+<div class="results">
+<h3>Contributions to Date</h3>
+<table style="width:100%;border-collapse:collapse;margin-top:10px">
+<thead>
+<tr style="border-bottom:2px solid var(--border)">
+<th style="text-align:left;padding:12px 8px;color:var(--text-light)">Expense</th>
+<th style="text-align:right;padding:12px 8px;color:var(--primary)">Tim</th>
+<th style="text-align:right;padding:12px 8px;color:var(--secondary)">Lani</th>
+<th style="text-align:right;padding:12px 8px;color:var(--text-light)">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr style="border-bottom:1px solid var(--border)">
+<td style="padding:12px 8px">Lot Down Payment</td>
+<td style="text-align:right;padding:12px 8px">$15,000</td>
+<td style="text-align:right;padding:12px 8px">$75,000</td>
+<td style="text-align:right;padding:12px 8px;color:var(--text-light)">$90,000</td>
+</tr>
+<tr style="border-bottom:1px solid var(--border)">
+<td style="padding:12px 8px">Mortgage Payments</td>
+<td style="text-align:right;padding:12px 8px">$1,500</td>
+<td style="text-align:right;padding:12px 8px">$1,500</td>
+<td style="text-align:right;padding:12px 8px;color:var(--text-light)">$3,000</td>
+</tr>
+<tr style="border-bottom:1px solid var(--border)">
+<td style="padding:12px 8px">Architect Fees</td>
+<td style="text-align:right;padding:12px 8px">$4,450</td>
+<td style="text-align:right;padding:12px 8px">$4,450</td>
+<td style="text-align:right;padding:12px 8px;color:var(--text-light)">$8,900</td>
+</tr>
+<tr style="background:var(--bg);font-weight:600">
+<td style="padding:12px 8px">Total Paid</td>
+<td style="text-align:right;padding:12px 8px;color:var(--primary)">$20,950</td>
+<td style="text-align:right;padding:12px 8px;color:var(--secondary)">$80,950</td>
+<td style="text-align:right;padding:12px 8px">$101,900</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div class="results">
+<h3>Balance (50/50 Split)</h3>
+<div class="row"><span class="lbl">Total Expenses</span><span class="val">$101,900</span></div>
+<div class="row"><span class="lbl">Each Should Pay (50%)</span><span class="val">$50,950</span></div>
+<div class="row"><span class="lbl">Tim Has Paid</span><span class="val">$20,950</span></div>
+<div class="row"><span class="lbl">Lani Has Paid</span><span class="val">$80,950</span></div>
+<div class="row total" style="background:var(--warning)"><span class="lbl">Tim Owes Lani</span><span class="val">$30,000</span></div>
+</div>
+</div>
+
+<div class="alert alert-info" style="margin-top:20px">
+<span></span>
+<div><strong>Joint Financing Note:</strong> Since the construction loan will be in both names, ongoing mortgage payments will naturally be shared. The imbalance represents pre-construction contributions. You can settle this by:<br>
+• Paying before or at closing<br>
+• Contributing more to closing costs<br>
+• Adjusting ownership percentages accordingly<br>
+• Tracking as a loan between partners</div>
+</div>
+
+<div class="card" style="margin-top:20px;padding:20px">
+<h3 style="color:var(--secondary);margin-bottom:15px">Custom Calculator</h3>
+<p style="margin-bottom:15px;font-size:.9rem;color:var(--text-light)">Update values as expenses change:</p>
+<div class="grid">
+<div>
+<div class="form-group"><label>Tim - Lot Down Payment</label><div class="input-wrap"><span class="pre">$</span><input type="number" id="timLot" value="15000" onchange="calcShare()"></div></div>
+<div class="form-group"><label>Tim - Mortgage Payments</label><div class="input-wrap"><span class="pre">$</span><input type="number" id="timMtg" value="1500" onchange="calcShare()"></div></div>
+<div class="form-group"><label>Tim - Architect Fees</label><div class="input-wrap"><span class="pre">$</span><input type="number" id="timArch" value="4450" onchange="calcShare()"></div></div>
+<div class="form-group"><label>Tim - Other Expenses</label><div class="input-wrap"><span class="pre">$</span><input type="number" id="timOther" value="0" onchange="calcShare()"></div></div>
+</div>
+<div>
+<div class="form-group"><label>Lani - Lot Down Payment</label><div class="input-wrap"><span class="pre">$</span><input type="number" id="laniLot" value="75000" onchange="calcShare()"></div></div>
+<div class="form-group"><label>Lani - Mortgage Payments</label><div class="input-wrap"><span class="pre">$</span><input type="number" id="laniMtg" value="1500" onchange="calcShare()"></div></div>
+<div class="form-group"><label>Lani - Architect Fees</label><div class="input-wrap"><span class="pre">$</span><input type="number" id="laniArch" value="4450" onchange="calcShare()"></div></div>
+<div class="form-group"><label>Lani - Other Expenses</label><div class="input-wrap"><span class="pre">$</span><input type="number" id="laniOther" value="0" onchange="calcShare()"></div></div>
+</div>
+</div>
+<div class="results" style="margin-top:20px">
+<h3>Updated Balance</h3>
+<div class="row"><span class="lbl">Tim Total</span><span class="val" id="timTotal">$20,950</span></div>
+<div class="row"><span class="lbl">Lani Total</span><span class="val" id="laniTotal">$80,950</span></div>
+<div class="row"><span class="lbl">Combined Total</span><span class="val" id="combinedTotal">$101,900</span></div>
+<div class="row"><span class="lbl">Each Should Pay (50%)</span><span class="val" id="eachShare">$50,950</span></div>
+<div class="row total" id="balanceRow"><span class="lbl" id="balanceLbl">Tim Owes Lani</span><span class="val" id="balanceAmt">$30,000</span></div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Citations -->
+<div class="card cites">
+<h2>📚 Sources &amp; Citations</h2>
+<ol>
+<li><strong>FHA Loan Limits (Oregon):</strong> <a href="https://www.fha.com/lending_limits_state?state=OREGON" target="_blank">fha.com/lending_limits_state?state=OREGON</a></li>
+<li><strong>Construction Loan Guide:</strong> Bankrate. <a href="https://www.bankrate.com/mortgages/construction-loans-guide/" target="_blank">bankrate.com/mortgages/construction-loans-guide</a></li>
+<li><strong>US Bank Construction:</strong> <a href="https://www.usbank.com/home-loans/construction-loans.html" target="_blank">usbank.com/home-loans/construction-loans</a></li>
+<li><strong>Wells Fargo Construction:</strong> <a href="https://www.wellsfargo.com/mortgage/construction-loan/" target="_blank">wellsfargo.com/mortgage/construction-loan</a></li>
+<li><strong>Oregon Building Codes:</strong> <a href="https://www.oregon.gov/bcd/codes-stand/Pages/adopted-codes.aspx" target="_blank">oregon.gov/bcd</a></li>
+<li><strong>Oregon Residential:</strong> <a href="https://www.oregon.gov/bcd/codes-stand/Pages/residential-structures.aspx" target="_blank">oregon.gov/bcd residential</a></li>
+<li><strong>Tillamook County:</strong> <a href="https://www.tillamookcounty.gov/commdev" target="_blank">tillamookcounty.gov/commdev</a></li>
+<li><strong>FEMA Flood Zones:</strong> <a href="https://www.fema.gov/flood-zones" target="_blank">fema.gov/flood-zones</a></li>
+<li><strong>Building Costs:</strong> HomeAdvisor. <a href="https://www.homeadvisor.com/cost/architects-and-engineers/build-a-house/" target="_blank">homeadvisor.com</a></li>
+<li><strong>GitHub Pages:</strong> <a href="https://pages.github.com/" target="_blank">pages.github.com</a></li>
+</ol>
+<p style="margin-top:20px;font-style:italic;color:var(--text-light)">Last updated: February 2026. Verify requirements with lenders and authorities.</p>
+</div>
+</div>
+<footer>
+<p>Lani and Tim Build A Coastie House | Built for GitHub Pages</p>
+<p style="margin-top:5px"><a href="sources.html" style="color:var(--primary-light);text-decoration:none">Sources & Citations</a></p>
+<p style="margin-top:5px">© 2026 | Tillamook County, Oregon</p>
+</footer>
+
+<script>
+function fmt(n){return new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',minimumFractionDigits:0,maximumFractionDigits:0}).format(n)}
+function showTab(id){document.querySelectorAll('.tc').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelector(`[onclick="showTab('${id}')"]`).classList.add('active')}
+function calcAutoValue(){
+const lp=+document.getElementById('lotPrice').value||0;
+const cc=+document.getElementById('constCost').value||0;
+const valueGain=+document.getElementById('valueGain').value||1.35;
+const autoVal=Math.round((lp+cc)*valueGain);
+document.getElementById('estValue').value=autoVal;
+calc();
+}
+
+function calc(){
+const lp=+document.getElementById('lotPrice').value||0;
+const le=+document.getElementById('lotEquity').value||0;
+const cc=+document.getElementById('constCost').value||0;
+const ev=+document.getElementById('estValue').value||0;
+const ac=+document.getElementById('addCash').value||0;
+const rt=+document.getElementById('rate').value||0;
+const tm=+document.getElementById('term').value||30;
+const dp=+document.getElementById('downPct').value||20;
+const cp=+document.getElementById('closePct').value||0;
+const pmr=+document.getElementById('pmiRate').value||0;
+
+const lotPayoff=lp-le;
+const totAcq=lp+cc;
+const finNeed=cc+lotPayoff;
+const reqDown=totAcq*(dp/100);
+const totDown=le+ac;
+const downGap=Math.max(0,reqDown-totDown);
+const loanAmt=totAcq-totDown;
+const closeCost=loanAmt*(cp/100);
+const totCash=downGap+closeCost+ac;
+const ltv=(loanAmt/ev)*100;
+const needsPMI=ltv>80;
+const mr=rt/100/12,np=tm*12;
+let pi=0;if(mr>0)pi=loanAmt*(mr*Math.pow(1+mr,np))/(Math.pow(1+mr,np)-1);
+const mPMI=needsPMI?(loanAmt*(pmr/100))/12:0;
+const mTax=(ev*0.01)/12;
+const mIns=300;
+const mTot=pi+mPMI+mTax+mIns;
+const equity=ev-loanAmt;
+const eqPct=(equity/ev)*100;
+
+document.getElementById('totAcq').textContent=fmt(totAcq);
+document.getElementById('lotPay').textContent=fmt(lotPayoff);
+document.getElementById('finNeed').textContent=fmt(finNeed);
+document.getElementById('reqDown').textContent=fmt(reqDown)+' ('+dp+'%)';
+document.getElementById('lotEqDisp').textContent=fmt(le);
+document.getElementById('addCashDisp').textContent=fmt(ac);
+document.getElementById('totDown').textContent=fmt(totDown);
+document.getElementById('loanAmt').textContent=fmt(loanAmt);
+document.getElementById('downGap').textContent=fmt(downGap);
+document.getElementById('closeCost').textContent=fmt(closeCost);
+document.getElementById('totCash').textContent=fmt(totCash);
+document.getElementById('mPI').textContent=fmt(pi);
+document.getElementById('mPMI').textContent=needsPMI?fmt(mPMI):'$0 (no PMI)';
+document.getElementById('mTax').textContent=fmt(mTax);
+document.getElementById('mIns').textContent=fmt(mIns);
+document.getElementById('mTot').textContent=fmt(mTot);
+document.getElementById('compVal').textContent=fmt(ev);
+document.getElementById('loanAmt2').textContent=fmt(loanAmt);
+document.getElementById('ltv').textContent=ltv.toFixed(1)+'%';
+document.getElementById('eqComp').textContent=fmt(equity);
+document.getElementById('eqPct').textContent=eqPct.toFixed(1)+'%';
+
+const warn=document.getElementById('ltvWarn'),ok=document.getElementById('ltvOk');
+const wt=document.getElementById('warnTxt'),ot=document.getElementById('okTxt');
+if(downGap>0){
+warn.style.display='flex';ok.style.display='none';
+wt.innerHTML='<strong>Down Payment Shortfall:</strong> You need '+fmt(downGap)+' more in cash to meet the '+dp+'% down payment requirement.';
+}else if(ltv>80){
+warn.style.display='flex';ok.style.display='none';
+wt.innerHTML='<strong>PMI Required:</strong> LTV of '+ltv.toFixed(1)+'% exceeds 80%. Monthly PMI of '+fmt(mPMI)+' will apply until you reach 80% LTV.';
+}else{
+warn.style.display='none';ok.style.display='flex';
+ot.innerHTML='<strong>Great Position!</strong> Your '+fmt(totDown)+' down payment gives you '+eqPct.toFixed(1)+'% equity and no PMI required.';
+}
+const cr=document.getElementById('cashRow');
+cr.style.background=totCash>150000?'var(--danger)':totCash>75000?'var(--warning)':'var(--primary)';
+}
+
+function getSt(){const s=localStorage.getItem('tideStatus');return s?JSON.parse(s):{}}
+function saveSt(d){localStorage.setItem('tideStatus',JSON.stringify(d))}
+function toggle(el){const id=el.dataset.id,st=getSt();if(el.classList.contains('done')){el.classList.remove('done');el.querySelector('.stat-chk').textContent='';st[id]=''}else if(el.classList.contains('wip')){el.classList.remove('wip');el.classList.add('done');el.querySelector('.stat-chk').textContent='✓';st[id]='done'}else{el.classList.add('wip');el.querySelector('.stat-chk').textContent='●';st[id]='wip'}saveSt(st)}
+function loadSt(){const st=getSt();document.querySelectorAll('.stat-item').forEach(el=>{const id=el.dataset.id,s=st[id];if(s==='done'){el.classList.add('done');el.classList.remove('wip');el.querySelector('.stat-chk').textContent='✓'}else if(s==='wip'){el.classList.add('wip');el.classList.remove('done');el.querySelector('.stat-chk').textContent='●'}else if(s===''){el.classList.remove('done','wip');el.querySelector('.stat-chk').textContent=''}})}
+function resetStat(){if(confirm('Reset all status items?')){localStorage.removeItem('tideStatus');location.reload()}}
+// Base costs for "Mid-to-High-Mid" (1.15) grade - these are the reference values
+const baseCosts = {
+  windows: 18000,
+  extDoors: 6500,
+  flooring: 12,
+  ceiling: 14,
+  intDoors: 4800,
+  trim: 12000,
+  cabinets: 22000,
+  counters: 9500,
+  appliances: 12000,
+  bathFixtures: 18000
+};
+
+// Grade multipliers relative to mid-to-high-mid (1.15) base
+const gradeMultipliers = {
+  0.85: 0.65,  // Budget
+  1.0: 0.80,   // Standard
+  1.15: 1.0,   // Mid-to-High-Mid (reference)
+  1.35: 1.25,  // High-End
+  1.6: 1.65    // Luxury
+};
+
+const gradeDescriptions = {
+  0.85: '<strong style="color:var(--secondary)">Budget / Builder Grade:</strong> Basic materials meeting code minimums. Vinyl windows, hollow-core doors, laminate counters, builder-pack appliances, carpet or vinyl flooring. Functional but minimal upgrades.',
+  1.0: '<strong style="color:var(--secondary)">Standard:</strong> Common production-home materials. Vinyl or basic fiberglass windows, hollow-core doors, stock cabinets, laminate counters, standard appliances, LVP or basic hardwood.',
+  1.15: '<strong style="color:var(--secondary)">Mid-to-High-Mid Grade:</strong> Quality materials above builder-grade. Includes fiberglass or wood-clad windows, solid-core interior doors, soft-close semi-custom cabinets, quartz/granite counters, mid-tier appliances. Durable hardwood or engineered wood floors.',
+  1.35: '<strong style="color:var(--secondary)">High-End:</strong> Premium materials and finishes. High-performance windows (Marvin, Pella), custom cabinets, natural stone counters, premium appliances (Sub-Zero, Wolf range), wide-plank hardwood, designer fixtures.',
+  1.6: '<strong style="color:var(--secondary)">Luxury:</strong> Top-tier designer materials. European windows, fully custom cabinetry, exotic stone, restaurant-grade appliances, rare wood species, bespoke fixtures. Architect-designed details throughout.'
+};
+
+function updateFinishGrade() {
+  const grade = +document.getElementById('finishGrade').value;
+  const mult = gradeMultipliers[grade] || 1.0;
+  
+  // Update the description
+  document.getElementById('finishDesc').innerHTML = gradeDescriptions[grade];
+  
+  // Update finish-sensitive line items
+  document.getElementById('windows').value = Math.round(baseCosts.windows * mult);
+  document.getElementById('extDoors').value = Math.round(baseCosts.extDoors * mult);
+  document.getElementById('flooring').value = Math.round(baseCosts.flooring * mult);
+  document.getElementById('ceiling').value = Math.round(baseCosts.ceiling * mult);
+  document.getElementById('intDoors').value = Math.round(baseCosts.intDoors * mult);
+  document.getElementById('trim').value = Math.round(baseCosts.trim * mult);
+  document.getElementById('cabinets').value = Math.round(baseCosts.cabinets * mult);
+  document.getElementById('counters').value = Math.round(baseCosts.counters * mult);
+  document.getElementById('appliances').value = Math.round(baseCosts.appliances * mult);
+  document.getElementById('bathFixtures').value = Math.round(baseCosts.bathFixtures * mult);
+  
+  calcBuild();
+}
+
+function calcBuild(){
+const sqft=+document.getElementById('sqft').value||1600;
+const roofSqft=+document.getElementById('roofSqft').value||1800;
+const locFactor=+document.getElementById('locFactor').value||1.15;
+
+// Get all line items
+const sitePrep=+document.getElementById('sitePrep').value||0;
+const tree=+document.getElementById('tree').value||0;
+const retaining=+document.getElementById('retaining').value||0;
+const neighborShare=+document.getElementById('neighborShare').value||0;
+const foundation=+document.getElementById('foundation').value||0;
+const septic=+document.getElementById('septic').value||0;
+const utility=+document.getElementById('utility').value||0;
+const framingRate=+document.getElementById('framing').value||45;
+const sheath=+document.getElementById('sheath').value||0;
+const roofRate=+document.getElementById('roofing').value||18;
+const siding=+document.getElementById('siding').value||0;
+const windows=+document.getElementById('windows').value||0;
+const extDoors=+document.getElementById('extDoors').value||0;
+const gutters=+document.getElementById('gutters').value||0;
+const electric=+document.getElementById('electric').value||0;
+const plumbing=+document.getElementById('plumbing').value||0;
+const hvac=+document.getElementById('hvac').value||0;
+const insulation=+document.getElementById('insulation').value||0;
+const drywall=+document.getElementById('drywall').value||0;
+const floorRate=+document.getElementById('flooring').value||12;
+const ceilRate=+document.getElementById('ceiling').value||14;
+const intDoors=+document.getElementById('intDoors').value||0;
+const trim=+document.getElementById('trim').value||0;
+const cabinets=+document.getElementById('cabinets').value||0;
+const counters=+document.getElementById('counters').value||0;
+const appliances=+document.getElementById('appliances').value||0;
+const bathFixtures=+document.getElementById('bathFixtures').value||0;
+const permits=+document.getElementById('permits').value||0;
+const insurance=+document.getElementById('insurance').value||0;
+const gcPct=+document.getElementById('gcFee').value||15;
+const isOwnerBuilder=document.getElementById('ownerBuilder').checked;
+const driveway=+document.getElementById('driveway').value||0;
+const landscape=+document.getElementById('landscape').value||0;
+const deck=+document.getElementById('deck').value||0;
+const accessSave=+document.getElementById('accessSave').value||0;
+const paint=+document.getElementById('paint').value||0;
+
+// DIY savings checkboxes
+const diyFlooringSave=document.getElementById('diyFlooring').checked?(+document.getElementById('diyFlooringSave').value||0)*sqft:0;
+const diyCeilingSave=document.getElementById('diyCeiling').checked?(+document.getElementById('diyCeilingSave').value||0)*sqft:0;
+const diyDoorsSave=document.getElementById('diyDoors').checked?(+document.getElementById('diyDoorsSave').value||0):0;
+const diyTrimSave=document.getElementById('diyTrim').checked?(+document.getElementById('diyTrimSave').value||0):0;
+const diyCabinetsSave=document.getElementById('diyCabinets').checked?(+document.getElementById('diyCabinetsSave').value||0):0;
+const diyPaintSave=document.getElementById('diyPaint').checked?(+document.getElementById('diyPaintSave').value||0):0;
+const diyLandscapeSave=document.getElementById('diyLandscape').checked?(+document.getElementById('diyLandscapeSave').value||0):0;
+const diyDeckSave=document.getElementById('diyDeck').checked?(+document.getElementById('diyDeckSave').value||0):0;
+const totalDiySavings=diyFlooringSave+diyCeilingSave+diyDoorsSave+diyTrimSave+diyCabinetsSave+diyPaintSave+diyLandscapeSave+diyDeckSave;
+
+// Calculate per-sf items
+const framingCost=framingRate*sqft;
+const roofCost=roofRate*roofSqft;
+const flooringCost=floorRate*sqft;
+const ceilingCost=ceilRate*sqft;
+
+// Update rate displays
+document.getElementById('frameRate').textContent='$'+framingRate;
+document.getElementById('roofRate').textContent='$'+roofRate;
+document.getElementById('floorRate').textContent='$'+floorRate;
+document.getElementById('ceilRate').textContent='$'+ceilRate;
+
+// Category totals
+const catSite=sitePrep+tree+(retaining-neighborShare)+foundation+septic+utility;
+const catFrame=framingCost+sheath;
+const catExt=roofCost+siding+windows+extDoors+gutters;
+const catMep=electric+plumbing+hvac;
+const catInsul=insulation+drywall+paint;
+const catInt=flooringCost+ceilingCost+intDoors+trim;
+const catKb=cabinets+counters+appliances+bathFixtures;
+const catSavings=accessSave+totalDiySavings;
+const catFinish=driveway+landscape+deck;
+const hardCosts=catSite+catFrame+catExt+catMep+catInsul+catInt+catKb-catSavings;
+const gcFeeCalc=isOwnerBuilder?0:hardCosts*(gcPct/100);
+const gcSavingsAmt=isOwnerBuilder?hardCosts*(gcPct/100):0;
+const catSoft=permits+insurance+gcFeeCalc;
+
+const baseTotal=hardCosts+catSoft+catFinish;
+// Quality adjustment now built into individual line items (windows, cabinets, etc.)
+// Only location factor applied to total
+const locAdj=baseTotal*(locFactor-1);
+const grandTotal=baseTotal+locAdj;
+const costPerSf=grandTotal/sqft;
+
+// Update display - line items
+document.getElementById('sitePrepCost').textContent=fmt(sitePrep);
+document.getElementById('treeCost').textContent=fmt(tree);
+document.getElementById('retainCost').textContent=fmt(retaining);
+document.getElementById('neighborCost').textContent='-'+fmt(neighborShare);
+document.getElementById('foundationCost').textContent=fmt(foundation);
+document.getElementById('septicCost').textContent=fmt(septic);
+document.getElementById('utilityCost').textContent=fmt(utility);
+document.getElementById('framingCost').textContent=fmt(framingCost);
+document.getElementById('sheathCost').textContent=fmt(sheath);
+document.getElementById('roofCost').textContent=fmt(roofCost);
+document.getElementById('sidingCost').textContent=fmt(siding);
+document.getElementById('windowCost').textContent=fmt(windows);
+document.getElementById('extDoorCost').textContent=fmt(extDoors);
+document.getElementById('gutterCost').textContent=fmt(gutters);
+document.getElementById('electricCost').textContent=fmt(electric);
+document.getElementById('plumbingCost').textContent=fmt(plumbing);
+document.getElementById('hvacCost').textContent=fmt(hvac);
+document.getElementById('insulCost').textContent=fmt(insulation);
+document.getElementById('drywallCost').textContent=fmt(drywall);
+document.getElementById('paintCost').textContent=fmt(paint);
+document.getElementById('flooringCost').textContent=fmt(flooringCost);
+document.getElementById('ceilingCost').textContent=fmt(ceilingCost);
+document.getElementById('intDoorCost').textContent=fmt(intDoors);
+document.getElementById('trimCost').textContent=fmt(trim);
+document.getElementById('cabinetCost').textContent=fmt(cabinets);
+document.getElementById('counterCost').textContent=fmt(counters);
+document.getElementById('applianceCost').textContent=fmt(appliances);
+document.getElementById('bathCost').textContent=fmt(bathFixtures);
+document.getElementById('permitCost').textContent=fmt(permits);
+document.getElementById('insuranceCost').textContent=fmt(insurance);
+document.getElementById('gcFeeCost').textContent=isOwnerBuilder?'$0 (Owner-Builder)':fmt(gcFeeCalc);
+document.getElementById('gcSavings').textContent=isOwnerBuilder?'Saving '+fmt(gcSavingsAmt):'';
+document.getElementById('driveCost').textContent=fmt(driveway);
+document.getElementById('landscapeCost').textContent=fmt(landscape);
+document.getElementById('deckCost').textContent=fmt(deck);
+document.getElementById('accessSaveCost').textContent='-'+fmt(accessSave);
+document.getElementById('totalDiySavings').textContent='-'+fmt(totalDiySavings);
+document.getElementById('diyTotalRow').style.display=totalDiySavings>0?'flex':'none';
+
+// Update category totals
+document.getElementById('catSite').textContent=fmt(catSite);
+document.getElementById('catFrame').textContent=fmt(catFrame);
+document.getElementById('catExt').textContent=fmt(catExt);
+document.getElementById('catMep').textContent=fmt(catMep);
+document.getElementById('catInsul').textContent=fmt(catInsul);
+document.getElementById('catInt').textContent=fmt(catInt);
+document.getElementById('catKb').textContent=fmt(catKb);
+document.getElementById('catSoft').textContent=fmt(catSoft);
+document.getElementById('catFinish').textContent=fmt(catFinish);
+document.getElementById('catSavings').textContent='-'+fmt(catSavings);
+
+// Update summary
+document.getElementById('baseTotal').textContent=fmt(baseTotal);
+document.getElementById('locAdj').textContent=(locFactor>=1?'+':'')+fmt(locAdj);
+document.getElementById('grandTotal').textContent=fmt(grandTotal);
+document.getElementById('costPerSf').textContent=fmt(costPerSf)+'/sf';
+
+// Store for finance calc and auto-update
+window.buildCostTotal=Math.round(grandTotal);
+document.getElementById('constCost').value=window.buildCostTotal;
+calcAutoValue();
+}
+
+function applyBuildCost(){
+if(window.buildCostTotal){
+document.getElementById('constCost').value=window.buildCostTotal;
+calcAutoValue();
+showTab('calculator');
+}
+}
+
+function calcShare(){
+// Get values from finance calculator
+const lotPrice=+document.getElementById('lotPrice').value||402000;
+const lotEquity=+document.getElementById('lotEquity').value||90000;
+const constCost=+document.getElementById('constCost').value||575000;
+const closePct=+document.getElementById('closePct').value||3;
+const addCash=+document.getElementById('addCash').value||0;
+const downPct=+document.getElementById('downPct').value||20;
+
+// Calculate project totals
+const totAcq=lotPrice+constCost;
+const loanAmt=totAcq-lotEquity-addCash;
+const closeCost=loanAmt*(closePct/100);
+const reqDown=totAcq*(downPct/100);
+const downGap=Math.max(0,reqDown-lotEquity-addCash);
+const totCash=lotEquity+closeCost+addCash+downGap;
+
+// Update project funding display
+if(document.getElementById('shareLotPrice')){
+document.getElementById('shareLotPrice').textContent=fmt(lotPrice);
+document.getElementById('shareConstCost').textContent=fmt(constCost);
+document.getElementById('shareCloseCost').textContent=fmt(closeCost);
+document.getElementById('shareTotAcq').textContent=fmt(totAcq+closeCost);
+document.getElementById('shareLoanAmt').textContent=fmt(loanAmt);
+document.getElementById('shareLotEquity').textContent=fmt(lotEquity);
+document.getElementById('shareAddCash').textContent=fmt(addCash);
+document.getElementById('shareTotCash').textContent=fmt(totCash);
+}
+
+// Get contribution inputs
+const tl=+document.getElementById('timLot').value||0;
+const tm=+document.getElementById('timMtg').value||0;
+const ta=+document.getElementById('timArch').value||0;
+const to=+document.getElementById('timOther').value||0;
+const ll=+document.getElementById('laniLot').value||0;
+const lm=+document.getElementById('laniMtg').value||0;
+const la=+document.getElementById('laniArch').value||0;
+const lo=+document.getElementById('laniOther').value||0;
+
+// Calculate totals
+const timTot=tl+tm+ta+to;
+const laniTot=ll+lm+la+lo;
+const combined=timTot+laniTot;
+const each=combined/2;
+const diff=Math.abs(timTot-laniTot)/2;
+
+// Per-person required contribution (50/50 of total cash needed)
+const eachRequired=totCash/2;
+const timOtherContrib=tm+ta+to;
+const laniOtherContrib=lm+la+lo;
+
+// What each person has put toward their share
+const timTowardShare=tl+timOtherContrib;
+const laniTowardShare=ll+laniOtherContrib;
+
+// What's still needed from each
+const timStillNeeds=Math.max(0,eachRequired-timTowardShare);
+const laniStillNeeds=Math.max(0,eachRequired-laniTowardShare);
+
+// Update per-person breakdown
+if(document.getElementById('timRequired')){
+document.getElementById('timRequired').textContent=fmt(eachRequired);
+document.getElementById('timLotEquity').textContent=fmt(tl);
+document.getElementById('timOtherPaid').textContent=fmt(timOtherContrib);
+document.getElementById('timClosingCash').textContent=fmt(timStillNeeds);
+document.getElementById('timStillOwes').textContent=fmt(timStillNeeds);
+document.getElementById('laniRequired').textContent=fmt(eachRequired);
+document.getElementById('laniLotEquity').textContent=fmt(ll);
+document.getElementById('laniOtherPaid').textContent=fmt(laniOtherContrib);
+document.getElementById('laniClosingCash').textContent=fmt(laniStillNeeds);
+document.getElementById('laniStillOwes').textContent=fmt(laniStillNeeds);
+}
+
+// Update existing balance display
+document.getElementById('timTotal').textContent=fmt(timTot);
+document.getElementById('laniTotal').textContent=fmt(laniTot);
+document.getElementById('combinedTotal').textContent=fmt(combined);
+document.getElementById('eachShare').textContent=fmt(each);
+document.getElementById('balanceAmt').textContent=fmt(diff);
+const br=document.getElementById('balanceRow');
+const bl=document.getElementById('balanceLbl');
+if(timTot<laniTot){bl.textContent='Tim Owes Lani';br.style.background='var(--warning)';}
+else if(laniTot<timTot){bl.textContent='Lani Owes Tim';br.style.background='var(--warning)';}
+else{bl.textContent='Balanced!';br.style.background='var(--success)';}
+}
+document.addEventListener('DOMContentLoaded',()=>{calcBuild();calc();loadSt();calcShare()});
+</script>
+</body>
+</html>

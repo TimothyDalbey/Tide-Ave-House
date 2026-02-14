@@ -68,16 +68,16 @@ export const costExplanations: Record<string, { estimate: string; low: string; h
     notes: 'HomeGuide: siding $12K-$45K. Fiber cement (HardiePlank) or similar. ~2,000 sf wall area × $8-15/sf installed = $16K-$30K. Simple rectangle = lower end.'
   },
   windows: {
-    estimate: '$30,000',
-    low: '$20,000',
-    high: '$40,000',
-    notes: '⭐ INVESTMENT PRIORITY: Premium coastal-grade fiberglass windows for views, durability, and salt-air resistance. 8-12 large windows at $2,500-$4,000 each. Quality frames, hardware, and weathersealing essential for oceanfront.'
-  },
-  extDoors: {
     estimate: '$15,000',
     low: '$10,000',
     high: '$22,000',
-    notes: '⭐ INVESTMENT PRIORITY: 3 large sliding glass doors on back (ocean views): $3,000-$4,500 each = $9K-$13.5K. Sauna door (exterior-grade): $600-$1,000. Premium front entry door: $2,000-$3,500. All coastal-grade with salt-resistant hardware.'
+    notes: 'Mostly modest-sized windows with a few larger ones in living area. Coastal-grade fiberglass for salt-air resistance. ~8-10 standard windows at $800-$1,200 each ($8K-$12K) + 2-3 larger living room windows at $1,500-$2,500 each ($4K-$7K). Total $12K-$19K.'
+  },
+  extDoors: {
+    estimate: '$22,000',
+    low: '$15,000',
+    high: '$30,000',
+    notes: '⭐ INVESTMENT PRIORITY: 3 large sliding glass doors on back (ocean views): $4,000-$6,000 each = $12K-$18K. Premium front entry door: $2,500-$4,000. Sauna exterior door: $800-$1,200. All coastal-grade with salt-resistant hardware and weathersealing.'
   },
   gutters: {
     estimate: '$1,000',
@@ -195,7 +195,7 @@ export const costExplanations: Record<string, { estimate: string; low: string; h
     estimate: '$5,000',
     low: '$3,500',
     high: '$8,000',
-    notes: '⚠️ REQUIRED: Structural engineering for helical pylon foundation system. Geotechnical report + structural calculations + sealed drawings. Coastal/hillside sites with challenging soil require engineered foundation design. Helical piers require load calculations and spacing design by licensed PE.'
+    notes: '⚠️ REQUIRED: Structural engineering for helical pile foundation system. Geotechnical report + structural calculations + sealed drawings. Coastal/hillside sites with challenging soil require engineered foundation design. Helical piles require load calculations and spacing design by licensed PE.'
   },
   insurance: {
     estimate: '$3,500',

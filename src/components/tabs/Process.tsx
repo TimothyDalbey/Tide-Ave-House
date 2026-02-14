@@ -48,7 +48,7 @@ export function Process() {
         <div className="grid">
           <Results>
             <Row label="Site Preparation" value="1-2 weeks" />
-            <Row label="Foundation (w/ helical pylons)" value="2-4 weeks" />
+            <Row label="Foundation (w/ helical piles)" value="2-4 weeks" />
             <Row label="Framing" value="3-4 weeks" />
             <Row label="Roofing" value="1-2 weeks" />
             <Row label="Rough-ins (MEP)" value="3-4 weeks" />

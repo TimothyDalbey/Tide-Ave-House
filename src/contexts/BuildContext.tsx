@@ -47,6 +47,7 @@ export interface BuildInputs {
   // Soft Costs
   permits: number;
   engineering: number;
+  architect: number;
   insurance: number;
   gcFee: number;
   ownerBuilder: boolean;
@@ -129,8 +130,8 @@ const defaultInputs: BuildInputs = {
   sheath: 6000,
   roofing: 12,
   siding: 20000,
-  windows: 30000,
-  extDoors: 15000,
+  windows: 15000,
+  extDoors: 22000,
   gutters: 1000,
   electric: 18000,
   plumbing: 22000,
@@ -149,6 +150,7 @@ const defaultInputs: BuildInputs = {
   bathFixtures: 12000,
   permits: 5500,
   engineering: 5000,
+  architect: 14000,
   insurance: 3500,
   gcFee: 12,
   ownerBuilder: false,
@@ -236,7 +238,7 @@ export function BuildProvider({ children }: { children: ReactNode }) {
       electric, plumbing, hvac, radiantHeat, insulation, drywall, paint,
       flooring, ceiling, intDoors, trim,
       cabinets, counters, appliances, bathFixtures,
-      permits, engineering, insurance, gcFee, ownerBuilder,
+      permits, engineering, architect, insurance, gcFee, ownerBuilder,
       driveway, landscape, deck, accessSave,
       diyPaint, diyPaintSave,
       diyCeiling, diyCeilingSave, diyDoors, diyDoorsSave,
@@ -277,7 +279,7 @@ export function BuildProvider({ children }: { children: ReactNode }) {
     const gcSavingsAmt = ownerBuilder ? hardCosts * (gcFee / 100) : 0;
     
     // Pre-loan costs (paid before financing)
-    const preLoanCosts = permits + engineering;
+    const preLoanCosts = permits + engineering + architect;
     const catSoft = insurance + gcFeeCalc;  // Permits excluded from financed soft costs
 
     const baseTotal = hardCosts + catSoft + catFinish;

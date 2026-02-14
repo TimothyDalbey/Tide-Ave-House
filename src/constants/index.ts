@@ -81,11 +81,11 @@ export const lenders = [
 export const statusItems = {
   preConstruction: [
     { id: 'lot', title: 'Lot Purchased', note: '$402,000 with ~$90,000 down', defaultStatus: 'done' },
-    { id: 'geo', title: 'Geotechnical Study', note: 'Helical pylons recommended for west side', defaultStatus: 'done' },
+    { id: 'geo', title: 'Geotechnical Study', note: 'Helical piles recommended for west side', defaultStatus: 'done' },
     { id: 'sep', title: 'Septic Permits', note: 'Permits obtained', defaultStatus: 'done' },
     { id: 'util', title: 'Utilities Arranged', note: 'Electrical and water handled', defaultStatus: 'done' },
     { id: 'rough', title: 'Architect Rough Plans', note: 'Initial design complete', defaultStatus: 'done' },
-    { id: 'eng', title: 'Structural Engineering', note: 'Required for helical pylon foundation', defaultStatus: '' },
+    { id: 'eng', title: 'Structural Engineering', note: 'Required for helical pile foundation', defaultStatus: '' },
     { id: 'final', title: 'Final Architectural Plans', note: 'Currently in progress', defaultStatus: 'wip' },
     { id: 'bperm', title: 'Building Permit Application', note: 'Submit to Tillamook County (2-6 weeks)', defaultStatus: '' },
     { id: 'bpermapp', title: 'Building Permit Approved', note: 'Required before loan closing', defaultStatus: '' }
@@ -100,7 +100,7 @@ export const statusItems = {
   ],
   construction: [
     { id: 'site', title: 'Site Preparation', note: 'Clearing, grading', defaultStatus: '' },
-    { id: 'found', title: 'Foundation', note: 'Helical pylons on west side', defaultStatus: '' },
+    { id: 'found', title: 'Foundation', note: 'Helical piles on west side', defaultStatus: '' },
     { id: 'frame', title: 'Framing', note: 'Structure and roof', defaultStatus: '' },
     { id: 'roof', title: 'Roofing', note: 'Installation and waterproofing', defaultStatus: '' },
     { id: 'mep', title: 'Rough-Ins (MEP)', note: 'Mechanical, electrical, plumbing', defaultStatus: '' },

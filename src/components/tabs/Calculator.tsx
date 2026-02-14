@@ -182,11 +182,11 @@ export function Calculator() {
           {buildResults.preLoanCosts > 0 && (
             <div style={{ marginTop: '15px', paddingTop: '15px', borderTop: '1px solid var(--border)' }}>
               <div className="row" style={{ background: 'rgba(241, 196, 15, 0.15)', padding: '8px 12px', borderRadius: '6px' }}>
-                <span className="lbl" style={{ color: 'var(--warning)' }}>⚠️ Pre-Loan Costs (permits)</span>
+                <span className="lbl" style={{ color: 'var(--warning)' }}>⚠️ Pre-Loan Costs (permits, engineering, architect/designer)</span>
                 <span className="val" style={{ color: 'var(--warning)' }}>{fmt(buildResults.preLoanCosts)}</span>
               </div>
               <div className="row hint" style={{ fontSize: '.85rem', color: 'var(--text-light)', marginTop: '5px' }}>
-                <span>Permits required before loan closing - not financed</span>
+                <span>Architect/designer already paid ($9K) + permits/engineering required before loan closing - not financed</span>
               </div>
             </div>
           )}

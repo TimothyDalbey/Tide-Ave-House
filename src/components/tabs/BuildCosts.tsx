@@ -135,7 +135,7 @@ export function BuildCosts() {
               <input type="number" value={inputs.neighborShare} onChange={e => setInput('neighborShare', +e.target.value)} style={{ width: '100px', marginLeft: '10px', padding: '4px 8px' }} />
             </div>
           </div>
-          <CostRowWithExplanation label="Foundation (crawl space w/ helical pylons west side)" value={inputs.foundation} field="foundation" setInput={setInput} explanation={costExplanations.foundation} show={showExplanations} />
+          <CostRowWithExplanation label="Foundation (crawl space w/ helical piles west side)" value={inputs.foundation} field="foundation" setInput={setInput} explanation={costExplanations.foundation} show={showExplanations} />
           <CostRowWithExplanation label="Septic System (already permitted)" value={inputs.septic} field="septic" setInput={setInput} explanation={costExplanations.septic} show={showExplanations} />
           <CostRowWithExplanation label="Water & Utility Connections" value={inputs.utility} field="utility" setInput={setInput} explanation={costExplanations.utility} show={showExplanations} />
         </Results>
@@ -280,8 +280,11 @@ export function BuildCosts() {
             </div>
           )}
           <div className="row">
-            <span className="lbl">Architect/Design <span style={{ color: 'var(--text-light)', fontWeight: 'normal' }}>(tracked in Cost Sharing)</span></span>
-            <span className="val">$0</span>
+            <span className="lbl">⚠️ Architect/Designer (pre-loan cost, already paid)</span>
+            <div>
+              <span className="val">{fmt(inputs.architect)}</span>
+              <input type="number" value={inputs.architect} onChange={e => setInput('architect', +e.target.value)} style={{ width: '100px', marginLeft: '10px', padding: '4px 8px' }} />
+            </div>
           </div>
           <CostRowWithExplanation label="Builder's Risk Insurance" value={inputs.insurance} field="insurance" setInput={setInput} explanation={costExplanations.insurance} show={showExplanations} />
           <div className="row">
@@ -377,7 +380,7 @@ export function BuildCosts() {
             <Row label="Location Factor (Coastal)" value={`${results.locAdj >= 0 ? '+' : ''}${fmt(results.locAdj)}`} />
             <Row label="Financed Construction Cost" value={fmt(results.financedTotal)} total />
             <div className="row" style={{ marginTop: '15px', background: 'rgba(241, 196, 15, 0.1)', padding: '8px 10px', borderRadius: '4px' }}>
-              <span className="lbl" style={{ color: 'var(--warning)' }}>⚠️ Pre-Loan Costs (permits + engineering)</span>
+              <span className="lbl" style={{ color: 'var(--warning)' }}>⚠️ Pre-Loan Costs (permits + engineering + architect)</span>
               <span className="val" style={{ color: 'var(--warning)' }}>{fmt(results.preLoanCosts)}</span>
             </div>
             <Row label="Total Project Cost (including pre-loan)" value={fmt(results.grandTotal)} highlight />

@@ -55,7 +55,7 @@ export function Overview() {
               <span className="chk">✓</span>
               <div>
                 <strong>Geotechnical Study</strong><br />
-                <span style={{ color: 'var(--text-light)' }}>Helical pylons recommended for west side; no elevated foundation required</span>
+                <span style={{ color: 'var(--text-light)' }}>Helical piles recommended for west side; no elevated foundation required</span>
               </div>
             </li>
             <li>

@@ -100,10 +100,16 @@ export const costExplanations: Record<string, { estimate: string; low: string; h
     notes: 'HomeGuide: plumbing $12K-$20K for average home. 2.5 baths + kitchen + laundry on one side of house = efficient layout. Higher for coastal area.'
   },
   hvac: {
-    estimate: '$10,000',
-    low: '$7,000',
-    high: '$14,000',
-    notes: 'Ductless mini-split for supplemental heat/cooling. Primary heat from wood burning stove. 2-3 zone mini-split: $4,000-$8,000 installed. Wood stove + chimney/flue installation: $3,000-$6,000. No ductwork = major savings.'
+    estimate: '$3,000',
+    low: '$2,000',
+    high: '$5,000',
+    notes: 'Wood burning stove only for backup/ambiance heat. Primary heating from hydronic radiant floor system. Wood stove + chimney/flue installation: $2,000-$5,000. No mini-splits needed - coastal climate rarely needs AC and radiant provides primary heat.'
+  },
+  radiantHeat: {
+    estimate: '$26,000',
+    low: '$20,000',
+    high: '$35,000',
+    notes: '⭐ PREMIUM COMFORT: Hydronic radiant floor heating under polished concrete. 1600 sf × $12-15/sf = $19,200-$24,000 for tubing/manifolds. High-efficiency boiler: $5,000-$8,000. Even, silent heat perfect for coastal climate. No ductwork or forced air.'
   },
   
   // Insulation & Drywall
@@ -128,10 +134,10 @@ export const costExplanations: Record<string, { estimate: string; low: string; h
   
   // Interior
   flooring: {
-    estimate: '$14/sf',
-    low: '$8/sf',
-    high: '$20/sf',
-    notes: '⭐ INVESTMENT PRIORITY: Premium solid or engineered hardwood throughout. Quality grades $12-$18/sf installed. 1600 sf × $14 = $22,400. Worth investing for beauty, durability, and resale value. Good DIY candidate - save $4-6/sf on labor.'
+    estimate: '$8/sf',
+    low: '$5/sf',
+    high: '$12/sf',
+    notes: '⭐ MODERN AESTHETIC: Polished concrete floors throughout. Grinding, polishing, staining, and sealing. 1600 sf × $8 = $12,800. Durable, low maintenance, perfect thermal mass for radiant heating. Industrial-modern coastal vibe. NOT DIY - requires professional equipment.'
   },
   ceiling: {
     estimate: '$10/sf',
@@ -184,6 +190,12 @@ export const costExplanations: Record<string, { estimate: string; low: string; h
     low: '$4,000',
     high: '$8,000',
     notes: 'TILLAMOOK COUNTY PERMITS: Building permit (structural) ~$2,000-$3,000 based on valuation | Electrical permit ~$300-$500 | Plumbing permit ~$250-$400 | Mechanical permit ~$150-$300 | Zoning permit ~$200 | Septic permit ~$800-$1,200 | School Excise Tax (Neah-Kah-Nie SD) $1.00/sf = $1,600 | May need: Floodplain Development Permit, Geohazard/Beach & Dune Permit for coastal.'
+  },
+  engineering: {
+    estimate: '$5,000',
+    low: '$3,500',
+    high: '$8,000',
+    notes: '⚠️ REQUIRED: Structural engineering for helical pylon foundation system. Geotechnical report + structural calculations + sealed drawings. Coastal/hillside sites with challenging soil require engineered foundation design. Helical piers require load calculations and spacing design by licensed PE.'
   },
   insurance: {
     estimate: '$3,500',

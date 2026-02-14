@@ -6,17 +6,20 @@ import { BuildProvider } from './contexts/BuildContext.tsx'
 import { FinanceProvider } from './contexts/FinanceContext.tsx'
 import { StatusProvider } from './contexts/StatusContext.tsx'
 import { STRProvider } from './contexts/STRContext.tsx'
+import { AuthProvider } from './contexts/AuthContext.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <StatusProvider>
-      <BuildProvider>
-        <FinanceProvider>
-          <STRProvider>
-            <App />
-          </STRProvider>
-        </FinanceProvider>
-      </BuildProvider>
-    </StatusProvider>
+    <AuthProvider>
+      <StatusProvider>
+        <BuildProvider>
+          <FinanceProvider>
+            <STRProvider>
+              <App />
+            </STRProvider>
+          </FinanceProvider>
+        </BuildProvider>
+      </StatusProvider>
+    </AuthProvider>
   </StrictMode>,
 )

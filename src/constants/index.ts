@@ -2,7 +2,7 @@
 export const baseCosts = {
   windows: 18000,
   extDoors: 6500,
-  flooring: 12,
+  flooring: 8,
   ceiling: 14,
   intDoors: 4800,
   trim: 12000,
@@ -85,6 +85,7 @@ export const statusItems = {
     { id: 'sep', title: 'Septic Permits', note: 'Permits obtained', defaultStatus: 'done' },
     { id: 'util', title: 'Utilities Arranged', note: 'Electrical and water handled', defaultStatus: 'done' },
     { id: 'rough', title: 'Architect Rough Plans', note: 'Initial design complete', defaultStatus: 'done' },
+    { id: 'eng', title: 'Structural Engineering', note: 'Required for helical pylon foundation', defaultStatus: '' },
     { id: 'final', title: 'Final Architectural Plans', note: 'Currently in progress', defaultStatus: 'wip' },
     { id: 'bperm', title: 'Building Permit Application', note: 'Submit to Tillamook County (2-6 weeks)', defaultStatus: '' },
     { id: 'bpermapp', title: 'Building Permit Approved', note: 'Required before loan closing', defaultStatus: '' }

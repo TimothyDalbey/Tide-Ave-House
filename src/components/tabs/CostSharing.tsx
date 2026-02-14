@@ -2,11 +2,35 @@ import { useState } from 'react';
 import { Card, Alert, Row, Results, FormGroup, InputWrap } from '../ui';
 import { useFinance } from '../../contexts/FinanceContext';
 import { fmt } from '../../utils/format';
+import { ProtectedSection } from '../auth/ProtectedSection';
+import { authConfig } from '../../config/auth.config';
 
 export function CostSharing() {
   const { inputs, results, shareInputs, shareResults, setShareInput } = useFinance();
   const [showDetails, setShowDetails] = useState(false);
 
+  // If auth is disabled, render content directly
+  if (!authConfig.costSharingEnabled) {
+    return <CostSharingContent inputs={inputs} results={results} shareInputs={shareInputs} shareResults={shareResults} setShareInput={setShareInput} showDetails={showDetails} setShowDetails={setShowDetails} />;
+  }
+
+  return (
+    <ProtectedSection title="Cost Sharing - Login Required">
+      <CostSharingContent inputs={inputs} results={results} shareInputs={shareInputs} shareResults={shareResults} setShareInput={setShareInput} showDetails={showDetails} setShowDetails={setShowDetails} />
+    </ProtectedSection>
+  );
+}
+
+// Extracted content component
+function CostSharingContent({ inputs, results, shareInputs, shareResults, setShareInput, showDetails, setShowDetails }: {
+  inputs: ReturnType<typeof useFinance>['inputs'];
+  results: ReturnType<typeof useFinance>['results'];
+  shareInputs: ReturnType<typeof useFinance>['shareInputs'];
+  shareResults: ReturnType<typeof useFinance>['shareResults'];
+  setShareInput: ReturnType<typeof useFinance>['setShareInput'];
+  showDetails: boolean;
+  setShowDetails: (v: boolean) => void;
+}) {
   return (
     <>
       <Card title="Project Funding Breakdown">

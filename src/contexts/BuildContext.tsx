@@ -29,6 +29,7 @@ export interface BuildInputs {
   electric: number;
   plumbing: number;
   hvac: number;
+  radiantHeat: number;
   // Insulation & Drywall
   insulation: number;
   drywall: number;
@@ -45,6 +46,7 @@ export interface BuildInputs {
   bathFixtures: number;
   // Soft Costs
   permits: number;
+  engineering: number;
   insurance: number;
   gcFee: number;
   ownerBuilder: boolean;
@@ -56,8 +58,6 @@ export interface BuildInputs {
   // DIY Options
   diyPaint: boolean;
   diyPaintSave: number;
-  diyFlooring: boolean;
-  diyFlooringSave: number;
   diyCeiling: boolean;
   diyCeilingSave: number;
   diyDoors: boolean;
@@ -134,11 +134,12 @@ const defaultInputs: BuildInputs = {
   gutters: 1000,
   electric: 18000,
   plumbing: 22000,
-  hvac: 10000,
+  hvac: 3000,
+  radiantHeat: 26000,
   insulation: 10000,
   drywall: 16000,
   paint: 5000,
-  flooring: 14,
+  flooring: 8,
   ceiling: 10,
   intDoors: 9000,
   trim: 2000,
@@ -147,6 +148,7 @@ const defaultInputs: BuildInputs = {
   appliances: 8000,
   bathFixtures: 12000,
   permits: 5500,
+  engineering: 5000,
   insurance: 3500,
   gcFee: 12,
   ownerBuilder: false,
@@ -156,8 +158,6 @@ const defaultInputs: BuildInputs = {
   accessSave: 8000,
   diyPaint: false,
   diyPaintSave: 4500,
-  diyFlooring: false,
-  diyFlooringSave: 4,
   diyCeiling: false,
   diyCeilingSave: 5,
   diyDoors: false,
@@ -233,19 +233,18 @@ export function BuildProvider({ children }: { children: ReactNode }) {
       sqft, roofSqft, locFactor,
       sitePrep, tree, retaining, neighborShare, foundation, septic, utility,
       framing, sheath, roofing, siding, windows, extDoors, gutters,
-      electric, plumbing, hvac, insulation, drywall, paint,
+      electric, plumbing, hvac, radiantHeat, insulation, drywall, paint,
       flooring, ceiling, intDoors, trim,
       cabinets, counters, appliances, bathFixtures,
-      permits, insurance, gcFee, ownerBuilder,
+      permits, engineering, insurance, gcFee, ownerBuilder,
       driveway, landscape, deck, accessSave,
-      diyPaint, diyPaintSave, diyFlooring, diyFlooringSave,
+      diyPaint, diyPaintSave,
       diyCeiling, diyCeilingSave, diyDoors, diyDoorsSave,
       diyTrim, diyTrimSave, diyCabinets, diyCabinetsSave,
       diyLandscape, diyLandscapeSave, diyDeck, diyDeckSave
     } = inputs;
 
     // DIY savings calculations
-    const diyFlooringSaveAmt = diyFlooring ? diyFlooringSave * sqft : 0;
     const diyCeilingSaveAmt = diyCeiling ? diyCeilingSave * sqft : 0;
     const diyDoorsSaveAmt = diyDoors ? diyDoorsSave : 0;
     const diyTrimSaveAmt = diyTrim ? diyTrimSave : 0;
@@ -253,7 +252,7 @@ export function BuildProvider({ children }: { children: ReactNode }) {
     const diyPaintSaveAmt = diyPaint ? diyPaintSave : 0;
     const diyLandscapeSaveAmt = diyLandscape ? diyLandscapeSave : 0;
     const diyDeckSaveAmt = diyDeck ? diyDeckSave : 0;
-    const totalDiySavings = diyFlooringSaveAmt + diyCeilingSaveAmt + diyDoorsSaveAmt + 
+    const totalDiySavings = diyCeilingSaveAmt + diyDoorsSaveAmt + 
       diyTrimSaveAmt + diyCabinetsSaveAmt + diyPaintSaveAmt + diyLandscapeSaveAmt + diyDeckSaveAmt;
 
     // Per-sf calculations
@@ -266,7 +265,7 @@ export function BuildProvider({ children }: { children: ReactNode }) {
     const catSite = sitePrep + tree + (retaining - neighborShare) + foundation + septic + utility;
     const catFrame = framingCost + sheath;
     const catExt = roofCost + siding + windows + extDoors + gutters;
-    const catMep = electric + plumbing + hvac;
+    const catMep = electric + plumbing + hvac + radiantHeat;
     const catInsul = insulation + drywall + paint;
     const catInt = flooringCost + ceilingCost + intDoors + trim;
     const catKb = cabinets + counters + appliances + bathFixtures;
@@ -277,8 +276,8 @@ export function BuildProvider({ children }: { children: ReactNode }) {
     const gcFeeCalc = ownerBuilder ? 0 : hardCosts * (gcFee / 100);
     const gcSavingsAmt = ownerBuilder ? hardCosts * (gcFee / 100) : 0;
     
-    // Permits are pre-loan costs (paid before financing)
-    const preLoanCosts = permits;
+    // Pre-loan costs (paid before financing)
+    const preLoanCosts = permits + engineering;
     const catSoft = insurance + gcFeeCalc;  // Permits excluded from financed soft costs
 
     const baseTotal = hardCosts + catSoft + catFinish;

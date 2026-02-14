@@ -170,7 +170,8 @@ export function BuildCosts() {
         <Results title="⚡ Mechanical, Electrical, Plumbing (MEP)">
           <CostRowWithExplanation label="Electrical (panel, wiring, fixtures)" value={inputs.electric} field="electric" setInput={setInput} explanation={costExplanations.electric} show={showExplanations} />
           <CostRowWithExplanation label="Plumbing (2.5 bath, kitchen, laundry)" value={inputs.plumbing} field="plumbing" setInput={setInput} explanation={costExplanations.plumbing} show={showExplanations} />
-          <CostRowWithExplanation label="HVAC (heat pump / mini-split)" value={inputs.hvac} field="hvac" setInput={setInput} explanation={costExplanations.hvac} show={showExplanations} />
+          <CostRowWithExplanation label="⭐ Radiant Floor Heating (hydronic)" value={inputs.radiantHeat} field="radiantHeat" setInput={setInput} explanation={costExplanations.radiantHeat} show={showExplanations} />
+          <CostRowWithExplanation label="HVAC (wood stove only)" value={inputs.hvac} field="hvac" setInput={setInput} explanation={costExplanations.hvac} show={showExplanations} />
         </Results>
 
         <Results title="🧱 Insulation & Drywall">
@@ -190,18 +191,13 @@ export function BuildCosts() {
         </Results>
 
         <Results title="🪟 Interior Finishes">
-          <DiyPerSfRow
-            label={`⭐ Premium Hardwood Flooring ($/sf: $${inputs.flooring})`}
-            cost={results.flooringCost}
-            rate={inputs.flooring}
-            rateField="flooring"
-            diyChecked={inputs.diyFlooring}
-            diyField="diyFlooring"
-            diySave={inputs.diyFlooringSave}
-            diySaveField="diyFlooringSave"
-            sqft={inputs.sqft}
-            setInput={setInput}
-          />
+          <div className="row">
+            <span className="lbl">⭐ Polished Concrete Floors ($/sf: ${inputs.flooring})</span>
+            <div>
+              <span className="val">{fmt(results.flooringCost)}</span>
+              <input type="number" value={inputs.flooring} onChange={e => setInput('flooring', +e.target.value)} style={{ width: '80px', marginLeft: '10px', padding: '4px 8px' }} />/sf
+            </div>
+          </div>
           {showExplanations && <ExplanationRow explanation={costExplanations.flooring} />}
           <DiyPerSfRow
             label={`Wood Ceiling ($/sf: $${inputs.ceiling})`}
@@ -259,6 +255,7 @@ export function BuildCosts() {
 
         <Results title="📄 Soft Costs & Fees">
           <CostRowWithExplanation label="⚠️ Permits & Fees (pre-loan cost)" value={inputs.permits} field="permits" setInput={setInput} explanation={costExplanations.permits} show={showExplanations} />
+          <CostRowWithExplanation label="⚠️ Structural Engineering (pre-loan cost)" value={inputs.engineering} field="engineering" setInput={setInput} explanation={costExplanations.engineering} show={showExplanations} />
           {showExplanations && (
             <div style={{ background: 'var(--bg)', padding: '12px 15px', borderRadius: '8px', marginBottom: '10px', fontSize: '.85rem' }}>
               <div style={{ background: 'rgba(241, 196, 15, 0.15)', padding: '8px 12px', borderRadius: '4px', marginBottom: '10px', border: '1px solid rgba(241, 196, 15, 0.3)' }}>
@@ -380,7 +377,7 @@ export function BuildCosts() {
             <Row label="Location Factor (Coastal)" value={`${results.locAdj >= 0 ? '+' : ''}${fmt(results.locAdj)}`} />
             <Row label="Financed Construction Cost" value={fmt(results.financedTotal)} total />
             <div className="row" style={{ marginTop: '15px', background: 'rgba(241, 196, 15, 0.1)', padding: '8px 10px', borderRadius: '4px' }}>
-              <span className="lbl" style={{ color: 'var(--warning)' }}>⚠️ Pre-Loan Costs (permits - paid out of pocket)</span>
+              <span className="lbl" style={{ color: 'var(--warning)' }}>⚠️ Pre-Loan Costs (permits + engineering)</span>
               <span className="val" style={{ color: 'var(--warning)' }}>{fmt(results.preLoanCosts)}</span>
             </div>
             <Row label="Total Project Cost (including pre-loan)" value={fmt(results.grandTotal)} highlight />

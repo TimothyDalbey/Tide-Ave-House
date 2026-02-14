@@ -25,7 +25,7 @@ export const costExplanations: Record<string, { estimate: string; low: string; h
     estimate: '$35,000',
     low: '$25,000',
     high: '$50,000',
-    notes: 'HomeGuide: foundations $25K-$70K. Crawl space with helical pylons on west side. Simple rectangle = lower end. 1600 sf × $15-$25/sf = $24K-$40K.'
+    notes: 'HomeGuide: foundations $25K-$70K. Hybrid system: conventional crawl space on east + HELICAL PILES on west side (per geotech). West side: 65 ft wide ÷ 8 ft spacing = 9 piles. Helical piles $1,500-$3,000 each installed (steel shaft 2.875"-3.5" dia, helical plates 8"-14", hydraulic torque install, pile caps, 10-25 ft depth). 9 piles = $13,500-$27,000 for west side. Conventional crawl on remainder ~$15K-$20K. No excavation or cure time with helical - immediate load capacity, ideal for coastal sandy/shifting soil.'
   },
   septic: {
     estimate: '$25,000',

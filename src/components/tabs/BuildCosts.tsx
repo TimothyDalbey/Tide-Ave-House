@@ -8,7 +8,7 @@ import { fmt } from '../../utils/format';
 export function BuildCosts() {
   const { inputs, results, setInput, updateFinishGrade } = useBuild();
   const gradeInfo = gradeDescriptions[inputs.finishGrade];
-  const [showExplanations, setShowExplanations] = useState(false);
+  const [showExplanations, setShowExplanations] = useState(true);
 
   return (
     <>
@@ -127,6 +127,7 @@ export function BuildCosts() {
         <Results title="🔨 Site Work & Foundation">
           <CostRowWithExplanation label="Site Prep (grading already done)" value={inputs.sitePrep} field="sitePrep" setInput={setInput} explanation={costExplanations.sitePrep} show={showExplanations} />
           <CostRowWithExplanation label="Tree Removal (large tree)" value={inputs.tree} field="tree" setInput={setInput} explanation={costExplanations.tree} show={showExplanations} />
+          <CostRowWithExplanation label="Excavation (foundation/misc)" value={inputs.excavation} field="excavation" setInput={setInput} explanation={costExplanations.excavation} show={showExplanations} />
           <CostRowWithExplanation label="Retaining Wall (poured concrete, part of foundation)" value={inputs.retaining} field="retaining" setInput={setInput} explanation={costExplanations.retaining} show={showExplanations} />
           <div className="row" style={{ background: 'rgba(39,174,96,.05)' }}>
             <span className="lbl" style={{ paddingLeft: '20px' }}>↳ Neighbor Contribution</span>
@@ -136,8 +137,22 @@ export function BuildCosts() {
             </div>
           </div>
           <CostRowWithExplanation label="Foundation (crawl space w/ helical piles west side)" value={inputs.foundation} field="foundation" setInput={setInput} explanation={costExplanations.foundation} show={showExplanations} />
-          <CostRowWithExplanation label="Septic System (already permitted)" value={inputs.septic} field="septic" setInput={setInput} explanation={costExplanations.septic} show={showExplanations} />
-          <CostRowWithExplanation label="Water & Utility Connections" value={inputs.utility} field="utility" setInput={setInput} explanation={costExplanations.utility} show={showExplanations} />
+          <div className="row" style={{ background: 'rgba(46, 204, 113, 0.1)', borderLeft: '3px solid var(--success)' }}>
+            <span className="lbl">✓ Septic System <span style={{ fontSize: '.8rem', color: 'var(--success)', fontWeight: 'normal' }}>(bid received)</span></span>
+            <div>
+              <span className="val">{fmt(inputs.septic)}</span>
+              <input type="number" value={inputs.septic} onChange={e => setInput('septic', +e.target.value)} style={{ width: '100px', marginLeft: '10px', padding: '4px 8px' }} />
+            </div>
+          </div>
+          {showExplanations && <ExplanationRow explanation={costExplanations.septic} />}
+          <div className="row" style={{ background: 'rgba(46, 204, 113, 0.1)', borderLeft: '3px solid var(--success)' }}>
+            <span className="lbl">✓ Water & Utility Connections <span style={{ fontSize: '.8rem', color: 'var(--success)', fontWeight: 'normal' }}>(bid received)</span></span>
+            <div>
+              <span className="val">{fmt(inputs.utility)}</span>
+              <input type="number" value={inputs.utility} onChange={e => setInput('utility', +e.target.value)} style={{ width: '100px', marginLeft: '10px', padding: '4px 8px' }} />
+            </div>
+          </div>
+          {showExplanations && <ExplanationRow explanation={costExplanations.utility} />}
         </Results>
 
         <Results title="🪵 Framing & Structure">

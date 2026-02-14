@@ -200,13 +200,15 @@ input:focus, select:focus {
   color: var(--text-light);
   flex: 1;
   min-width: 0;
+  font-size: .9rem;
+  line-height: 1.4;
 }
 
 .val {
   font-weight: 600;
   text-align: right;
   font-variant-numeric: tabular-nums;
-  min-width: 90px;
+  min-width: 80px;
   flex-shrink: 0;
 }
 
@@ -218,9 +220,10 @@ input:focus, select:focus {
 }
 
 .row input[type="number"] {
-  width: 70px;
-  padding: 4px 6px;
+  width: 80px;
+  padding: 6px 8px;
   font-size: .9rem;
+  text-align: right;
 }
 
 .row.total .lbl, .row.total .val {
@@ -641,6 +644,12 @@ footer a {
   .tabs {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  .tabs::-webkit-scrollbar {
+    display: none;
   }
   
   .tab {
@@ -691,9 +700,15 @@ footer a {
     white-space: nowrap;
   }
   
-  /* Investment priority labels */
+  /* Row labels */
   .row .lbl {
+    font-size: .85rem;
+  }
+  
+  /* Alert text wrap */
+  .alert {
     font-size: .9rem;
+    line-height: 1.5;
   }
 }
 
@@ -727,8 +742,9 @@ footer a {
   }
   
   .card h2 {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     margin-bottom: 15px;
+    padding-bottom: 8px;
   }
   
   .tabs {
@@ -766,18 +782,20 @@ footer a {
   
   .results h3 {
     font-size: 1rem;
+    margin-bottom: 12px;
   }
   
   .row {
-    flex-wrap: wrap;
-    padding: 10px 0;
-    gap: 5px;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 12px 0;
+    gap: 6px;
   }
   
   .row .lbl {
-    flex: 1 1 100%;
+    width: 100%;
     font-size: .85rem;
-    margin-bottom: 4px;
+    margin-bottom: 2px;
   }
   
   .row > div {
@@ -787,34 +805,43 @@ footer a {
   
   .row .val {
     font-size: .95rem;
-    min-width: 80px;
+    min-width: 70px;
   }
   
   .row input[type="number"] {
-    width: 65px !important;
+    width: 70px !important;
     font-size: .85rem;
+    padding: 6px 8px;
   }
   
   .row.total {
     margin: 15px -12px -12px;
     padding: 12px;
     font-size: .95rem;
-    flex-wrap: nowrap;
+    flex-direction: row;
+    align-items: center;
   }
   
   .row.total .lbl {
-    flex: 1 1 auto;
+    flex: 1;
     margin-bottom: 0;
+    width: auto;
   }
   
   .row.hl {
     margin: 0 -12px;
-    padding: 10px 12px;
+    padding: 12px;
   }
   
   .alert {
     padding: 12px 15px;
-    font-size: .9rem;
+    font-size: .85rem;
+    line-height: 1.5;
+  }
+  
+  .alert strong {
+    display: block;
+    margin-bottom: 4px;
   }
   
   .lcard {
@@ -839,8 +866,10 @@ footer a {
   
   .diy-save {
     width: 100%;
-    margin: 5px 0 0 0;
+    margin: 8px 0 0 0;
     justify-content: flex-start;
+    padding: 8px 0;
+    border-top: 1px dashed var(--border);
   }
   
   .form-group label {
@@ -853,14 +882,19 @@ footer a {
   
   .specs {
     grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  
+  .spec {
+    padding: 12px 8px;
   }
   
   .spec-val {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
   
   .spec-lbl {
-    font-size: .8rem;
+    font-size: .75rem;
   }
   
   /* Permits table responsive */
@@ -872,25 +906,18 @@ footer a {
     padding: 4px 0;
   }
   
-  /* Fixed lot display box responsive */
-  .card .grid > div > div[style*="background"] {
-    padding: 10px 12px;
+  /* Grid display boxes */
+  .grid > div > div[style*="background: var(--bg)"] {
+    padding: 10px 12px !important;
     font-size: .85rem;
   }
   
-  /* Explanation rows responsive */
-  .explanation-row {
-    padding: 10px 12px;
-    font-size: .8rem;
-  }
-  
-  /* DIY checkbox layout fix */
-  .row > div[style*="flex-wrap"] {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  .diy-save .diy-amt input {
-    width: 50px !important;
+  /* Fix inline styles on special rows */
+  .row[style*="background"] {
+    margin-left: -12px;
+    margin-right: -12px;
+    padding-left: 12px;
+    padding-right: 12px;
+    border-radius: 6px;
   }
 }

@@ -11,6 +11,7 @@ export interface BuildInputs {
   // Site Work
   sitePrep: number;
   tree: number;
+  excavation: number;
   retaining: number;
   neighborShare: number;
   foundation: number;
@@ -115,21 +116,22 @@ interface BuildContextType {
 const defaultInputs: BuildInputs = {
   sqft: 1600,
   roofSqft: 1600,
-  wallLf: 170,
+  wallLf: 180,
   wallHt: 10,
   finishGrade: '1.15',
   locFactor: 1,
   sitePrep: 2500,
   tree: 3500,
+  excavation: 5000,
   retaining: 18000,
   neighborShare: 0,
   foundation: 35000,
   septic: 25000,
   utility: 20400,
   framing: 20,
-  sheath: 6000,
+  sheath: 4000,
   roofing: 12,
-  siding: 20000,
+  siding: 14000,
   windows: 15000,
   extDoors: 22000,
   gutters: 1000,
@@ -233,7 +235,7 @@ export function BuildProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const {
       sqft, roofSqft, locFactor,
-      sitePrep, tree, retaining, neighborShare, foundation, septic, utility,
+      sitePrep, tree, excavation, retaining, neighborShare, foundation, septic, utility,
       framing, sheath, roofing, siding, windows, extDoors, gutters,
       electric, plumbing, hvac, radiantHeat, insulation, drywall, paint,
       flooring, ceiling, intDoors, trim,
@@ -264,7 +266,7 @@ export function BuildProvider({ children }: { children: ReactNode }) {
     const ceilingCost = ceiling * sqft;
 
     // Category totals
-    const catSite = sitePrep + tree + (retaining - neighborShare) + foundation + septic + utility;
+    const catSite = sitePrep + tree + excavation + (retaining - neighborShare) + foundation + septic + utility;
     const catFrame = framingCost + sheath;
     const catExt = roofCost + siding + windows + extDoors + gutters;
     const catMep = electric + plumbing + hvac + radiantHeat;

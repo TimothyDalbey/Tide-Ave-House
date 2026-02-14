@@ -15,6 +15,12 @@ export const costExplanations: Record<string, { estimate: string; low: string; h
     high: '$5,000',
     notes: 'One large tree removal. National average $750-$2,500 per tree, larger trees up to $5K. Coastal access may add cost.'
   },
+  excavation: {
+    estimate: '$5,000',
+    low: '$2,000',
+    high: '$8,000',
+    notes: 'Minimal excavation expected: helical piles on west side don\'t require digging, septic bid may include its own excavation. Budget for crawl space prep on east side and any unexpected digging. Verify with foundation contractor what\'s included in their bid.'
+  },
   retaining: {
     estimate: '$18,000',
     low: '$12,000',
@@ -48,10 +54,10 @@ export const costExplanations: Record<string, { estimate: string; low: string; h
     notes: 'HomeGuide: $11-$30/sf for framing. Simple single-story, rectangular, shed roof = low complexity. 1600 sf × $20 = $32,000. National avg for basic: $22K-$60K for 2000sf.'
   },
   sheath: {
-    estimate: '$6,000',
-    low: '$4,000',
-    high: '$9,000',
-    notes: 'OSB sheathing + house wrap. ~$1-3.50/sf wall surface + $2-5/sf roof. Walls ~2,000 sf + roof 1600 sf = ~$6K materials + labor.'
+    estimate: '$4,000',
+    low: '$3,000',
+    high: '$6,000',
+    notes: 'OSB sheathing + house wrap. Reduced area: west wall mostly doors/windows, south wall has foundation running up. ~1,200 sf actual siding area + roof 1,600 sf sheathing. Materials + labor.'
   },
   
   // Exterior
@@ -62,10 +68,10 @@ export const costExplanations: Record<string, { estimate: string; low: string; h
     notes: 'Metal standing seam shed roof. Simple single pitch = easy install. HomeGuide: metal roofing $8-$14/sf installed. 1600 sf × $12 = $19,200. New roof typically $10K-$25K.'
   },
   siding: {
-    estimate: '$20,000',
-    low: '$12,000',
-    high: '$30,000',
-    notes: 'HomeGuide: siding $12K-$45K. Fiber cement (HardiePlank) or similar. ~2,000 sf wall area × $8-15/sf installed = $16K-$30K. Simple rectangle = lower end.'
+    estimate: '$14,000',
+    low: '$10,000',
+    high: '$20,000',
+    notes: 'Reduced siding area: west wall (65 ft) mostly sliding doors/windows, south wall (25 ft) has foundation running up partway. Actual siding ~1,200 sf vs typical 1,800 sf. Fiber cement (HardiePlank) at $10-12/sf installed.'
   },
   windows: {
     estimate: '$15,000',

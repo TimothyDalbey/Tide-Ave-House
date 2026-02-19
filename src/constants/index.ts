@@ -1,15 +1,15 @@
 // Base costs for "Mid-to-High-Mid" (1.15) grade - these are the reference values
 export const baseCosts = {
   windows: 18000,
-  extDoors: 6500,
-  flooring: 8,
-  ceiling: 14,
-  intDoors: 4800,
-  trim: 12000,
-  cabinets: 22000,
-  counters: 9500,
-  appliances: 12000,
-  bathFixtures: 18000
+  extDoors: 22000,
+  flooring: 9,       // $/SF - polished concrete + tile
+  ceiling: 11,       // $/SF - T&G wood ceiling
+  intDoors: 5000,
+  trim: 3000,
+  cabinets: 15000,
+  counters: 8000,
+  appliances: 10000,
+  bathFixtures: 12000
 };
 
 // Grade multipliers relative to mid-to-high-mid (1.15) base

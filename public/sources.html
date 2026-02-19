@@ -18,12 +18,16 @@ header p{opacity:.9}
 .card h2{color:var(--primary);margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid var(--border);font-size:1.4rem}
 .card h3{color:var(--secondary);margin:25px 0 15px;font-size:1.1rem}
 .source-list{list-style:none;padding:0}
-.source-list li{padding:12px 15px;margin-bottom:10px;background:var(--bg);border-radius:8px;border-left:3px solid var(--primary-light)}
+.source-list li{padding:12px 15px;margin-bottom:10px;background:var(--bg);border-radius:8px;border-left:3px solid var(--primary-light);scroll-margin-top:100px}
 .source-list li strong{display:block;color:var(--text);margin-bottom:4px}
 .source-list li span{font-size:.9rem;color:var(--text-light)}
 .source-list li a{color:var(--primary-light);word-break:break-all;font-size:.85rem}
 .tag{display:inline-block;font-size:.7rem;padding:2px 8px;border-radius:10px;background:var(--primary);color:#fff;margin-left:8px;vertical-align:middle}
+.cite-num{display:inline-block;font-size:.75rem;font-weight:bold;padding:2px 8px;border-radius:4px;background:var(--secondary);color:#fff;margin-right:8px}
 .note{font-size:.9rem;color:var(--text-light);font-style:italic;margin-top:15px;padding:15px;background:rgba(45,140,184,.1);border-radius:8px}
+.cite-index{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:8px;font-size:.85rem}
+.cite-index a{color:var(--primary);text-decoration:none;padding:4px 8px;border-radius:4px;background:var(--bg)}
+.cite-index a:hover{background:var(--primary-light);color:#fff}
 footer{text-align:center;padding:30px;color:var(--text-light)}
 footer a{color:var(--primary-light);text-decoration:none}
 </style>
@@ -36,57 +40,113 @@ footer a{color:var(--primary-light);text-decoration:none}
 <div class="container">
 <a href="index.html" class="back-link">← Back to Project Tracker</a>
 
+<!-- Citation Quick Reference Index -->
+<div class="card">
+<h2>📚 Citation Index</h2>
+<p style="margin-bottom:15px;color:var(--text-light)">Click any citation number to jump to its full reference. Citations are referenced in cost explanations using [x] notation.</p>
+<div class="cite-index">
+<a href="#cite-1">[1] HomeAdvisor - Build a House</a>
+<a href="#cite-2">[2] Fixr.com - Single Family Home</a>
+<a href="#cite-3">[3] Fixr.com - Oregon Construction</a>
+<a href="#cite-4">[4] Fixr.com - Metal Roofing</a>
+<a href="#cite-5">[5] Fixr.com - Wood Framing</a>
+<a href="#cite-6">[6] Fixr.com - Foundation Costs</a>
+<a href="#cite-7">[7] HomeAdvisor - Septic Systems</a>
+<a href="#cite-8">[8] Fixr.com - Trade Labor Rates</a>
+<a href="#cite-9">[9] Bankrate - Construction Loans</a>
+<a href="#cite-10">[10] NerdWallet - Construction Loans</a>
+<a href="#cite-11">[11] Tillamook County Assessor</a>
+<a href="#cite-12">[12] Oregon Building Codes</a>
+<a href="#cite-13">[13] Oregon Coastal Management</a>
+<a href="#cite-14">[14] Builder's Risk Insurance</a>
+<a href="#cite-15">[15] Oregon CCB - Owner-Builder</a>
+<a href="#cite-16">[16] Chance Helical - Pile Systems</a>
+<a href="#cite-17">[17] Concrete Network - Polished Concrete</a>
+<a href="#cite-18">[18] Warmboard - Radiant Heating</a>
+<a href="#cite-19">[19] Metal Roofing Alliance</a>
+<a href="#cite-20">[20] NAHB - Construction Best Practices</a>
+<a href="#cite-21">[21] HomeGuide - Framing Costs</a>
+<a href="#cite-22">[22] HomeGuide - Insulation Costs</a>
+<a href="#cite-23">[23] HomeGuide - Electrical Costs</a>
+<a href="#cite-24">[24] HomeGuide - Plumbing Costs</a>
+<a href="#cite-25">[25] HomeGuide - Drywall Costs</a>
+<a href="#cite-26">[26] This Old House - Radiant Heat</a>
+<a href="#cite-27">[27] Cedar Brook Sauna - Sauna Costs</a>
+<a href="#cite-28">[28] BLS - Oregon Wage Data</a>
+<a href="#cite-29">[29] RSMeans - Regional Cost Data</a>
+<a href="#cite-30">[30] HomeGuide - Kitchen Cabinets</a>
+<a href="#cite-31">[31] HomeGuide - Countertops</a>
+<a href="#cite-32">[32] EnergyStar - Windows</a>
+<a href="#cite-33">[33] Fixr.com - Fiber Cement Siding</a>
+<a href="#cite-34">[34] HomeGuide - Interior Doors</a>
+<a href="#cite-35">[35] HomeAdvisor - Deck Building</a>
+<a href="#cite-36">[36] Tillamook County Permits</a>
+<a href="#cite-37">[37] HomeGuide - Tree Removal</a>
+<a href="#cite-38">[38] HomeGuide - Site Preparation</a>
+<a href="#cite-39">[39] HomeGuide - Excavation</a>
+<a href="#cite-40">[40] HomeGuide - Retaining Walls</a>
+</div>
+</div>
+
 <div class="card">
 <h2>Construction Cost Data</h2>
 
 <h3>National & Regional Construction Costs</h3>
 <ul class="source-list">
-<li>
+<li id="cite-1">
+<span class="cite-num">[1]</span>
 <strong>HomeAdvisor - Cost to Build a House <span class="tag">Primary</span></strong>
-<span>National construction cost averages, material costs, and labor rates</span><br>
+<span>National construction cost averages, material costs, and labor rates. Average cost $285,956 with range $119,912-$484,091.</span><br>
 <a href="https://www.homeadvisor.com/cost/architects-and-engineers/build-a-house/" target="_blank">homeadvisor.com/cost/architects-and-engineers/build-a-house/</a>
 </li>
-<li>
+<li id="cite-2">
+<span class="cite-num">[2]</span>
 <strong>Fixr.com - Single Family Home Construction Costs <span class="tag">Primary</span></strong>
-<span>Detailed breakdown by phase: foundation, framing, roofing, MEP, finishes. Oregon-specific data.</span><br>
+<span>Detailed breakdown by phase: foundation, framing, roofing, MEP, finishes. National average $310,000-$485,000 for 2,000 SF.</span><br>
 <a href="https://www.fixr.com/costs/build-single-family-house" target="_blank">fixr.com/costs/build-single-family-house</a>
 </li>
-<li>
+<li id="cite-3">
+<span class="cite-num">[3]</span>
 <strong>Fixr.com - Cost to Build a House in Oregon</strong>
-<span>Oregon average: $496,486 for 2,500 sq ft (~$199/sq ft)</span><br>
+<span>Oregon average: $496,486 for 2,500 sq ft (~$199/sq ft). Coastal areas 10-20% higher.</span><br>
 <a href="https://www.fixr.com/costs/build-single-family-house#cost-to-build-a-house-in-oregon" target="_blank">fixr.com - Oregon specific data</a>
 </li>
 </ul>
 
 <h3>Specific Trade & Material Costs</h3>
 <ul class="source-list">
-<li>
+<li id="cite-4">
+<span class="cite-num">[4]</span>
 <strong>Standing Seam Metal Roofing Costs</strong>
-<span>$14.75-$42 per sq ft installed, based on material gauge and complexity</span><br>
+<span>$14.75-$42 per sq ft installed, based on material gauge and complexity. Average $8-$14/sf for standard residential.</span><br>
 <a href="https://www.fixr.com/costs/metal-roof-installation" target="_blank">fixr.com/costs/metal-roof-installation</a>
 </li>
-<li>
+<li id="cite-5">
+<span class="cite-num">[5]</span>
 <strong>Wood Framing Costs</strong>
-<span>$29-$53 per sq ft for residential wood framing in Oregon</span><br>
+<span>$29-$53 per sq ft for residential wood framing in Oregon. Simple rectangular plans at lower end.</span><br>
 <a href="https://www.fixr.com/costs/framing" target="_blank">fixr.com/costs/framing</a>
 </li>
-<li>
+<li id="cite-6">
+<span class="cite-num">[6]</span>
 <strong>Foundation & Helical Pile Costs</strong>
-<span>Crawl space foundation costs plus helical pier installation for coastal soils</span><br>
+<span>Crawl space foundation: $8,000-$21,000. Helical piles: $1,500-$3,500 per pile installed depending on depth and soil.</span><br>
 <a href="https://www.fixr.com/costs/foundation" target="_blank">fixr.com/costs/foundation</a>
 </li>
-<li>
+<li id="cite-7">
+<span class="cite-num">[7]</span>
 <strong>Septic System Installation</strong>
-<span>Oregon septic system costs and permitting requirements</span><br>
+<span>Oregon septic system costs: $15,000-$35,000 depending on soil conditions and system type. Permits $500-$1,500.</span><br>
 <a href="https://www.homeadvisor.com/cost/plumbing/install-a-septic-tank/" target="_blank">homeadvisor.com - septic installation</a>
 </li>
 </ul>
 
 <h3>Labor Rates</h3>
 <ul class="source-list">
-<li>
+<li id="cite-8">
+<span class="cite-num">[8]</span>
 <strong>Oregon Trade Labor Rates (2025-2026)</strong>
-<span>Electricians: $101-$183/hr | Plumbers: $101-$183/hr | HVAC: $86-$157/hr | General carpentry: $45-$85/hr</span><br>
+<span>Electricians: $75-$150/hr | Plumbers: $75-$150/hr | HVAC: $75-$125/hr | General carpentry: $45-$85/hr | Coastal areas +15-25%</span><br>
 <a href="https://www.fixr.com/costs/electrician" target="_blank">fixr.com - trade labor rates</a>
 </li>
 </ul>
@@ -97,14 +157,16 @@ footer a{color:var(--primary-light);text-decoration:none}
 
 <h3>Conventional Construction Loans</h3>
 <ul class="source-list">
-<li>
+<li id="cite-9">
+<span class="cite-num">[9]</span>
 <strong>Bankrate - Construction Loan Guide</strong>
-<span>Construction-to-permanent loan requirements, rates, and process</span><br>
+<span>Construction-to-permanent loan requirements, rates (6-8% typical), and process. Interest-only during construction phase.</span><br>
 <a href="https://www.bankrate.com/mortgages/construction-loans/" target="_blank">bankrate.com/mortgages/construction-loans/</a>
 </li>
-<li>
+<li id="cite-10">
+<span class="cite-num">[10]</span>
 <strong>NerdWallet - Construction Loans Explained</strong>
-<span>Down payment requirements, draw schedules, and lender comparisons</span><br>
+<span>Down payment requirements (20-25% typical), draw schedules, and lender comparisons. Construction period 6-12 months.</span><br>
 <a href="https://www.nerdwallet.com/article/mortgages/construction-loans" target="_blank">nerdwallet.com - construction loans</a>
 </li>
 <li>
@@ -135,9 +197,10 @@ footer a{color:var(--primary-light);text-decoration:none}
 <span>PMI typically 0.3%-1.5% of loan amount annually for LTV > 80%</span><br>
 <a href="https://www.bankrate.com/mortgages/what-is-pmi/" target="_blank">bankrate.com - PMI guide</a>
 </li>
-<li>
+<li id="cite-14">
+<span class="cite-num">[14]</span>
 <strong>Builder's Risk Insurance</strong>
-<span>Coverage requirements during construction phase</span><br>
+<span>Coverage requirements during construction phase. Typically 1-4% of construction cost for 6-12 month build.</span><br>
 <a href="https://www.thehartford.com/business-insurance/builders-risk" target="_blank">thehartford.com - builders risk</a>
 </li>
 </ul>
@@ -148,23 +211,32 @@ footer a{color:var(--primary-light);text-decoration:none}
 
 <h3>Property & Tax Information</h3>
 <ul class="source-list">
-<li>
+<li id="cite-11">
+<span class="cite-num">[11]</span>
 <strong>Tillamook County Property Tax Rates</strong>
-<span>Estimated 1.0% of assessed value annually</span><br>
+<span>Estimated 1.0% of assessed value annually. School excise tax: $1.00/SF new construction.</span><br>
 <a href="https://www.co.tillamook.or.us/departments/assessor" target="_blank">co.tillamook.or.us - Assessor</a>
 </li>
-<li>
+<li id="cite-12">
+<span class="cite-num">[12]</span>
 <strong>Oregon Building Codes Division</strong>
-<span>State building requirements and permit processes</span><br>
+<span>State building requirements and permit processes. 2021 Oregon Residential Specialty Code (ORSC) in effect.</span><br>
 <a href="https://www.oregon.gov/bcd" target="_blank">oregon.gov/bcd</a>
+</li>
+<li id="cite-36">
+<span class="cite-num">[36]</span>
+<strong>Tillamook County Building Permits</strong>
+<span>Building permit fees based on valuation. Plan review: $500-$1,500. Structural: $2,000-$3,000. Electrical/Plumbing/Mechanical: $150-$500 each.</span><br>
+<a href="https://www.co.tillamook.or.us/departments/community-development" target="_blank">co.tillamook.or.us - Community Development</a>
 </li>
 </ul>
 
 <h3>Coastal Construction Considerations</h3>
 <ul class="source-list">
-<li>
+<li id="cite-13">
+<span class="cite-num">[13]</span>
 <strong>Coastal Building Requirements</strong>
-<span>Special considerations for coastal Oregon: wind loads, corrosion resistance, foundation requirements</span><br>
+<span>Special considerations for coastal Oregon: wind loads (90-110 mph design), corrosion resistance, foundation requirements, flood zone compliance.</span><br>
 <a href="https://www.oregon.gov/lcd/OCMP/" target="_blank">Oregon Coastal Management Program</a>
 </li>
 <li>
@@ -214,15 +286,187 @@ footer a{color:var(--primary-light);text-decoration:none}
 <span>Licensing requirements for general contractors in Oregon</span><br>
 <a href="https://www.oregon.gov/ccb" target="_blank">oregon.gov/ccb</a>
 </li>
-<li>
+<li id="cite-15">
+<span class="cite-num">[15]</span>
 <strong>Owner-Builder Exemptions & Limitations</strong>
-<span>Oregon owner-builder rules and lender requirements</span><br>
+<span>Oregon owner-builder rules and lender requirements. Must occupy as primary residence, cannot sell within 1 year.</span><br>
 <a href="https://www.oregon.gov/ccb/Pages/owner-builder.aspx" target="_blank">oregon.gov/ccb - owner-builder</a>
 </li>
-<li>
+<li id="cite-20">
+<span class="cite-num">[20]</span>
 <strong>Construction Management Best Practices</strong>
-<span>Draw schedules, subcontractor coordination, project sequencing</span><br>
+<span>Draw schedules, subcontractor coordination, project sequencing. CM fees typically 10-15% vs GC 15-25%.</span><br>
 <a href="https://www.nahb.org/" target="_blank">National Association of Home Builders (NAHB)</a>
+</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>Specialized Trade & Material Sources</h2>
+
+<h3>Foundation & Site Work</h3>
+<ul class="source-list">
+<li id="cite-16">
+<span class="cite-num">[16]</span>
+<strong>Chance/Hubbell - Helical Pile Systems</strong>
+<span>Helical pile specifications, load capacities, and installation. Residential piles: $1,500-$3,500 installed. Shaft diameter 2.875"-3.5", helical plates 8"-14".</span><br>
+<a href="https://www.abchance.com/resources/" target="_blank">abchance.com - Helical pile resources</a>
+</li>
+<li id="cite-37">
+<span class="cite-num">[37]</span>
+<strong>HomeGuide - Tree Removal Costs</strong>
+<span>Tree removal: $400-$1,900 average, large trees (24"+ diameter) $1,500-$5,000+. Stump grinding: $100-$400. Coastal access premium: +20-50%.</span><br>
+<a href="https://homeguide.com/costs/tree-removal-cost" target="_blank">homeguide.com/costs/tree-removal-cost</a>
+</li>
+<li id="cite-38">
+<span class="cite-num">[38]</span>
+<strong>HomeGuide - Site Preparation Costs</strong>
+<span>Site prep: $1,500-$5,000 basic grading, $5,000-$20,000+ extensive clearing. Grading: $1-$2/SF. Compaction: $0.50-$1/SF.</span><br>
+<a href="https://homeguide.com/costs/land-clearing-cost" target="_blank">homeguide.com/costs/land-clearing-cost</a>
+</li>
+<li id="cite-39">
+<span class="cite-num">[39]</span>
+<strong>HomeGuide - Excavation Costs</strong>
+<span>Excavation: $50-$200/cubic yard. Crawl space excavation: $500-$3,000. Equipment mobilization: $500-$1,500. Hauling: $50-$100/load.</span><br>
+<a href="https://homeguide.com/costs/excavation-cost" target="_blank">homeguide.com/costs/excavation-cost</a>
+</li>
+<li id="cite-40">
+<span class="cite-num">[40]</span>
+<strong>HomeGuide - Retaining Wall Costs</strong>
+<span>Poured concrete retaining walls: $150-$250/linear ft. Engineering: $500-$2,000. Rebar: $0.75-$1.25/lb. Concrete: $125-$150/cubic yard.</span><br>
+<a href="https://homeguide.com/costs/retaining-wall-cost" target="_blank">homeguide.com/costs/retaining-wall-cost</a>
+</li>
+</ul>
+
+<h3>Framing & Structure</h3>
+<ul class="source-list">
+<li id="cite-21">
+<span class="cite-num">[21]</span>
+<strong>HomeGuide - Framing Costs</strong>
+<span>House framing: $7-$16/SF labor only, $20-$50/SF with materials. Lumber: $450-$700/MBF (thousand board feet). Oregon average: $15-$25/SF total.</span><br>
+<a href="https://homeguide.com/costs/cost-to-frame-a-house" target="_blank">homeguide.com/costs/cost-to-frame-a-house</a>
+</li>
+<li id="cite-22">
+<span class="cite-num">[22]</span>
+<strong>HomeGuide - Insulation Costs</strong>
+<span>Batt insulation: $0.65-$2/SF. Spray foam: $1-$4/SF. Blown-in: $1-$2.50/SF. R-21 walls, R-49 ceiling for Oregon Zone 4C.</span><br>
+<a href="https://homeguide.com/costs/insulation-cost" target="_blank">homeguide.com/costs/insulation-cost</a>
+</li>
+<li id="cite-25">
+<span class="cite-num">[25]</span>
+<strong>HomeGuide - Drywall Costs</strong>
+<span>Drywall: $1.50-$3.50/SF total. Hanging: $0.75-$1.25/SF. Taping/finishing: $1-$1.50/SF. Materials: $0.40-$0.65/SF.</span><br>
+<a href="https://homeguide.com/costs/cost-to-hang-and-finish-drywall" target="_blank">homeguide.com/costs/cost-to-hang-and-finish-drywall</a>
+</li>
+</ul>
+
+<h3>MEP Systems</h3>
+<ul class="source-list">
+<li id="cite-23">
+<span class="cite-num">[23]</span>
+<strong>HomeGuide - Electrical Costs</strong>
+<span>Whole house electrical: $8,000-$25,000. 200-amp panel: $1,500-$3,500. Wiring: $6-$8/LF. Outlets: $150-$300 each installed. Oregon electrician: $75-$150/hr.</span><br>
+<a href="https://homeguide.com/costs/electrical-work-pricing-guide" target="_blank">homeguide.com/costs/electrical-work-pricing-guide</a>
+</li>
+<li id="cite-24">
+<span class="cite-num">[24]</span>
+<strong>HomeGuide - Plumbing Costs</strong>
+<span>New construction plumbing: $12,000-$30,000. Rough-in: $4-$8/SF. Fixture installation: $150-$500 each. Oregon plumber: $75-$150/hr.</span><br>
+<a href="https://homeguide.com/costs/plumber-cost" target="_blank">homeguide.com/costs/plumber-cost</a>
+</li>
+<li id="cite-18">
+<span class="cite-num">[18]</span>
+<strong>Warmboard - Radiant Floor Heating</strong>
+<span>Hydronic radiant systems: $10-$20/SF installed. Tubing: $0.50-$1/LF. Manifolds: $500-$1,500. Boiler: $3,000-$10,000. Controls: $300-$1,000.</span><br>
+<a href="https://www.warmboard.com/radiant-heating-cost" target="_blank">warmboard.com/radiant-heating-cost</a>
+</li>
+<li id="cite-26">
+<span class="cite-num">[26]</span>
+<strong>This Old House - Radiant Floor Heating</strong>
+<span>Hydronic system costs: tubing/manifolds $6-$10/SF, high-efficiency boiler $5,000-$10,000. Best with concrete thermal mass.</span><br>
+<a href="https://www.thisoldhouse.com/heating-cooling/21015261/radiant-heat" target="_blank">thisoldhouse.com - radiant heat</a>
+</li>
+</ul>
+
+<h3>Exterior Finishes</h3>
+<ul class="source-list">
+<li id="cite-19">
+<span class="cite-num">[19]</span>
+<strong>Metal Roofing Alliance</strong>
+<span>Standing seam metal roofing: $8-$14/SF residential. Panels: $3-$5/SF materials. Installation: $4-$8/SF labor. 50+ year lifespan.</span><br>
+<a href="https://www.metalroofing.com/metal-roofing-costs/" target="_blank">metalroofing.com/metal-roofing-costs/</a>
+</li>
+<li id="cite-33">
+<span class="cite-num">[33]</span>
+<strong>Fixr.com - Fiber Cement Siding</strong>
+<span>HardiePlank: $6-$13/SF installed. Materials: $2-$4/SF. Labor: $4-$8/SF. 30-50 year lifespan. Excellent for coastal salt air.</span><br>
+<a href="https://www.fixr.com/costs/fiber-cement-siding" target="_blank">fixr.com/costs/fiber-cement-siding</a>
+</li>
+<li id="cite-32">
+<span class="cite-num">[32]</span>
+<strong>EnergyStar - Window Selection & Costs</strong>
+<span>Fiberglass windows: $500-$1,500 standard, $1,000-$3,000 large. Impact-rated: +30-50%. Coastal-grade essential for salt air resistance.</span><br>
+<a href="https://www.energystar.gov/products/windows" target="_blank">energystar.gov/products/windows</a>
+</li>
+</ul>
+
+<h3>Interior Finishes</h3>
+<ul class="source-list">
+<li id="cite-17">
+<span class="cite-num">[17]</span>
+<strong>Concrete Network - Polished Concrete Floors</strong>
+<span>Polished concrete: $3-$12/SF. Basic polish: $3-$5/SF. Mid-range (dyed): $5-$8/SF. High-end (decorative): $8-$15/SF. Not DIY - requires professional equipment.</span><br>
+<a href="https://www.concretenetwork.com/polished-concrete/cost.html" target="_blank">concretenetwork.com/polished-concrete/cost</a>
+</li>
+<li id="cite-34">
+<span class="cite-num">[34]</span>
+<strong>HomeGuide - Interior Door Costs</strong>
+<span>Solid wood doors: $250-$600 each. CVG fir premium: $600-$1,200 each. Installation: $100-$300/door. Hardware: $50-$200/door.</span><br>
+<a href="https://homeguide.com/costs/interior-door-installation-cost" target="_blank">homeguide.com/costs/interior-door-installation-cost</a>
+</li>
+<li id="cite-30">
+<span class="cite-num">[30]</span>
+<strong>HomeGuide - Kitchen Cabinet Costs</strong>
+<span>Stock cabinets: $75-$200/LF. Semi-custom: $150-$650/LF. Custom: $500-$1,500/LF. Installation: $50-$200/LF. DIY install saves 30-40%.</span><br>
+<a href="https://homeguide.com/costs/cost-to-install-kitchen-cabinets" target="_blank">homeguide.com/costs/cost-to-install-kitchen-cabinets</a>
+</li>
+<li id="cite-31">
+<span class="cite-num">[31]</span>
+<strong>HomeGuide - Countertop Costs</strong>
+<span>Quartz: $50-$150/SF installed. Granite: $40-$100/SF. Fabrication: $200-$500. Sink cutout: $100-$300. Edge profiles: $10-$30/LF.</span><br>
+<a href="https://homeguide.com/costs/quartz-countertops-cost" target="_blank">homeguide.com/costs/quartz-countertops-cost</a>
+</li>
+</ul>
+
+<h3>Specialty & Site Finishing</h3>
+<ul class="source-list">
+<li id="cite-27">
+<span class="cite-num">[27]</span>
+<strong>Cedar Brook Sauna - Residential Sauna Costs</strong>
+<span>Sauna heater: $1,000-$3,500. Cedar benches: $500-$1,500. Interior lining: $1,500-$3,000. Installation: $1,000-$3,000. Total: $4,000-$10,000.</span><br>
+<a href="https://cedarbrooksauna.com/pages/sauna-cost" target="_blank">cedarbrooksauna.com - sauna costs</a>
+</li>
+<li id="cite-35">
+<span class="cite-num">[35]</span>
+<strong>HomeAdvisor - Deck Building Costs</strong>
+<span>Composite deck: $25-$60/SF. Pressure-treated: $15-$25/SF. Cedar: $20-$40/SF. Railing: $20-$60/LF. Posts/framing: $5-$10/SF.</span><br>
+<a href="https://www.homeadvisor.com/cost/decks-porches-and-ramps/build-a-deck/" target="_blank">homeadvisor.com - deck building</a>
+</li>
+</ul>
+
+<h3>Regional Data & Labor</h3>
+<ul class="source-list">
+<li id="cite-28">
+<span class="cite-num">[28]</span>
+<strong>Bureau of Labor Statistics - Oregon Wage Data</strong>
+<span>Oregon construction wages: Electricians median $32.50/hr, Plumbers $30.80/hr, Carpenters $26.40/hr. Add 30-50% for benefits/overhead. Coastal premium +15-25%.</span><br>
+<a href="https://www.bls.gov/oes/current/oes_or.htm" target="_blank">bls.gov/oes/current/oes_or.htm</a>
+</li>
+<li id="cite-29">
+<span class="cite-num">[29]</span>
+<strong>RSMeans - Regional Construction Cost Data</strong>
+<span>Oregon coastal region cost index: 1.08-1.15x national average. Material transport premium, limited contractor pool, weather delays factor into higher costs.</span><br>
+<a href="https://www.rsmeans.com/" target="_blank">rsmeans.com - construction cost data</a>
 </li>
 </ul>
 </div>

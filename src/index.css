@@ -921,3 +921,194 @@ footer a {
     border-radius: 6px;
   }
 }
+/* ═══════════════════════════════════════════════════════════════
+   Collapsible Explanation Styles
+   ═══════════════════════════════════════════════════════════════ */
+
+.explanation-container {
+  margin-top: -1px;
+  margin-bottom: 8px;
+  border-left: 3px solid var(--primary-light);
+  background: rgba(52, 152, 219, 0.05);
+}
+
+.explanation-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-size: .85rem;
+  color: var(--text);
+  transition: background 0.15s;
+}
+
+.explanation-toggle:hover {
+  background: rgba(52, 152, 219, 0.08);
+}
+
+.explanation-toggle .toggle-icon {
+  font-size: .7rem;
+  color: var(--primary);
+  width: 12px;
+  flex-shrink: 0;
+}
+
+.explanation-toggle .range-preview {
+  color: var(--text-light);
+}
+
+.explanation-toggle .range-preview strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.explanation-toggle .range-preview .estimate {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.explanation-content {
+  padding: 12px 16px 16px;
+  font-size: .85rem;
+  line-height: 1.6;
+  color: var(--text);
+  border-top: 1px solid rgba(52, 152, 219, 0.15);
+}
+
+/* Section headers (═══ HEADER ═══) */
+.explanation-section-header {
+  font-weight: 700;
+  font-size: .9rem;
+  color: var(--primary);
+  margin: 16px 0 8px;
+  padding: 6px 10px;
+  background: rgba(52, 152, 219, 0.1);
+  border-radius: 4px;
+  letter-spacing: 0.02em;
+}
+
+.explanation-section-header:first-child {
+  margin-top: 0;
+}
+
+/* Bold headers (**HEADER:**) */
+.explanation-header {
+  font-weight: 600;
+  color: var(--text);
+  margin: 14px 0 6px;
+  font-size: .85rem;
+}
+
+.explanation-header:first-child {
+  margin-top: 0;
+}
+
+/* Bullet points */
+.explanation-bullet {
+  display: flex;
+  gap: 8px;
+  margin: 4px 0;
+  padding-left: 4px;
+}
+
+.explanation-bullet .bullet {
+  flex-shrink: 0;
+  width: 14px;
+  color: var(--text-light);
+}
+
+.explanation-bullet.check .bullet {
+  color: var(--success);
+}
+
+.explanation-bullet.x .bullet {
+  color: var(--danger);
+}
+
+.explanation-bullet strong {
+  color: var(--text);
+}
+
+/* Regular text */
+.explanation-text {
+  margin: 6px 0;
+}
+
+.explanation-text strong {
+  color: var(--text);
+}
+
+/* Citation links */
+.explanation-content a.citation {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: .8rem;
+}
+
+.explanation-content a.citation:hover {
+  text-decoration: underline;
+}
+
+/* Tables */
+.explanation-table {
+  margin: 10px 0;
+  overflow-x: auto;
+}
+
+.explanation-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .8rem;
+}
+
+.explanation-table th {
+  background: rgba(52, 152, 219, 0.1);
+  padding: 6px 10px;
+  text-align: left;
+  font-weight: 600;
+  color: var(--text);
+  border-bottom: 2px solid rgba(52, 152, 219, 0.2);
+}
+
+.explanation-table td {
+  padding: 5px 10px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+.explanation-table tr:last-child td {
+  border-bottom: none;
+}
+
+.explanation-table tr:hover td {
+  background: rgba(52, 152, 219, 0.04);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .explanation-toggle {
+    padding: 10px 12px;
+  }
+  
+  .explanation-content {
+    padding: 10px 12px 14px;
+  }
+  
+  .explanation-table {
+    margin-left: -12px;
+    margin-right: -12px;
+    padding: 0 12px;
+  }
+  
+  .explanation-table th,
+  .explanation-table td {
+    padding: 4px 6px;
+    font-size: .75rem;
+  }
+}

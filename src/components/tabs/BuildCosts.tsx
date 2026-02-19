@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Card, Alert, Row, Results, FormGroup, InputWrap } from '../ui';
 import { useBuild } from '../../contexts/BuildContext';
 import { gradeOptions, gradeDescriptions } from '../../constants';
@@ -98,7 +98,7 @@ export function BuildCosts() {
       <Card title="📋 Itemized Cost Breakdown">
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px' }}>
           <p style={{ fontSize: '.9rem', color: 'var(--text-light)', margin: 0 }}>
-            Costs editable for custom estimates.
+            Costs editable for custom estimates. {showExplanations && <span style={{ fontSize: '.8rem' }}>Click any row's ▶ to expand details.</span>}
           </p>
           <button
             onClick={() => setShowExplanations(!showExplanations)}
@@ -112,15 +112,15 @@ export function BuildCosts() {
               cursor: 'pointer'
             }}
           >
-            {showExplanations ? '🔽 Hide Explanations' : '📊 Show Cost Sources'}
+            {showExplanations ? '📊 Hide All Details' : '📊 Show Cost Details'}
           </button>
         </div>
 
         {showExplanations && (
           <Alert type="info" icon="📚" style={{ marginBottom: '20px' }}>
-            <strong>Estimate Methodology:</strong> Oregon basic construction costs $250-$350/sf (HomeGuide 2024). 
-            For a simple 1,600 sf single-story with shed roof, estimates target the lower end of complexity. 
-            Ranges shown as Low / Estimate / High based on HomeGuide, local contractors, and actual bids.
+            <strong>Estimate Methodology:</strong> Each line item shows a cost range (Low – Estimate – High). 
+            Click any row to expand detailed breakdowns with calculations, material costs, labor rates, and citations. 
+            All sources linked to <a href="/sources.html" target="_blank">/sources.html</a>.
           </Alert>
         )}
 
@@ -418,23 +418,200 @@ interface ExplanationProps {
   notes: string;
 }
 
-function ExplanationRow({ explanation }: { explanation: ExplanationProps }) {
+// Parse markdown-style formatting into readable HTML
+function FormattedNotes({ notes }: { notes: string }) {
+  const formatted = useMemo(() => {
+    const lines = notes.split('\n');
+    const elements: JSX.Element[] = [];
+    let inTable = false;
+    let tableRows: string[][] = [];
+    let tableHeader: string[] = [];
+    
+    const processLine = (line: string, idx: number) => {
+      const trimmed = line.trim();
+      
+      // Skip empty lines
+      if (!trimmed) {
+        if (inTable && tableRows.length > 0) {
+          // End of table
+          elements.push(
+            <div key={`table-${idx}`} className="explanation-table">
+              <table>
+                <thead>
+                  <tr>
+                    {tableHeader.map((h, i) => <th key={i}>{h}</th>)}
+                  </tr>
+                </thead>
+                <tbody>
+                  {tableRows.map((row, ri) => (
+                    <tr key={ri}>
+                      {row.map((cell, ci) => <td key={ci}>{cell}</td>)}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          );
+          tableRows = [];
+          tableHeader = [];
+          inTable = false;
+        }
+        return;
+      }
+      
+      // Section headers with ═══
+      if (trimmed.includes('═══')) {
+        const headerText = trimmed.replace(/═/g, '').trim();
+        if (headerText) {
+          elements.push(
+            <div key={idx} className="explanation-section-header">
+              {headerText}
+            </div>
+          );
+        }
+        return;
+      }
+      
+      // Table detection (starts with |)
+      if (trimmed.startsWith('|') && trimmed.endsWith('|')) {
+        const cells = trimmed.slice(1, -1).split('|').map(c => c.trim());
+        
+        // Skip separator rows (|---|---|)
+        if (cells.every(c => /^[-:]+$/.test(c))) {
+          return;
+        }
+        
+        if (!inTable) {
+          inTable = true;
+          tableHeader = cells;
+        } else {
+          tableRows.push(cells);
+        }
+        return;
+      }
+      
+      // If we were in a table but this line isn't a table row, close the table
+      if (inTable && tableRows.length > 0) {
+        elements.push(
+          <div key={`table-${idx}`} className="explanation-table">
+            <table>
+              <thead>
+                <tr>
+                  {tableHeader.map((h, i) => <th key={i}>{h}</th>)}
+                </tr>
+              </thead>
+              <tbody>
+                {tableRows.map((row, ri) => (
+                  <tr key={ri}>
+                    {row.map((cell, ci) => <td key={ci}>{cell}</td>)}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        );
+        tableRows = [];
+        tableHeader = [];
+        inTable = false;
+      }
+      
+      // Bold headers (**text:**)
+      if (/^\*\*[^*]+\*\*:?$/.test(trimmed) || /^\*\*[^*]+:\*\*/.test(trimmed)) {
+        const text = trimmed.replace(/\*\*/g, '').replace(/:$/, '');
+        elements.push(
+          <div key={idx} className="explanation-header">
+            {text}
+          </div>
+        );
+        return;
+      }
+      
+      // Bullet points (• or -)
+      if (trimmed.startsWith('•') || trimmed.startsWith('-') || trimmed.startsWith('✓') || trimmed.startsWith('✗')) {
+        let content = trimmed.slice(1).trim();
+        // Process inline bold
+        content = content.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+        // Process citations [x]
+        content = content.replace(/\[(\d+)\]/g, '<a href="/sources.html#cite-$1" class="citation">[$1]</a>');
+        
+        const isCheck = trimmed.startsWith('✓');
+        const isX = trimmed.startsWith('✗');
+        
+        elements.push(
+          <div key={idx} className={`explanation-bullet ${isCheck ? 'check' : ''} ${isX ? 'x' : ''}`}>
+            <span className="bullet">{isCheck ? '✓' : isX ? '✗' : '•'}</span>
+            <span dangerouslySetInnerHTML={{ __html: content }} />
+          </div>
+        );
+        return;
+      }
+      
+      // Regular paragraph with formatting
+      let content = trimmed;
+      content = content.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+      content = content.replace(/\[(\d+)\]/g, '<a href="/sources.html#cite-$1" class="citation">[$1]</a>');
+      
+      elements.push(
+        <div key={idx} className="explanation-text" dangerouslySetInnerHTML={{ __html: content }} />
+      );
+    };
+    
+    lines.forEach(processLine);
+    
+    // Handle any remaining table
+    if (inTable && tableRows.length > 0) {
+      elements.push(
+        <div key="table-final" className="explanation-table">
+          <table>
+            <thead>
+              <tr>
+                {tableHeader.map((h, i) => <th key={i}>{h}</th>)}
+              </tr>
+            </thead>
+            <tbody>
+              {tableRows.map((row, ri) => (
+                <tr key={ri}>
+                  {row.map((cell, ci) => <td key={ci}>{cell}</td>)}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      );
+    }
+    
+    return elements;
+  }, [notes]);
+  
+  return <>{formatted}</>;
+}
+
+function CollapsibleExplanation({ explanation, defaultExpanded = false }: { explanation: ExplanationProps; defaultExpanded?: boolean }) {
+  const [expanded, setExpanded] = useState(defaultExpanded);
+  
   return (
-    <div style={{ 
-      background: 'rgba(52, 152, 219, 0.08)', 
-      padding: '8px 15px', 
-      marginTop: '-1px',
-      marginBottom: '5px',
-      fontSize: '.85rem', 
-      color: 'var(--text-light)',
-      borderLeft: '3px solid var(--primary-light)'
-    }}>
-      <div style={{ marginBottom: '4px' }}>
-        <strong style={{ color: 'var(--text)' }}>Range:</strong> {explanation.low} – <span style={{ color: 'var(--primary)' }}>{explanation.estimate}</span> – {explanation.high}
-      </div>
-      <div>{explanation.notes}</div>
+    <div className="explanation-container">
+      <button 
+        className="explanation-toggle"
+        onClick={() => setExpanded(!expanded)}
+      >
+        <span className="toggle-icon">{expanded ? '▼' : '▶'}</span>
+        <span className="range-preview">
+          <strong>Range:</strong> {explanation.low} – <span className="estimate">{explanation.estimate}</span> – {explanation.high}
+        </span>
+      </button>
+      {expanded && (
+        <div className="explanation-content">
+          <FormattedNotes notes={explanation.notes} />
+        </div>
+      )}
     </div>
   );
+}
+
+// Legacy simple row (kept for compatibility)
+function ExplanationRow({ explanation }: { explanation: ExplanationProps }) {
+  return <CollapsibleExplanation explanation={explanation} />;
 }
 
 interface CostRowProps {

@@ -41,27 +41,36 @@ export function Process() {
         />
       </Card>
 
-      <Card title="🏗️ Construction Timeline">
+      <Card title="🏗️ Construction Timeline - Two Phase Approach">
         <p style={{ marginBottom: '20px' }}>
-          Estimated for 2-bed, 2.5-bath single-floor coastal home:
+          <strong>Phase 1: Shell/Dry-In</strong> — Foundation through exterior envelope<br/>
+          <strong>Phase 2: Interior Finishes</strong> — All interior work after dry-in
         </p>
         <div className="grid">
           <Results>
+            <Row label="PHASE 1: SHELL" value="" />
             <Row label="Site Preparation" value="1-2 weeks" />
-            <Row label="Foundation (w/ helical piles)" value="2-4 weeks" />
+            <Row label="Foundation (helical + crawl)" value="2-4 weeks" />
+            <Row label="Septic & Utilities" value="1-2 weeks" />
             <Row label="Framing" value="3-4 weeks" />
             <Row label="Roofing" value="1-2 weeks" />
-            <Row label="Rough-ins (MEP)" value="3-4 weeks" />
+            <Row label="Siding, Windows, Doors" value="2-3 weeks" />
+            <Row label="Phase 1 Subtotal" value="10-17 weeks" total />
           </Results>
           <Results>
+            <Row label="PHASE 2: INTERIOR" value="" />
+            <Row label="MEP Rough-in" value="3-4 weeks" />
             <Row label="Insulation" value="1 week" />
             <Row label="Drywall" value="2-3 weeks" />
-            <Row label="Interior Finishes" value="4-6 weeks" />
-            <Row label="Exterior Finishes" value="2-3 weeks" />
+            <Row label="Ceiling, Flooring, Trim" value="3-4 weeks" />
+            <Row label="Cabinets, Fixtures, Paint" value="3-4 weeks" />
             <Row label="Final Inspections" value="1-2 weeks" />
-            <Row label="Total Estimated" value="6-9 months" total />
+            <Row label="Phase 2 Subtotal" value="13-18 weeks" total />
           </Results>
         </div>
+        <p style={{ marginTop: '15px', fontSize: '.9rem', color: 'var(--text-light)' }}>
+          <strong>Total Estimated: 6-9 months</strong> — Break between phases allows flexibility for financing, seasonal timing, or DIY work on Phase 2.
+        </p>
       </Card>
 
       <Card title="📞 Tillamook County Resources">

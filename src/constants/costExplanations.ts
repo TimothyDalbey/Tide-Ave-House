@@ -134,13 +134,13 @@ The west side of the foundation uses helical piles which require ZERO excavation
   },
   
   retaining: {
-    estimate: '$18,000',
-    low: '$12,000',
-    high: '$25,000',
+    estimate: '$10,000',
+    low: '$7,000',
+    high: '$14,000',
     notes: `**CALCULATION:** Poured concrete retaining wall integrated with foundation.
 
 **WALL SPECIFICATIONS:** [40]
-• Estimated length: 70-90 linear feet (final per engineer)
+• Length: ~40 linear feet
 • Height: 4-6 feet (varies with grade)
 • Thickness: 8-12" (per structural engineer)
 • Footing: 16-24" wide × 8-12" deep
@@ -148,58 +148,55 @@ The west side of the foundation uses helical piles which require ZERO excavation
 **MATERIAL COSTS:**
 
 1. **Concrete:** [40]
-   • Wall volume: 80 LF × 5 ft H × 0.83 ft thick = 332 CF = 12.3 CY
-   • Footing volume: 80 LF × 1.5 ft W × 0.83 ft D = 100 CF = 3.7 CY
-   • Total concrete: ~16 cubic yards
-   • Cost: 16 CY × $140/CY delivered = $2,240
-   • Pump truck: $500-$800 (if needed for access)
+   • Wall volume: 40 LF × 5 ft H × 0.83 ft thick = 166 CF = 6.1 CY
+   • Footing volume: 40 LF × 1.5 ft W × 0.83 ft D = 50 CF = 1.9 CY
+   • Total concrete: ~8 cubic yards
+   • Cost: 8 CY × $140/CY delivered = $1,120
+   • Pump truck: $400-$600 (if needed for access)
 
 2. **Reinforcement:** [40]
-   • Rebar (#4 and #5): ~800 lbs × $0.85/lb = $680
-   • Rebar labor (tie and place): $400-$600
+   • Rebar (#4 and #5): ~400 lbs × $0.85/lb = $340
+   • Rebar labor (tie and place): $200-$300
 
 3. **Formwork:**
-   • Form rental: 160 SF × $2/SF = $320 (reusable forms)
-   • Form labor: 16 hours × $55/hr = $880
-   • Form release agent, stakes, bracing: $200
+   • Form rental: 80 SF × $2/SF = $160 (reusable forms)
+   • Form labor: 10 hours × $55/hr = $550
+   • Form release agent, stakes, bracing: $150
 
 4. **Drainage:**
-   • Perforated drain pipe: 80 LF × $3/LF = $240
-   • Drain rock: 2 CY × $50/CY = $100
-   • Filter fabric: $75
-   • Outlet to daylight: $200-$400
+   • Perforated drain pipe: 40 LF × $3/LF = $120
+   • Drain rock: 1 CY × $50/CY = $50
+   • Filter fabric: $50
+   • Outlet to daylight: $200-$300
 
 **LABOR COSTS:** [8][28]
-• Foundation crew: 3 workers × 3 days = 72 hours
+• Foundation crew: 3 workers × 2 days = 48 hours
 • Rate: $55-$75/hr (concrete work premium)
-• Labor total: $3,960-$5,400
+• Labor total: $2,640-$3,600
 
 **TOTAL BREAKDOWN:**
-• Concrete: $2,240
-• Pump: $650
-• Rebar (materials + labor): $1,280
-• Formwork: $1,400
-• Drainage: $615
-• Labor: $4,680
-• Contingency (10%): $1,087
-• **SUBTOTAL: $11,952**
+• Concrete: $1,120
+• Pump: $500
+• Rebar (materials + labor): $590
+• Formwork: $860
+• Drainage: $420
+• Labor: $3,120
+• Contingency (10%): $661
+• **SUBTOTAL: $7,271**
 
 **INTEGRATION SAVINGS:**
 Doing retaining wall WITH foundation pour saves 15-25%:
-• Shared mobilization: -$1,000
-• Shared concrete delivery: -$500
-• Efficient formwork transition: -$500
-• **Savings: ~$2,000**
+• Shared mobilization: -$500
+• Shared concrete delivery: -$300
+• Efficient formwork transition: -$300
+• **Savings: ~$1,100**
 
-**NEIGHBOR COST-SHARING:**
-If neighbor benefits from wall and agrees to share:
-• 50% split: $9,000 each
-• Property line walls often split in Oregon
+**ESTIMATED TOTAL: ~$8,500-$10,000**
 
 **RANGE EXPLANATION:**
-• Low ($12K): Shorter wall, neighbor split, good conditions
-• Mid ($18K): Full wall, no split, standard conditions
-• High ($25K): Longer wall, complex engineering, difficult soil`
+• Low ($7K): Easy access, good conditions
+• Mid ($10K): Standard conditions ✓
+• High ($14K): Complex engineering, difficult soil`
   },
 
   foundation: {
@@ -759,35 +756,32 @@ West wall is 65 ft of mostly sliding doors and windows - minimal sheathing neede
 • BUT offset by reduced area scope`
   },
   windows: {
-    estimate: '$15,000',
-    low: '$10,000',
-    high: '$22,000',
-    notes: `**CALCULATION:** Based on window schedule for 1,600 SF modern coastal home.
+    estimate: '$21,000',
+    low: '$14,000',
+    high: '$28,000',
+    notes: `**CALCULATION:** Based on actual window schedule for 1,600 SF modern coastal home.
 
 **═══ WINDOW SCHEDULE ═══** [32]
 
-**Standard Windows (Bedrooms, Baths, Kitchen):**
+**Total: 15 windows**
 
-| Location | Size | Qty | Unit Cost | Subtotal |
-|----------|------|-----|-----------|----------|
-| Master BR | 4'×4' | 2 | $850 | $1,700 |
-| Bedroom 2 | 3'×4' | 2 | $700 | $1,400 |
-| Master Bath #1 | 2'×3' (obscure) | 1 | $500 | $500 |
-| Master Bath #2 | 2'×3' (obscure) | 1 | $500 | $500 |
-| Half Bath | 1.5'×2' (obscure) | 1 | $350 | $350 |
-| Kitchen | 4'×3' | 2 | $750 | $1,500 |
-| Laundry | 2'×3' | 1 | $450 | $450 |
-| **Standard Subtotal** | | **10** | | **$6,400** |
+| Description | Size | Qty | Type | Unit Cost | Subtotal |
+|-------------|------|-----|------|-----------|----------|
+| Small fixed/awning | 2'6" × 2'9" | 6 | Fixed or awning | $450 | $2,700 |
+| Large horizontal | 9' × 2'9" | 1 | Fixed w/2'6" operable | $2,200 | $2,200 |
+| Medium horizontal | 6'6" × 2'9" | 4 | Fixed | $1,100 | $4,400 |
+| Large picture | 7'6" × 46" | 1 | Fixed w/2'6" operable | $2,400 | $2,400 |
+| Picture window | 8' × 8' | 1 | Fixed (ocean view) | $4,500 | $4,500 |
+| Tall narrow | 1'9" × 6' | 2 | Fixed | $850 | $1,700 |
+| **WINDOW SUBTOTAL** | | **15** | | | **$17,900** |
 
-**Large Living Room Windows (Ocean Views):**
-
-| Location | Size | Qty | Unit Cost | Subtotal |
-|----------|------|-----|-----------|----------|
-| Living - fixed | 5'×5' | 1 | $1,800 | $1,800 |
-| Living - operable | 4'×5' | 2 | $1,500 | $3,000 |
-| **Large Subtotal** | | **3** | | **$4,800** |
-
-**WINDOW TOTAL: $11,200**
+**Window Sizes Summary:**
+• 6 small: 2'6" × 2'9" (30" × 33") - bathrooms, utility, etc.
+• 1 large horizontal: 9' × 2'9" with 2'6" operable section
+• 4 medium: 6'6" × 2'9"
+• 1 large: 7'6" × 46" (3'10") with 2'6" operable section
+• 1 picture: 8' × 8' - large fixed ocean view window
+• 2 tall narrow: 1'9" × 6' (21" × 72")
 
 **═══ COASTAL-GRADE SPECIFICATIONS ═══** [13][32]
 
@@ -806,72 +800,75 @@ West wall is 65 ft of mostly sliding doors and windows - minimal sheathing neede
 • Enhanced weatherstripping: +$30-$50/window
 • Salt-spray resistant finish: Included in fiberglass
 
-**Coastal Premium:** ~$100-$150 per window = $1,300-$1,950 total
+**Coastal Premium:** ~$100-$150 per window = $1,500-$2,250 total
 
 **═══ INSTALLATION ═══** [8][32]
 
 **Labor:**
 • Windows typically installed by general framing crew
 • OR window contractor: $150-$300 per window
-• 13 windows × $200 = $2,600
+• 15 windows × $200 = $3,000
 
 **Often included in window purchase** - verify with vendor
 
 **═══ TOTAL CALCULATION ═══**
-• Standard windows: $6,400
-• Large windows: $4,800
-• Coastal upgrade: $1,500
-• Installation: $2,600
+• Windows (15): $17,900
+• Coastal upgrade: $1,800
+• Installation: $3,000
 • Flashing/sealant: $400
-• **TOTAL: $15,700 ≈ $15,000**
+• **TOTAL: $23,100 ≈ $21,000** (mid-range pricing)
 
 **═══ NOT IN THIS LINE ITEM ═══**
 
 • Sliding glass doors: See "Exterior Doors" line item
-• These are THREE LARGE SLIDERS budgeted separately at $22,000
 
 **RANGE EXPLANATION:**
-• Low ($10K): Builder-grade vinyl (NOT recommended for coast)
-• Mid ($15K): Quality fiberglass, coastal-rated ✓
-• High ($22K): Premium brands (Marvin, Pella), custom sizes`
+• Low ($14K): Builder-grade (NOT recommended for coast)
+• Mid ($21K): Quality fiberglass, coastal-rated ✓
+• High ($28K): Premium brands (Marvin, Pella), custom sizes`
   },
   extDoors: {
-    estimate: '$23,000',
+    estimate: '$22,000',
     low: '$15,000',
-    high: '$30,000',
+    high: '$28,000',
     notes: `**CALCULATION:** ⭐ INVESTMENT PRIORITY - Ocean Views + Premium Entry
 
-This line item is CRITICAL to the home's value and lifestyle. The west wall is defined by three sliding glass doors capturing Pacific Ocean views (one to living area, one to each master bedroom). Premium CVG fir front entry.
+This line item is CRITICAL to the home's value and lifestyle. Premium CVG fir front entry with frosted glass, plus large sliding glass door to living area and two door/window combos to master bedrooms.
 
 **═══ DOOR SCHEDULE ═══**
 
-**1. SLIDING GLASS DOORS (3) - West Wall**
+**1. LARGE SLIDING GLASS DOOR - Living Area**
+
+| Location | Size | Type | Unit Cost |
+|----------|------|------|-----------|
+| Living Area | 12' × 10' | Multi-slide | $8,000 |
+
+**Slider Subtotal: $8,000**
+
+**2. DOOR/WINDOW COMBOS (2) - Master Bedrooms**
 
 | Location | Size | Type | Unit Cost | Subtotal |
 |----------|------|------|-----------|----------|
-| Living Area | 12'×8' | Multi-slide | $6,000 | $6,000 |
-| Master BR #1 | 8'×8' | Lift-slide | $4,500 | $4,500 |
-| Master BR #2 | 8'×8' | Lift-slide | $4,500 | $4,500 |
+| Master BR #1 | 8' × 6' | Door w/window on left | $3,500 | $3,500 |
+| Master BR #2 | 8' × 6' | Door w/window on left | $3,500 | $3,500 |
 
-**Slider Subtotal: $15,000**
+**Door/Window Combo Subtotal: $7,000**
 
-**Slider Specifications:**
+**Specifications:**
 • Frame: Aluminum-clad fiberglass OR thermally-broken aluminum
 • Glass: Dual-pane Low-E, tempered safety glass
-• Operation: Multi-slide (panels stack) OR lift-slide (smooth operation)
 • Hardware: Stainless steel (CRITICAL for salt air)
 • Threshold: ADA-compliant, water-resistant
 • Weathersealing: Marine-grade gaskets
 
-**2. FRONT ENTRY DOOR**
+**3. FRONT ENTRY DOOR**
 
 | Component | Specification | Cost |
 |-----------|--------------|------|
-| Door | 3'×8' CVG fir, frosted glass insert | $4,000 |
-| Sidelite (1) | Fixed frosted glass panel | $700 |
+| Door | 3' × 8' CVG fir, frosted glass inset | $4,000 |
 | Hardware | Multi-point lock, lever handle | $400 |
 
-**Entry Subtotal: $5,100**
+**Entry Subtotal: $4,400**
 
 CVG (Clear Vertical Grain) fir: Premium old-growth appearance, tight grain, excellent stability. Frosted glass provides privacy while allowing natural light. Requires proper finishing/sealing for coastal climate.
 
@@ -889,23 +886,27 @@ Sauna door allows: Natural light, exterior access for ventilation/cleaning
 
 **═══ INSTALLATION ═══** [8]
 
-**Sliding Doors:**
-• Large sliders require 2-3 person crew
+**Sliding Door:**
+• Large slider requires 2-3 person crew
 • Professional install REQUIRED for warranty
-• 3 doors × $400 each = $1,200
+• 1 large door: $500
+
+**Door/Window Combos:**
+• 2 units × $300 each = $600
 
 **Entry & Sauna:**
 • Standard door install: $250 each × 2 = $500
 
-**INSTALLATION SUBTOTAL: $1,700**
+**INSTALLATION SUBTOTAL: $1,600**
 
 **═══ TOTAL CALCULATION ═══**
-• Sliding doors (3): $15,000
-• Entry door package: $5,100
+• Large slider (12'×10'): $8,000
+• Door/window combos (2): $7,000
+• Entry door package: $4,400
 • Sauna door: $1,150
-• Installation: $1,700
+• Installation: $1,600
 • Flashing/sealant: $400
-• **TOTAL: $23,350 ≈ $23,000**
+• **TOTAL: $22,550 ≈ $22,000**
 
 **═══ WHY THIS IS AN INVESTMENT PRIORITY ═══**
 
@@ -934,9 +935,9 @@ Sauna door allows: Natural light, exterior access for ventilation/cleaning
 • UV resistance: Frames won't fade/chalk
 
 **RANGE EXPLANATION:**
-• Low ($15K): Smaller sliders, basic entry, no sauna door
-• Mid ($23K): Full scope as designed with premium CVG fir entry ✓
-• High ($30K): Premium brands (La Cantina, Fleetwood), larger panels`
+• Low ($15K): Smaller slider, basic entry, no sauna door
+• Mid ($22K): Full scope as designed with premium CVG fir entry ✓
+• High ($28K): Premium brands (La Cantina, Fleetwood), larger panels`
   },
   gutters: {
     estimate: '$1,000',

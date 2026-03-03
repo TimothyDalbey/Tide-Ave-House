@@ -45,9 +45,28 @@ export function StatusTracker() {
       </div>
 
       <div className="stat-sec">
-        <h3>Construction Phase</h3>
+        <h3>Construction Phase 1: Shell / Dry-In</h3>
         <div className="tl">
-          {statusItems.construction.map(item => (
+          {statusItems.construction.filter(item => 
+            ['site', 'found', 'sepinst', 'utilinst', 'frame', 'roof', 'siding', 'windows', 'extdoors'].includes(item.id)
+          ).map(item => (
+            <StatusItem
+              key={item.id}
+              status={status[item.id] || ''}
+              title={item.title}
+              note={item.note}
+              onClick={() => toggle(item.id)}
+            />
+          ))}
+        </div>
+      </div>
+
+      <div className="stat-sec">
+        <h3>Construction Phase 2: Interior Finishes</h3>
+        <div className="tl">
+          {statusItems.construction.filter(item => 
+            ['mep', 'ins', 'dry', 'ceiling', 'floor', 'cab', 'intdoors', 'bath', 'appl', 'paint', 'ext'].includes(item.id)
+          ).map(item => (
             <StatusItem
               key={item.id}
               status={status[item.id] || ''}

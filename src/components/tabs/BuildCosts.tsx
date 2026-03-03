@@ -371,25 +371,38 @@ export function BuildCosts() {
 
       <Card title="📊 Cost Summary">
         <div className="grid">
-          <Results title="By Category">
-            <Row label="Site Work & Foundation" value={fmt(results.catSite)} />
-            <Row label="Framing & Structure" value={fmt(results.catFrame)} />
-            <Row label="Exterior (roof, siding, windows, doors)" value={fmt(results.catExt)} />
-            <Row label="MEP (electrical, plumbing, HVAC)" value={fmt(results.catMep)} />
-            <Row label="Insulation & Drywall" value={fmt(results.catInsul)} />
-            <Row label="Interior Finishes" value={fmt(results.catInt)} />
-            <Row label="Kitchen & Bath" value={fmt(results.catKb)} />
-            <Row label="Soft Costs & GC Fee" value={fmt(results.catSoft)} />
-            <Row label="Site Finishing" value={fmt(results.catFinish)} />
-            <div className="row" style={{ color: 'var(--success)' }}>
+          <Results title="By Phase">
+            <div style={{ background: 'rgba(52, 152, 219, 0.1)', padding: '10px', borderRadius: '6px', marginBottom: '10px' }}>
+              <div style={{ fontWeight: 'bold', color: 'var(--primary)', marginBottom: '8px' }}>Phase 1: Shell / Dry-In</div>
+              <Row label="Site Work & Foundation" value={fmt(results.catSite)} />
+              <Row label="Framing & Structure" value={fmt(results.catFrame)} />
+              <Row label="Exterior (roof, siding, windows, doors)" value={fmt(results.catExt)} />
+              <Row label="Phase 1 Subtotal" value={fmt(results.phase1Total)} total />
+            </div>
+            <div style={{ background: 'rgba(46, 204, 113, 0.1)', padding: '10px', borderRadius: '6px' }}>
+              <div style={{ fontWeight: 'bold', color: 'var(--success)', marginBottom: '8px' }}>Phase 2: Interior Finishes</div>
+              <Row label="MEP (electrical, plumbing, HVAC)" value={fmt(results.catMep)} />
+              <Row label="Insulation & Drywall" value={fmt(results.catInsul)} />
+              <Row label="Interior Finishes" value={fmt(results.catInt)} />
+              <Row label="Kitchen & Bath" value={fmt(results.catKb)} />
+              <Row label="Site Finishing" value={fmt(results.catFinish)} />
+              <Row label="Phase 2 Subtotal" value={fmt(results.phase2Total)} total />
+            </div>
+            <div className="row" style={{ marginTop: '10px', color: 'var(--success)' }}>
               <span className="lbl">Total Savings (Single-Story + DIY Labor)</span>
               <span className="val">-{fmt(results.catSavings)}</span>
             </div>
           </Results>
           <Results title="Totals">
-            <Row label="Base Construction Cost (financed)" value={fmt(results.baseTotal)} />
+            <div style={{ background: 'rgba(52, 152, 219, 0.15)', padding: '8px 10px', borderRadius: '4px', marginBottom: '8px' }}>
+              <Row label="Phase 1: Dry-In (hard costs)" value={fmt(results.phase1Total)} style={{ fontWeight: 'bold' }} />
+            </div>
+            <div style={{ background: 'rgba(46, 204, 113, 0.15)', padding: '8px 10px', borderRadius: '4px', marginBottom: '8px' }}>
+              <Row label="Phase 2: Interior (hard costs)" value={fmt(results.phase2Total)} style={{ fontWeight: 'bold' }} />
+            </div>
+            <Row label="Soft Costs & GC Fee" value={fmt(results.catSoft)} />
             <div className="row" style={{ fontSize: '.85rem', color: 'var(--text-light)' }}>
-              <span className="lbl">↳ Finish grade applied to line items (windows, cabinets, flooring, etc.)</span>
+              <span className="lbl">↳ Includes insurance, GC fee, construction loan interest</span>
               <span className="val"></span>
             </div>
             <Row label="Location Factor (Coastal)" value={`${results.locAdj >= 0 ? '+' : ''}${fmt(results.locAdj)}`} />

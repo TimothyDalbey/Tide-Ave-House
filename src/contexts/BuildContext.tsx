@@ -97,6 +97,9 @@ export interface BuildResults {
   catSoft: number;
   catFinish: number;
   catSavings: number;
+  // Phase totals
+  phase1Total: number;  // Dry-in: site, frame, exterior envelope
+  phase2Total: number;  // Interior finishes
   // DIY savings
   totalDiySavings: number;
   gcFeeCalc: number;
@@ -130,7 +133,7 @@ const defaultInputs: BuildInputs = {
   sitePrep: 2500,    // Pre-graded site = minimal prep needed
   tree: 3500,        // Single large tree, coastal arborist rates
   excavation: 5000,  // 50% reduced - helical piles eliminate west side excavation
-  retaining: 18000,
+  retaining: 10000,   // ~40 linear feet poured concrete
   neighborShare: 0,
   foundation: 40000, // 9 helical piles ($22.5K) + crawl space east ($10K) + caps ($7.5K)
   septic: 28000,     // Bid received
@@ -141,8 +144,8 @@ const defaultInputs: BuildInputs = {
   // Exterior
   roofing: 12,
   siding: 15000,     // Fiber cement, 1,620 SF wall area
-  windows: 18000,
-  extDoors: 23000,   // 3 sliders (living + 2 masters) + CVG fir entry w/frosted glass + sauna
+  windows: 21000,    // 15 windows per actual schedule
+  extDoors: 22000,   // 12'x10' slider + 2 door/window combos + CVG fir entry + sauna
   gutters: 1200,
   // MEP
   electric: 20000,   // Calc shows $18K, +$2K buffer for coastal
@@ -169,8 +172,8 @@ const defaultInputs: BuildInputs = {
   architect: 14000,
   insurance: 4000,
   gcFee: 15,
-  ownerBuilder: false,
-  loanInterest: 18000,
+  ownerBuilder: true,   // No GC - owner-managed build
+  loanInterest: 0,      // Cash build - no construction loan
   // Site Finishing
   driveway: 2000,    // Small parking pad only (~400 SF), no turnaround
   landscape: 0,     // Owner DIY - no lawn, native plants over time
@@ -213,6 +216,8 @@ const defaultResults: BuildResults = {
   catSoft: 0,
   catFinish: 0,
   catSavings: 0,
+  phase1Total: 0,
+  phase2Total: 0,
   totalDiySavings: 0,
   gcFeeCalc: 0,
   gcSavingsAmt: 0,
@@ -299,6 +304,12 @@ export function BuildProvider({ children }: { children: ReactNode }) {
     const catSavings = accessSave + totalDiySavings;
     const catFinish = driveway + landscape + deck + extLighting + tempUtilities + finalCleanup + miscCode - diyLandscapeSaveAmt - diyDeckSaveAmt;
 
+    // Phase totals (hard costs only, before GC fee and soft costs)
+    // Phase 1: Dry-In = Site + Frame + Exterior envelope
+    const phase1Total = catSite + catFrame + catExt;
+    // Phase 2: Interior = MEP + Insulation/Drywall + Interior + Kitchen/Bath + Site Finishing
+    const phase2Total = catMep + catInsul + catInt + catKb + catFinish - (catSavings - diyLandscapeSaveAmt - diyDeckSaveAmt);
+
     const hardCosts = catSite + catFrame + catExt + catMep + catInsul + catInt + catKb - (catSavings - diyLandscapeSaveAmt - diyDeckSaveAmt);
     const gcFeeCalc = ownerBuilder ? 0 : hardCosts * (gcFee / 100);
     const gcSavingsAmt = ownerBuilder ? hardCosts * (gcFee / 100) : 0;
@@ -328,6 +339,8 @@ export function BuildProvider({ children }: { children: ReactNode }) {
       catSoft,
       catFinish,
       catSavings,
+      phase1Total,
+      phase2Total,
       totalDiySavings,
       gcFeeCalc,
       gcSavingsAmt,

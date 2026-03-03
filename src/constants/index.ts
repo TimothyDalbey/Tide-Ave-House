@@ -99,15 +99,28 @@ export const statusItems = {
     { id: 'close', title: 'Loan Closing', note: 'Sign documents, fund construction', defaultStatus: '' }
   ],
   construction: [
-    { id: 'site', title: 'Site Preparation', note: 'Clearing, grading', defaultStatus: '' },
-    { id: 'found', title: 'Foundation', note: 'Helical piles on west side', defaultStatus: '' },
-    { id: 'frame', title: 'Framing', note: 'Structure and roof', defaultStatus: '' },
-    { id: 'roof', title: 'Roofing', note: 'Installation and waterproofing', defaultStatus: '' },
-    { id: 'mep', title: 'Rough-Ins (MEP)', note: 'Mechanical, electrical, plumbing', defaultStatus: '' },
-    { id: 'ins', title: 'Insulation', note: 'Wall and ceiling', defaultStatus: '' },
-    { id: 'dry', title: 'Drywall', note: 'Installation, taping, finishing', defaultStatus: '' },
-    { id: 'int', title: 'Interior Finishes', note: 'Cabinets, flooring, fixtures', defaultStatus: '' },
-    { id: 'ext', title: 'Exterior Finishes', note: 'Siding, paint, landscaping', defaultStatus: '' }
+    // PHASE 1: Shell / Dry-In
+    { id: 'site', title: 'Site Preparation', note: 'Phase 1: Clearing, grading', defaultStatus: '' },
+    { id: 'found', title: 'Foundation', note: 'Phase 1: Helical piles + crawl space', defaultStatus: '' },
+    { id: 'sepinst', title: 'Septic Installation', note: 'Phase 1: Alternative septic system', defaultStatus: '' },
+    { id: 'utilinst', title: 'Utilities Connection', note: 'Phase 1: Electric, water, gas', defaultStatus: '' },
+    { id: 'frame', title: 'Framing', note: 'Phase 1: Structure and sheathing', defaultStatus: '' },
+    { id: 'roof', title: 'Roofing', note: 'Phase 1: Metal roof installation', defaultStatus: '' },
+    { id: 'siding', title: 'Siding', note: 'Phase 1: Fiber cement siding', defaultStatus: '' },
+    { id: 'windows', title: 'Windows', note: 'Phase 1: 15 windows installed', defaultStatus: '' },
+    { id: 'extdoors', title: 'Exterior Doors', note: 'Phase 1: Slider + door/window combos + entry', defaultStatus: '' },
+    // PHASE 2: Interior Finishes
+    { id: 'mep', title: 'MEP Rough-In', note: 'Phase 2: Electrical, plumbing, radiant heat', defaultStatus: '' },
+    { id: 'ins', title: 'Insulation', note: 'Phase 2: Wall and ceiling', defaultStatus: '' },
+    { id: 'dry', title: 'Drywall', note: 'Phase 2: Walls only (T&G ceiling)', defaultStatus: '' },
+    { id: 'ceiling', title: 'T&G Wood Ceiling', note: 'Phase 2: Exposed rafters + wood', defaultStatus: '' },
+    { id: 'floor', title: 'Flooring', note: 'Phase 2: Polished concrete + tile', defaultStatus: '' },
+    { id: 'cab', title: 'Cabinets & Counters', note: 'Phase 2: Kitchen + bath vanities', defaultStatus: '' },
+    { id: 'intdoors', title: 'Interior Doors & Trim', note: 'Phase 2: CVG fir, stained', defaultStatus: '' },
+    { id: 'bath', title: 'Bath Fixtures', note: 'Phase 2: 2 master baths + powder', defaultStatus: '' },
+    { id: 'appl', title: 'Appliances', note: 'Phase 2: Kitchen appliances', defaultStatus: '' },
+    { id: 'paint', title: 'Paint', note: 'Phase 2: Walls only (trim is stained)', defaultStatus: '' },
+    { id: 'ext', title: 'Exterior Finish', note: 'Phase 2: Deck, lighting', defaultStatus: '' }
   ],
   completion: [
     { id: 'finsp', title: 'Final Inspections', note: 'All trades and compliance', defaultStatus: '' },

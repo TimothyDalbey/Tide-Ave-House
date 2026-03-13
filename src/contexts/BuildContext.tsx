@@ -19,7 +19,6 @@ export interface BuildInputs {
   utility: number;
   // Framing
   framing: number;
-  sheath: number;
   // Exterior
   roofing: number;
   siding: number;
@@ -138,9 +137,8 @@ const defaultInputs: BuildInputs = {
   foundation: 40000, // 9 helical piles ($22.5K) + crawl space east ($10K) + caps ($7.5K)
   septic: 28000,     // Bid received
   utility: 22000,    // Bid received
-  // Framing
-  framing: 20,
-  sheath: 4500,
+  // Framing (labor $9/sf verified + all materials incl. sheathing & housewrap)
+  framing: 16,       // $9 labor (verified) + ~$7 materials (lumber, sheathing, housewrap)
   // Exterior
   roofing: 12,
   siding: 15000,     // Fiber cement, 1,620 SF wall area
@@ -263,7 +261,7 @@ export function BuildProvider({ children }: { children: ReactNode }) {
     const {
       sqft, roofSqft, locFactor,
       sitePrep, tree, excavation, retaining, neighborShare, foundation, septic, utility,
-      framing, sheath, roofing, siding, windows, extDoors, gutters,
+      framing, roofing, siding, windows, extDoors, gutters,
       electric, plumbing, hvac, radiantHeat, insulation, drywall, paint,
       flooring, ceiling, intDoors, trim,
       cabinets, counters, appliances, bathFixtures,
@@ -295,7 +293,7 @@ export function BuildProvider({ children }: { children: ReactNode }) {
 
     // Category totals
     const catSite = sitePrep + tree + excavation + (retaining - neighborShare) + foundation + septic + utility;
-    const catFrame = framingCost + sheath;
+    const catFrame = framingCost;
     const catExt = roofCost + siding + windows + extDoors + gutters;
     const catMep = electric + plumbing + hvac + radiantHeat;
     const catInsul = insulation + drywall + paint;

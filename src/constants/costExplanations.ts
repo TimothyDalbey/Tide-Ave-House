@@ -411,12 +411,16 @@ Our actual bid of $25,000 includes:
 This is FIRM pricing from utility companies - low variance expected unless scope changes or unexpected site conditions.`
   },
   
-  // Framing
+  // Framing (includes sheathing & housewrap)
   framing: {
-    estimate: '$20/sf',
-    low: '$15/sf',
-    high: '$30/sf',
-    notes: `**CALCULATION:** 1,600 SF × $20/SF = $32,000
+    estimate: '$16/sf',
+    low: '$14/sf',
+    high: '$20/sf',
+    notes: `**✓ VERIFIED BID: Framing labor $9/SF (includes sheathing labor)**
+
+**CALCULATION:** 1,600 SF × $16/SF = $25,600
+• Labor: 1,600 SF × $9/SF = $14,400 ✓ VERIFIED (framing + sheathing + housewrap)
+• All Materials: ~$11,200 (lumber, sheathing, housewrap, fasteners)
 
 **═══ MATERIAL COSTS ═══** [5][21]
 
@@ -446,32 +450,23 @@ This is FIRM pricing from utility companies - low variance expected unless scope
 
 **═══ LABOR COSTS ═══** [8][28]
 
-**Crew Requirements:**
-• Lead carpenter: 1 (supervises, critical cuts)
-• Carpenters: 2-3 (wall assembly, raising, sheathing)
-• Helper: 1 (material handling, cleanup)
+**✓ VERIFIED BID RECEIVED: $9/SF (labor only)**
+• 1,600 SF × $9/SF = **$14,400 labor cost**
+• Does NOT include building materials
+• Bid date: March 2026
 
-**Time Estimate:**
+**Labor Breakdown (for reference):**
+• Crew Requirements: Lead carpenter + 2-3 carpenters + helper
 • Shed roof single-story is SIMPLE framing
 • Rectangular footprint minimizes complexity
-• Estimated: 2-3 weeks with 4-person crew
 
-**Labor Calculation:**
-• 4 workers × 10 days × 8 hrs = 320 labor hours
-• Oregon carpenter rate: $28-$45/hr base [28]
-• With burden (benefits, insurance, overhead): $45-$70/hr
-• **Labor cost: $14,400-$22,400**
-
-**Using midpoint: $18,000**
-
-**═══ TOTAL FRAMING ═══**
-• Materials: $7,725
-• Labor: $18,000
-• Waste/contingency (8%): $2,058
-• **TOTAL: $27,783 ≈ $28,000**
-• **Per SF: $28,000 ÷ 1,600 = $17.50/SF**
-
-**Our $20/SF estimate includes small buffer for lumber volatility**
+**═══ TOTAL FRAMING + SHEATHING + HOUSEWRAP ═══**
+• Framing lumber & hardware: ~$8,000
+• Sheathing (wall + roof OSB): ~$2,400
+• Housewrap & tape: ~$900
+• Labor: $14,400 ✓ VERIFIED
+• **TOTAL: ~$25,700**
+• **Per SF: $25,700 ÷ 1,600 = $16/SF**
 
 **═══ COMPLEXITY ADJUSTMENTS ═══**
 
@@ -499,71 +494,9 @@ Standard framing costs $25-$40/SF [5][21] but our simple design drops us to $15-
 • Labor availability: Moderate in coastal Tillamook
 
 **RANGE EXPLANATION:**
-• Low ($15/SF = $24,000): Favorable lumber prices, efficient crew
-• Mid ($20/SF = $32,000): Expected cost with contingency
-• High ($30/SF = $48,000): Lumber spike, complex changes, difficult conditions`
-  },
-  sheath: {
-    estimate: '$4,000',
-    low: '$3,000',
-    high: '$6,000',
-    notes: `**CALCULATION:** Exterior sheathing and weather barrier.
-
-**═══ SHEATHING MATERIALS ═══** [21]
-
-**Wall Sheathing (OSB or Plywood):**
-• Wall area calculation (9'-11' shed roof, avg 10 ft):
-  - North wall: 65 ft × 10 ft = 650 SF
-  - South wall: 25 ft × 10 ft = 250 SF (partial - foundation runs up)
-  - East wall: 25 ft × 9 ft = 225 SF (low side)
-  - West wall: 65 ft × 11 ft = 0 SF sheathing (mostly openings - ocean side)
-  - **Net wall sheathing: ~1,000 SF**
-
-• OSB sheets needed: 900 SF ÷ 32 SF/sheet = 28 sheets
-• Cost: 28 sheets × $28/sheet = $784
-
-**Roof Sheathing:**
-• Roof area: 1,600 SF (matches floor for shed roof)
-• OSB sheets: 1,600 ÷ 32 = 50 sheets
-• Cost: 50 sheets × $32/sheet (thicker 5/8") = $1,600
-
-**═══ HOUSE WRAP ═══**
-
-**Tyvek or Equivalent:**
-• Coverage: ~1,000 SF walls
-• Roll coverage: 150 SF per roll (9 ft × 150 ft / 9)
-• Rolls needed: 7 rolls
-• Cost: 7 × $165 = $1,155, round to ~$800 (bulk pricing)
-
-**Seam Tape:**
-• Linear feet of seams: ~400 LF
-• Tape: 2 rolls × $30 = $60
-
-**═══ FASTENERS ═══**
-
-• Sheathing nails (8d ring shank): 2 boxes × $50 = $100
-• Staples for house wrap: $25
-• Flashing tape (windows/doors rough openings): $150
-
-**═══ LABOR ═══** [8][28]
-
-• Typically included with framing crew
-• Separate line: 2 workers × 2 days = 32 hours
-• Rate: $45/hr
-• Labor: $1,440
-
-**═══ TOTAL BREAKDOWN ═══**
-• Wall sheathing: $784
-• Roof sheathing: $1,600
-• House wrap: $860
-• Fasteners/tape: $275
-• Labor (if separate): $1,440
-• **TOTAL: $4,959 ≈ $5,000**
-
-**REDUCED AREA BENEFIT:**
-West wall is 65 ft of mostly sliding doors and windows - minimal sheathing needed there. This reduces typical sheathing cost by ~25%.
-
-**NOTE:** Sheathing often bid WITH framing labor. Verify with framing bid whether sheathing labor is included. Material cost is separate regardless.`
+• Low ($14/SF = $22,400): Favorable lumber prices, efficient crew
+• Mid ($16/SF = $25,600): Expected cost with verified labor
+• High ($20/SF = $32,000): Lumber spike, complex changes, difficult conditions`
   },
   
   // Exterior

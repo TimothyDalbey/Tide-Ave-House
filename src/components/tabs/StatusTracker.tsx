@@ -10,7 +10,7 @@ export function StatusTracker() {
       <p style={{ marginBottom: '5px' }}>Click items to toggle status. Progress saved automatically.</p>
       <p style={{ marginBottom: '20px', fontSize: '.9rem', color: 'var(--text-light)' }}>
         <span style={{ color: 'var(--success)' }}>●</span> Completed{' '}
-        <span style={{ color: 'var(--primary-light)' }}>●</span> In Progress{' '}
+        <span style={{ color: 'var(--warning)' }}>●</span> In Progress{' '}
         <span style={{ color: 'var(--border)' }}>●</span> Not Started
       </p>
 
@@ -29,10 +29,20 @@ export function StatusTracker() {
         </div>
       </div>
 
+      <div className="milestone">
+        <div className="milestone-icon">📋</div>
+        <div className="milestone-content">
+          <h3>✅ READY TO BUILD!</h3>
+          <p>Lot purchased, diligence complete, plans approved, permits in hand. Let's go!</p>
+        </div>
+      </div>
+
       <div className="stat-sec">
-        <h3>Financing Phase</h3>
+        <h3>Construction Phase 1: Shell / Dry-In</h3>
         <div className="tl">
-          {statusItems.financing.map(item => (
+          {statusItems.construction.filter(item => 
+            ['site', 'sepinst', 'found', 'utilinst', 'frame', 'roof', 'siding', 'windows', 'extdoors'].includes(item.id)
+          ).map(item => (
             <StatusItem
               key={item.id}
               status={status[item.id] || ''}
@@ -44,20 +54,11 @@ export function StatusTracker() {
         </div>
       </div>
 
-      <div className="stat-sec">
-        <h3>Construction Phase 1: Shell / Dry-In</h3>
-        <div className="tl">
-          {statusItems.construction.filter(item => 
-            ['site', 'found', 'sepinst', 'utilinst', 'frame', 'roof', 'siding', 'windows', 'extdoors'].includes(item.id)
-          ).map(item => (
-            <StatusItem
-              key={item.id}
-              status={status[item.id] || ''}
-              title={item.title}
-              note={item.note}
-              onClick={() => toggle(item.id)}
-            />
-          ))}
+      <div className="milestone">
+        <div className="milestone-icon">🏠</div>
+        <div className="milestone-content">
+          <h3>🎉 MAJOR MILESTONE: Dried In!</h3>
+          <p>Shell complete &amp; weather-tight. Protected from the elements!</p>
         </div>
       </div>
 

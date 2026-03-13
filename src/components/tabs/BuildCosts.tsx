@@ -156,15 +156,14 @@ export function BuildCosts() {
         </Results>
 
         <Results title="🪵 Framing & Structure">
-          <div className="row">
-            <span className="lbl">Wood Framing ($/sf: ${inputs.framing})</span>
+          <div className="row" style={{ background: 'rgba(46, 204, 113, 0.1)', borderLeft: '3px solid var(--success)' }}>
+            <span className="lbl">✓ Framing, Sheathing & Housewrap ($/sf: ${inputs.framing}) <span style={{ fontSize: '.8rem', color: 'var(--success)', fontWeight: 'normal' }}>(labor $9/sf verified)</span></span>
             <div>
               <span className="val">{fmt(results.framingCost)}</span>
               <input type="number" value={inputs.framing} onChange={e => setInput('framing', +e.target.value)} style={{ width: '80px', marginLeft: '10px', padding: '4px 8px' }} />/sf
             </div>
           </div>
           {showExplanations && <ExplanationRow explanation={costExplanations.framing} />}
-          <CostRowWithExplanation label="Sheathing & House Wrap" value={inputs.sheath} field="sheath" setInput={setInput} explanation={costExplanations.sheath} show={showExplanations} />
         </Results>
 
         <Results title="🏠 Exterior">

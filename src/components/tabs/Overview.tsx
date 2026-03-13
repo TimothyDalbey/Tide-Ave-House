@@ -75,8 +75,8 @@ export function Overview() {
             <li>
               <span className="chk wip">⏳</span>
               <div>
-                <strong>Final Architectural Plans</strong><br />
-                <span style={{ color: 'var(--primary-light)' }}>In progress — awaiting completion from architect</span>
+                <strong>Structural Engineering & Final Plans</strong><br />
+                <span style={{ color: 'var(--warning)' }}>In progress — plans currently with engineer</span>
               </div>
             </li>
           </ul>
@@ -97,17 +97,12 @@ export function Overview() {
         <p style={{ marginBottom: '5px' }}>Click items to toggle status. Progress saved automatically.</p>
         <p style={{ marginBottom: '20px', fontSize: '.9rem', color: 'var(--text-light)' }}>
           <span style={{ color: 'var(--success)' }}>●</span> Completed{' '}
-          <span style={{ color: 'var(--primary-light)' }}>●</span> In Progress{' '}
+          <span style={{ color: 'var(--warning)' }}>●</span> In Progress{' '}
           <span style={{ color: 'var(--border)' }}>●</span> Not Started
         </p>
 
         <div className="tl">
-          {[
-            ...statusItems.preConstruction,
-            ...statusItems.financing,
-            ...statusItems.construction,
-            ...statusItems.completion
-          ].map(item => (
+          {statusItems.preConstruction.map(item => (
             <StatusItem
               key={item.id}
               status={status[item.id] || ''}
@@ -116,6 +111,67 @@ export function Overview() {
               onClick={() => toggle(item.id)}
             />
           ))}
+        </div>
+
+        <div className="milestone">
+          <div className="milestone-icon">📋</div>
+          <div className="milestone-content">
+            <h3>✅ READY TO BUILD!</h3>
+            <p>Lot purchased, diligence complete, plans approved, permits in hand. Let's go!</p>
+          </div>
+        </div>
+
+        <div className="tl">
+          {statusItems.construction.filter(item => 
+            ['site', 'sepinst', 'found', 'utilinst', 'frame', 'roof', 'siding', 'windows', 'extdoors'].includes(item.id)
+          ).map(item => (
+            <StatusItem
+              key={item.id}
+              status={status[item.id] || ''}
+              title={item.title}
+              note={item.note}
+              onClick={() => toggle(item.id)}
+            />
+          ))}
+        </div>
+
+        <div className="milestone">
+          <div className="milestone-icon">🏠</div>
+          <div className="milestone-content">
+            <h3>🎉 MAJOR MILESTONE: Dried In!</h3>
+            <p>Shell complete &amp; weather-tight. Protected from the elements!</p>
+          </div>
+        </div>
+
+        <div className="tl">
+          {statusItems.construction.filter(item => 
+            ['mep', 'ins', 'dry', 'ceiling', 'floor', 'cab', 'intdoors', 'bath', 'appl', 'paint', 'ext'].includes(item.id)
+          ).map(item => (
+            <StatusItem
+              key={item.id}
+              status={status[item.id] || ''}
+              title={item.title}
+              note={item.note}
+              onClick={() => toggle(item.id)}
+            />
+          ))}
+          {statusItems.completion.map(item => (
+            <StatusItem
+              key={item.id}
+              status={status[item.id] || ''}
+              title={item.title}
+              note={item.note}
+              onClick={() => toggle(item.id)}
+            />
+          ))}
+        </div>
+
+        <div className="milestone">
+          <div className="milestone-icon">🎉</div>
+          <div className="milestone-content">
+            <h3>🏡 MOVE IN READY!</h3>
+            <p>Construction complete. Welcome home!</p>
+          </div>
         </div>
       </Card>
     </>

@@ -85,24 +85,16 @@ export const statusItems = {
     { id: 'sep', title: 'Septic Permits', note: 'Permits obtained', defaultStatus: 'done' },
     { id: 'util', title: 'Utilities Arranged', note: 'Electrical and water handled', defaultStatus: 'done' },
     { id: 'rough', title: 'Architect Rough Plans', note: 'Initial design complete', defaultStatus: 'done' },
-    { id: 'eng', title: 'Structural Engineering', note: 'Required for helical pile foundation', defaultStatus: '' },
-    { id: 'final', title: 'Final Architectural Plans', note: 'Currently in progress', defaultStatus: 'wip' },
+    { id: 'eng', title: 'Structural Engineering', note: 'Plans currently with engineer', defaultStatus: 'wip' },
+    { id: 'final', title: 'Final Architectural Plans', note: 'In progress with engineering', defaultStatus: 'wip' },
     { id: 'bperm', title: 'Building Permit Application', note: 'Submit to Tillamook County (2-6 weeks)', defaultStatus: '' },
-    { id: 'bpermapp', title: 'Building Permit Approved', note: 'Required before loan closing', defaultStatus: '' }
-  ],
-  financing: [
-    { id: 'lres', title: 'Research & Select Lender', note: 'Compare conventional construction loan options', defaultStatus: '' },
-    { id: 'preap', title: 'Loan Pre-Qualification', note: 'Submit financial documents', defaultStatus: '' },
-    { id: 'bsel', title: 'Builder Selection', note: 'Select licensed general contractor', defaultStatus: '' },
-    { id: 'bapp', title: 'Builder Lender Approval', note: 'Lender reviews builder credentials', defaultStatus: '' },
-    { id: 'appr', title: 'Appraisal', note: 'Subject to completion appraisal', defaultStatus: '' },
-    { id: 'close', title: 'Loan Closing', note: 'Sign documents, fund construction', defaultStatus: '' }
+    { id: 'bpermapp', title: 'Building Permit Approved', note: 'Required before construction begins', defaultStatus: '' }
   ],
   construction: [
     // PHASE 1: Shell / Dry-In
     { id: 'site', title: 'Site Preparation', note: 'Phase 1: Clearing, grading', defaultStatus: '' },
-    { id: 'found', title: 'Foundation', note: 'Phase 1: Helical piles + crawl space', defaultStatus: '' },
     { id: 'sepinst', title: 'Septic Installation', note: 'Phase 1: Alternative septic system', defaultStatus: '' },
+    { id: 'found', title: 'Foundation', note: 'Phase 1: Helical piles + crawl space', defaultStatus: '' },
     { id: 'utilinst', title: 'Utilities Connection', note: 'Phase 1: Electric, water, gas', defaultStatus: '' },
     { id: 'frame', title: 'Framing', note: 'Phase 1: Structure and sheathing', defaultStatus: '' },
     { id: 'roof', title: 'Roofing', note: 'Phase 1: Metal roof installation', defaultStatus: '' },
@@ -124,9 +116,7 @@ export const statusItems = {
   ],
   completion: [
     { id: 'finsp', title: 'Final Inspections', note: 'All trades and compliance', defaultStatus: '' },
-    { id: 'co', title: 'Certificate of Occupancy', note: 'Final approval from county', defaultStatus: '' },
-    { id: 'conv', title: 'Loan Conversion', note: 'Construction to permanent mortgage', defaultStatus: '' },
-    { id: 'move', title: 'Move In! 🎉', note: 'Welcome home', defaultStatus: '' }
+    { id: 'co', title: 'Certificate of Occupancy', note: 'Final approval from county', defaultStatus: '' }
   ]
 };
 

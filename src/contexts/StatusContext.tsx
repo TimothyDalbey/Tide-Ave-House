@@ -21,15 +21,27 @@ function getDefaultStatus(): StatusMap {
 }
 
 function loadFromStorage(): StatusMap {
+  const defaults = getDefaultStatus();
   try {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved) {
-      return { ...getDefaultStatus(), ...JSON.parse(saved) };
+      const parsed = JSON.parse(saved) as StatusMap;
+      // Merge: use saved value unless default is 'wip' and saved is empty
+      // (allows code updates to mark items in-progress)
+      const merged: StatusMap = { ...defaults };
+      for (const [key, savedValue] of Object.entries(parsed)) {
+        if (defaults[key] === 'wip' && savedValue === '') {
+          // Keep the default 'wip' status
+          continue;
+        }
+        merged[key] = savedValue;
+      }
+      return merged;
     }
   } catch {
     // Ignore parse errors
   }
-  return getDefaultStatus();
+  return defaults;
 }
 
 const StatusContext = createContext<StatusContextType | undefined>(undefined);

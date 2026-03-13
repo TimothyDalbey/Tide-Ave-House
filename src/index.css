@@ -334,8 +334,14 @@ input:focus, select:focus {
 }
 
 .stat-item.wip {
-  background: rgba(45, 140, 184, .1);
-  border-color: var(--primary-light);
+  background: rgba(241, 196, 15, .15);
+  border-color: var(--warning);
+  animation: pulse-wip 2s ease-in-out infinite;
+}
+
+@keyframes pulse-wip {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(241, 196, 15, 0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(241, 196, 15, 0); }
 }
 
 .stat-chk {
@@ -356,8 +362,8 @@ input:focus, select:focus {
 }
 
 .stat-item.wip .stat-chk {
-  background: var(--primary-light);
-  border-color: var(--primary-light);
+  background: var(--warning);
+  border-color: var(--warning);
   color: #fff;
 }
 
@@ -398,8 +404,35 @@ input:focus, select:focus {
 }
 
 .tl .stat-item.wip::before {
-  background: var(--primary-light);
-  box-shadow: 0 0 0 4px rgba(45, 140, 184, .3);
+  background: var(--warning);
+  box-shadow: 0 0 0 4px rgba(241, 196, 15, .3);
+}
+
+.milestone {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 25px 30px;
+  margin: 30px 0;
+  background: rgba(39, 174, 96, 0.08);
+  border: 3px solid var(--success);
+  border-radius: 16px;
+}
+
+.milestone-icon {
+  font-size: 3rem;
+}
+
+.milestone-content h3 {
+  margin: 0 0 8px 0;
+  color: var(--success);
+  font-size: 1.3rem;
+}
+
+.milestone-content p {
+  margin: 0;
+  color: var(--text);
+  font-size: 1rem;
 }
 
 .step {
@@ -452,6 +485,10 @@ input:focus, select:focus {
 .rlist .chk {
   color: var(--success);
   font-weight: bold;
+}
+
+.rlist .chk.wip {
+  color: var(--warning);
 }
 
 .specs {

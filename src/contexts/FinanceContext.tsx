@@ -102,8 +102,8 @@ const defaultInputs: FinanceInputs = {
   lotEquity: 90000,
   lotAppraisal: 402000,
   constCost: 575000,
-  valueGain: '1.35',
-  estValue: Math.round((402000 + 575000) * 1.35),
+  valueGain: '950',
+  estValue: 1600 * 950,  // sqft × price per sqft (beachfront with ocean view)
   
   // Refinance inputs
   financeClosingCostsRefi: true,  // Roll closing costs into refinance loan
@@ -199,21 +199,24 @@ export function FinanceProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const calcAutoValue = useCallback(() => {
-    const { lotAppraisal, valueGain } = inputs;
-    // Use financedTotal (excludes pre-loan costs like permits)
-    const constCost = buildResults.financedTotal || inputs.constCost;
-    const autoVal = Math.round((lotAppraisal + constCost) * parseFloat(valueGain));
-    setInputs(prev => ({ ...prev, estValue: autoVal, constCost }));
-  }, [inputs, buildResults.financedTotal]);
+    const { valueGain } = inputs;
+    // Use sqft from build context, price per sqft from valueGain
+    const sqft = buildResults.sqft || 1600;
+    const pricePerSqft = parseInt(valueGain) || 800;
+    const autoVal = Math.round(sqft * pricePerSqft);
+    setInputs(prev => ({ ...prev, estValue: autoVal }));
+  }, [inputs, buildResults.sqft]);
 
-  // Sync construction cost from build calculator AND auto-calculate values
+  // Sync construction cost and recalculate estimated value
   useEffect(() => {
     if (buildResults.financedTotal > 0) {
       const constCost = Math.round(buildResults.financedTotal);
-      const autoVal = Math.round((inputs.lotAppraisal + constCost) * parseFloat(inputs.valueGain));
+      const sqft = buildResults.sqft || 1600;
+      const pricePerSqft = parseInt(inputs.valueGain) || 800;
+      const autoVal = Math.round(sqft * pricePerSqft);
       setInputs(prev => ({ ...prev, constCost, estValue: autoVal }));
     }
-  }, [buildResults.financedTotal, inputs.lotAppraisal, inputs.valueGain]);
+  }, [buildResults.financedTotal, buildResults.sqft, inputs.valueGain]);
 
   // Recalculate finance results (REFINANCE scenario)
   useEffect(() => {

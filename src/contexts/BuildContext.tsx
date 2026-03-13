@@ -85,6 +85,8 @@ export interface BuildResults {
   roofCost: number;
   flooringCost: number;
   ceilingCost: number;
+  // Square footage (for valuation)
+  sqft: number;
   // Category totals
   catSite: number;
   catFrame: number;
@@ -109,8 +111,9 @@ export interface BuildResults {
   locAdj: number;
   grandTotal: number;
   costPerSf: number;
-  // Pre-loan costs (paid out of pocket before financing)
-  preLoanCosts: number;
+  // Phase 0: Pre-Build costs (paid out of pocket before construction)
+  phase0Total: number;   // permits + engineering + architect (excludes lot)
+  preLoanCosts: number;  // Alias for backwards compatibility
   financedTotal: number;
 }
 
@@ -204,6 +207,7 @@ const defaultResults: BuildResults = {
   roofCost: 0,
   flooringCost: 0,
   ceilingCost: 0,
+  sqft: 1600,
   catSite: 0,
   catFrame: 0,
   catExt: 0,
@@ -224,6 +228,7 @@ const defaultResults: BuildResults = {
   locAdj: 0,
   grandTotal: 0,
   costPerSf: 0,
+  phase0Total: 0,
   preLoanCosts: 0,
   financedTotal: 0,
 };
@@ -312,8 +317,9 @@ export function BuildProvider({ children }: { children: ReactNode }) {
     const gcFeeCalc = ownerBuilder ? 0 : hardCosts * (gcFee / 100);
     const gcSavingsAmt = ownerBuilder ? hardCosts * (gcFee / 100) : 0;
     
-    // Pre-loan costs (paid before financing)
-    const preLoanCosts = permits + engineering + architect;
+    // Phase 0: Pre-Build costs (paid before construction starts)
+    const phase0Total = permits + engineering + architect;
+    const preLoanCosts = phase0Total;  // Backwards compatibility
     const catSoft = insurance + gcFeeCalc + loanInterest;  // Includes construction loan interest
 
     const baseTotal = hardCosts + catSoft + catFinish;
@@ -327,6 +333,7 @@ export function BuildProvider({ children }: { children: ReactNode }) {
       roofCost,
       flooringCost,
       ceilingCost,
+      sqft,
       catSite,
       catFrame,
       catExt,
@@ -347,6 +354,7 @@ export function BuildProvider({ children }: { children: ReactNode }) {
       locAdj,
       grandTotal,
       costPerSf,
+      phase0Total,
       preLoanCosts,
       financedTotal,
     });

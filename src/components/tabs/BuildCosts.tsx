@@ -267,14 +267,14 @@ export function BuildCosts() {
           <CostRowWithExplanation label="Bathroom Fixtures & Tile (2.5 bath)" value={inputs.bathFixtures} field="bathFixtures" setInput={setInput} explanation={costExplanations.bathFixtures} show={showExplanations} />
         </Results>
 
-        <Results title="📄 Soft Costs & Fees">
-          <CostRowWithExplanation label="⚠️ Permits & Fees (pre-loan cost)" value={inputs.permits} field="permits" setInput={setInput} explanation={costExplanations.permits} show={showExplanations} />
-          <CostRowWithExplanation label="⚠️ Structural Engineering (pre-loan cost)" value={inputs.engineering} field="engineering" setInput={setInput} explanation={costExplanations.engineering} show={showExplanations} />
+        <Results title="📄 Phase 0: Pre-Build Costs">
+          <Alert type="warn" icon="⚠️" style={{ marginBottom: '15px' }}>
+            <strong>Paid Before Construction Starts:</strong> These costs are paid out-of-pocket 
+            before the build begins. They are not part of the construction budget.
+          </Alert>
+          <CostRowWithExplanation label="Permits & Fees" value={inputs.permits} field="permits" setInput={setInput} explanation={costExplanations.permits} show={showExplanations} />
           {showExplanations && (
             <div style={{ background: 'var(--bg)', padding: '12px 15px', borderRadius: '8px', marginBottom: '10px', fontSize: '.85rem' }}>
-              <div style={{ background: 'rgba(241, 196, 15, 0.15)', padding: '8px 12px', borderRadius: '4px', marginBottom: '10px', border: '1px solid rgba(241, 196, 15, 0.3)' }}>
-                <strong style={{ color: 'var(--warning)' }}>⚠️ Pre-Loan Cost:</strong> Permits must be obtained before loan closing. This ${fmt(inputs.permits)} is paid out-of-pocket and is <em>not</em> included in the financed construction cost.
-              </div>
               <strong style={{ color: 'var(--secondary)', display: 'block', marginBottom: '8px' }}>📋 Tillamook County Permits Breakdown:</strong>
               <table style={{ width: '100%', fontSize: '.85rem' }}>
                 <tbody>
@@ -293,13 +293,18 @@ export function BuildCosts() {
               </div>
             </div>
           )}
+          <CostRowWithExplanation label="Structural Engineering" value={inputs.engineering} field="engineering" setInput={setInput} explanation={costExplanations.engineering} show={showExplanations} />
           <div className="row">
-            <span className="lbl">⚠️ Architect/Designer (pre-loan cost, already paid)</span>
+            <span className="lbl">Architect/Designer <span style={{ fontSize: '.8rem', color: 'var(--success)' }}>(✓ paid)</span></span>
             <div>
               <span className="val">{fmt(inputs.architect)}</span>
               <input type="number" value={inputs.architect} onChange={e => setInput('architect', +e.target.value)} style={{ width: '100px', marginLeft: '10px', padding: '4px 8px' }} />
             </div>
           </div>
+          <Row label="Phase 0 Total (Pre-Build)" value={fmt(results.phase0Total)} total />
+        </Results>
+
+        <Results title="📄 Soft Costs During Construction">
           <CostRowWithExplanation label="Builder's Risk Insurance" value={inputs.insurance} field="insurance" setInput={setInput} explanation={costExplanations.insurance} show={showExplanations} />
           <div className="row">
             <span className="lbl">Construction Manager Fee (% of hard costs)</span>
@@ -371,6 +376,13 @@ export function BuildCosts() {
       <Card title="📊 Cost Summary">
         <div className="grid">
           <Results title="By Phase">
+            <div style={{ background: 'rgba(241, 196, 15, 0.1)', padding: '10px', borderRadius: '6px', marginBottom: '10px' }}>
+              <div style={{ fontWeight: 'bold', color: 'var(--warning)', marginBottom: '8px' }}>Phase 0: Pre-Build (out of pocket)</div>
+              <Row label="Permits & Fees" value={fmt(inputs.permits)} />
+              <Row label="Structural Engineering" value={fmt(inputs.engineering)} />
+              <Row label="Architect/Designer" value={fmt(inputs.architect)} />
+              <Row label="Phase 0 Subtotal" value={fmt(results.phase0Total)} total />
+            </div>
             <div style={{ background: 'rgba(52, 152, 219, 0.1)', padding: '10px', borderRadius: '6px', marginBottom: '10px' }}>
               <div style={{ fontWeight: 'bold', color: 'var(--primary)', marginBottom: '8px' }}>Phase 1: Shell / Dry-In</div>
               <Row label="Site Work & Foundation" value={fmt(results.catSite)} />
@@ -393,29 +405,25 @@ export function BuildCosts() {
             </div>
           </Results>
           <Results title="Totals">
+            <div style={{ background: 'rgba(241, 196, 15, 0.15)', padding: '8px 10px', borderRadius: '4px', marginBottom: '8px' }}>
+              <Row label="Phase 0: Pre-Build" value={fmt(results.phase0Total)} style={{ fontWeight: 'bold' }} />
+              <p style={{ fontSize: '.75rem', color: 'var(--text-light)', margin: '4px 0 0 0' }}>Permits, engineering, architect — paid before construction</p>
+            </div>
             <div style={{ background: 'rgba(52, 152, 219, 0.15)', padding: '8px 10px', borderRadius: '4px', marginBottom: '8px' }}>
               <Row label="Phase 1: Dry-In (hard costs)" value={fmt(results.phase1Total)} style={{ fontWeight: 'bold' }} />
             </div>
             <div style={{ background: 'rgba(46, 204, 113, 0.15)', padding: '8px 10px', borderRadius: '4px', marginBottom: '8px' }}>
               <Row label="Phase 2: Interior (hard costs)" value={fmt(results.phase2Total)} style={{ fontWeight: 'bold' }} />
             </div>
-            <Row label="Soft Costs & GC Fee" value={fmt(results.catSoft)} />
-            <div className="row" style={{ fontSize: '.85rem', color: 'var(--text-light)' }}>
-              <span className="lbl">↳ Includes insurance, GC fee, construction loan interest</span>
-              <span className="val"></span>
-            </div>
+            <Row label="Soft Costs (insurance)" value={fmt(results.catSoft)} />
             <Row label="Location Factor (Coastal)" value={`${results.locAdj >= 0 ? '+' : ''}${fmt(results.locAdj)}`} />
-            <Row label="Financed Construction Cost" value={fmt(results.financedTotal)} total />
-            <div className="row" style={{ marginTop: '15px', background: 'rgba(241, 196, 15, 0.1)', padding: '8px 10px', borderRadius: '4px' }}>
-              <span className="lbl" style={{ color: 'var(--warning)' }}>⚠️ Pre-Loan Costs (permits + engineering + architect)</span>
-              <span className="val" style={{ color: 'var(--warning)' }}>{fmt(results.preLoanCosts)}</span>
-            </div>
-            <Row label="Total Project Cost (including pre-loan)" value={fmt(results.grandTotal)} highlight />
+            <Row label="Construction Cost (Phase 1 + 2 + Soft)" value={fmt(results.financedTotal)} total />
+            <Row label="Total Project Cost (Phase 0 + 1 + 2)" value={fmt(results.grandTotal)} highlight />
             <Row label="Cost Per Square Foot" value={`${fmt(results.costPerSf)}/sf`} style={{ marginTop: '10px', color: 'var(--text-light)' }} />
           </Results>
         </div>
         <Alert type="success" icon="💰">
-          <strong>This estimate feeds into the Finance Calculator.</strong> The total build cost is used as the default construction cost.
+          <strong>This estimate feeds into the Finance Calculator.</strong> Construction cost ({fmt(results.financedTotal)}) is used for calculations. Phase 0 costs ({fmt(results.phase0Total)}) are paid separately.
         </Alert>
       </Card>
     </>

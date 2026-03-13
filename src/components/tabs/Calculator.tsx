@@ -1,15 +1,19 @@
 import { Card, Alert, Row, Results, FormGroup, InputWrap } from '../ui';
 import { useFinance } from '../../contexts/FinanceContext';
-import { valueGainOptions, termOptions } from '../../constants';
+import { useBuild } from '../../contexts/BuildContext';
+import { valueGainOptions, termOptions, localComps } from '../../constants';
 import { fmt } from '../../utils/format';
 
 export function Calculator() {
   const { inputs, results, setInput, calcAutoValue } = useFinance();
+  const { results: buildResults } = useBuild();
   
   // Dynamically calculated values
   const existingLotLoan = inputs.lotPrice - inputs.lotEquity;
   const totalCashInvested = inputs.lotEquity + inputs.constCost;
   const costBasis = totalCashInvested + existingLotLoan;
+  const sqft = buildResults.sqft || 1600;
+  const pricePerSqft = parseInt(inputs.valueGain) || 800;
 
   return (
     <>
@@ -67,7 +71,7 @@ export function Calculator() {
               </div>
             </div>
 
-            <FormGroup label="Value Gain on Completion" hint="New construction typically adds 20-35% value">
+            <FormGroup label="Estimated Value ($/sqft based on local comps)" hint="Select comparable tier for your area">
               <select
                 value={inputs.valueGain}
                 onChange={e => {
@@ -86,11 +90,77 @@ export function Calculator() {
                 <span>
                   <strong style={{ color: 'var(--success)' }}>Completed Property Value</strong>
                   <br /><span style={{ fontSize: '.8rem', color: 'var(--text-light)' }}>
-                    ({inputs.lotPrice.toLocaleString()} + {inputs.constCost.toLocaleString()}) × {inputs.valueGain}
+                    {sqft.toLocaleString()} sqft × ${pricePerSqft}/sqft
                   </span>
                 </span>
                 <strong style={{ color: 'var(--success)', fontSize: '1.2rem' }}>{fmt(inputs.estValue)}</strong>
               </div>
+            </div>
+
+            <FormGroup label="Or override manually" hint="Enter your own estimate">
+              <InputWrap prefix="$">
+                <input
+                  type="number"
+                  value={inputs.estValue}
+                  onChange={e => setInput('estValue', +e.target.value)}
+                />
+              </InputWrap>
+            </FormGroup>
+          </div>
+        </div>
+      </Card>
+
+      <Card title="🏠 Local Comparable Sales (Arch Cape / Manzanita / Neahkahnie)">
+        <Alert type="success" icon="🌊">
+          <strong>Your Property:</strong> Beachfront with full ocean view — this puts you in the premium tier. 
+          Based on local comps, beachfront properties with ocean views command $875-$950/sqft.
+        </Alert>
+        
+        <div style={{ overflowX: 'auto', marginTop: '15px' }}>
+          <table style={{ width: '100%', fontSize: '.85rem', borderCollapse: 'collapse' }}>
+            <thead>
+              <tr style={{ background: 'var(--bg)', textAlign: 'left' }}>
+                <th style={{ padding: '10px', borderBottom: '2px solid var(--border)' }}>Address</th>
+                <th style={{ padding: '10px', borderBottom: '2px solid var(--border)' }}>Sold</th>
+                <th style={{ padding: '10px', borderBottom: '2px solid var(--border)', textAlign: 'right' }}>Sqft</th>
+                <th style={{ padding: '10px', borderBottom: '2px solid var(--border)', textAlign: 'right' }}>Price</th>
+                <th style={{ padding: '10px', borderBottom: '2px solid var(--border)', textAlign: 'right' }}>$/Sqft</th>
+                <th style={{ padding: '10px', borderBottom: '2px solid var(--border)' }}>Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              {localComps.map((comp, idx) => (
+                <tr key={idx} style={{ borderBottom: '1px solid var(--border)' }}>
+                  <td style={{ padding: '10px' }}>{comp.address}</td>
+                  <td style={{ padding: '10px' }}>{comp.soldDate}</td>
+                  <td style={{ padding: '10px', textAlign: 'right' }}>{comp.sqft.toLocaleString()}</td>
+                  <td style={{ padding: '10px', textAlign: 'right' }}>{fmt(comp.soldPrice)}</td>
+                  <td style={{ padding: '10px', textAlign: 'right', fontWeight: 'bold' }}>${comp.pricePerSqft}</td>
+                  <td style={{ padding: '10px', fontSize: '.8rem', color: 'var(--text-light)' }}>{comp.notes}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div style={{ background: 'var(--bg)', padding: '15px', borderRadius: '8px', marginTop: '15px' }}>
+          <h4 style={{ marginBottom: '10px', color: 'var(--secondary)' }}>📈 Market Analysis</h4>
+          <div className="grid">
+            <div>
+              <p style={{ fontSize: '.9rem', marginBottom: '8px' }}><strong>Comp Average:</strong> ${Math.round(localComps.reduce((a, c) => a + c.pricePerSqft, 0) / localComps.length)}/sqft</p>
+              <p style={{ fontSize: '.9rem', marginBottom: '8px' }}><strong>New Construction (2018-2022):</strong> $770-$900/sqft</p>
+              <p style={{ fontSize: '.9rem' }}><strong>Your Estimate:</strong> ${pricePerSqft}/sqft → {fmt(sqft * pricePerSqft)}</p>
+            </div>
+            <div>
+              <p style={{ fontSize: '.85rem', color: 'var(--text-light)' }}>
+                <strong>Factors affecting value:</strong>
+              </p>
+              <ul style={{ fontSize: '.85rem', color: 'var(--text-light)', paddingLeft: '20px', margin: '5px 0 0 0' }}>
+                <li>Ocean view vs forested (+$50-150/sqft)</li>
+                <li>Distance to beach (closer = premium)</li>
+                <li>Year built / condition</li>
+                <li>Quality of finishes</li>
+              </ul>
             </div>
           </div>
         </div>

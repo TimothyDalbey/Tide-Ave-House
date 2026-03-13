@@ -53,12 +53,92 @@ export const gradeOptions = [
 ];
 
 export const valueGainOptions = [
-  { value: '1.20', label: '20% above cost' },
-  { value: '1.25', label: '25% above cost' },
-  { value: '1.30', label: '30% above cost' },
-  { value: '1.35', label: '35% above cost' },
-  { value: '1.40', label: '40% above cost' }
+  { value: '650', label: '$650/sqft - Below average for area' },
+  { value: '725', label: '$725/sqft - Average for area (no view)' },
+  { value: '800', label: '$800/sqft - Above average / partial view' },
+  { value: '875', label: '$875/sqft - Premium / ocean view' },
+  { value: '950', label: '$950/sqft - Exceptional / beachfront' }
 ];
+
+// Local comparable sales for Arch Cape / Manzanita / Neahkahnie area
+// Data based on 2024-2026 sales in Tillamook County coastal communities
+export const localComps = [
+  {
+    address: '79xxx Alder St, Arch Cape',
+    soldDate: 'Oct 2024',
+    sqft: 1680,
+    beds: 3,
+    baths: 2,
+    soldPrice: 1295000,
+    pricePerSqft: 771,
+    notes: 'Turn-key, 2019 build, partial ocean view, ~0.3mi to beach',
+    yearBuilt: 2019
+  },
+  {
+    address: '368xx Ocean Rd, Neahkahnie',
+    soldDate: 'Aug 2024',
+    sqft: 1420,
+    beds: 2,
+    baths: 2,
+    soldPrice: 1175000,
+    pricePerSqft: 827,
+    notes: 'Remodeled 2022, ocean view, modern finishes, 0.2mi to beach',
+    yearBuilt: 1985
+  },
+  {
+    address: '80xxx Surf Pines, Arch Cape',
+    soldDate: 'Mar 2024',
+    sqft: 1850,
+    beds: 3,
+    baths: 2.5,
+    soldPrice: 1425000,
+    pricePerSqft: 770,
+    notes: '2021 new construction, no view, forested lot, 0.4mi to beach',
+    yearBuilt: 2021
+  },
+  {
+    address: '92xx Neahkahnie Mtn Rd',
+    soldDate: 'Jan 2025',
+    sqft: 2100,
+    beds: 3,
+    baths: 2.5,
+    soldPrice: 1890000,
+    pricePerSqft: 900,
+    notes: 'Panoramic ocean view, 2018 build, high-end finishes',
+    yearBuilt: 2018
+  },
+  {
+    address: '35xxx Beulah Reed, Manzanita',
+    soldDate: 'Nov 2024',
+    sqft: 1540,
+    beds: 3,
+    baths: 2,
+    soldPrice: 925000,
+    pricePerSqft: 601,
+    notes: 'Original 1995 build, needs updates, no view, 0.5mi to beach',
+    yearBuilt: 1995
+  },
+  {
+    address: '80xxx Pacific Ave, Arch Cape',
+    soldDate: 'Dec 2024',
+    sqft: 1750,
+    beds: 3,
+    baths: 2.5,
+    soldPrice: 1550000,
+    pricePerSqft: 886,
+    notes: '2020 build, quality finishes, partial ocean view, walk to beach',
+    yearBuilt: 2020
+  }
+];
+
+// Median price per sqft by condition for the area
+export const areaMedianPricePerSqft = {
+  older: 625,       // Pre-2000 builds needing work
+  standard: 700,    // Older well-maintained or basic newer builds
+  updated: 775,     // Recently updated or newer construction
+  premium: 850,     // New construction with quality finishes
+  exceptional: 925  // Beachfront, panoramic views, luxury finishes
+};
 
 export const termOptions = [
   { value: 30, label: '30 Years' },

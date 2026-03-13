@@ -6,24 +6,29 @@ import { formatCurrency } from '../../utils/format';
 import { statusItems } from '../../constants';
 
 export function Overview() {
-  const { results: buildResults } = useBuild();
+  const { inputs: buildInputs, results: buildResults } = useBuild();
   const { inputs: financeInputs, results: financeResults } = useFinance();
   const { status, toggle } = useStatus();
 
   const lotPrice = financeInputs.lotPrice;
   const lotEquity = financeInputs.lotEquity;
-  const constCost = buildResults.grandTotal > 0 ? buildResults.grandTotal : financeInputs.constCost;
-  // Calculate estimated value dynamically: (lot + construction) * value gain multiplier
-  const valueGainMultiplier = parseFloat(financeInputs.valueGain) || 1.35;
-  const estValue = Math.round((lotPrice + constCost) * valueGainMultiplier);
+  // Calculate estimated value from price per sqft 
+  const sqft = buildResults.sqft || 1600;
+  const pricePerSqft = parseInt(financeInputs.valueGain) || 800;
+  const estValue = financeInputs.estValue || (sqft * pricePerSqft);
   const equity = estValue - financeResults.loanAmt;
+  
+  // Phase 0 costs (pre-build)
+  const phase0Total = buildResults.phase0Total > 0 ? buildResults.phase0Total : (buildInputs.permits + buildInputs.engineering + buildInputs.architect);
+  const totalPhase0WithLot = lotPrice + phase0Total;
 
   return (
     <>
       <Card title="🌊 Project Overview">
         <p style={{ fontSize: '1.1rem', marginBottom: '20px' }}>
           The Tide Ave. House is a planned coastal residence in Tillamook County, Oregon. 
-          This project involves financing and constructing a single-floor home on an already-owned lot, 
+          <strong>Beachfront lot with full ocean view.</strong> This project involves constructing 
+          a single-floor home on an already-owned lot, paid for with cash. 
           utilizing a <strong>conventional construction-to-permanent loan</strong>.
         </p>
         <div className="specs">
@@ -42,7 +47,7 @@ export function Overview() {
       </Card>
 
       <div className="grid">
-        <Card title="✅ Completed Pre-Construction">
+        <Card title="📋 Phase 0: Pre-Build (Complete)">
           <ul className="rlist">
             <li>
               <span className="chk">✓</span>
@@ -73,21 +78,42 @@ export function Overview() {
               </div>
             </li>
             <li>
+              <span className="chk">✓</span>
+              <div>
+                <strong>Architect/Designer</strong><br />
+                <span style={{ color: 'var(--text-light)' }}>{formatCurrency(buildInputs.architect)} — paid</span>
+              </div>
+            </li>
+            <li>
               <span className="chk wip">⏳</span>
               <div>
-                <strong>Structural Engineering & Final Plans</strong><br />
-                <span style={{ color: 'var(--warning)' }}>In progress — plans currently with engineer</span>
+                <strong>Structural Engineering</strong><br />
+                <span style={{ color: 'var(--warning)' }}>In progress — {formatCurrency(buildInputs.engineering)} budgeted</span>
+              </div>
+            </li>
+            <li>
+              <span className="chk">○</span>
+              <div>
+                <strong>Building Permits</strong><br />
+                <span style={{ color: 'var(--text-light)' }}>{formatCurrency(buildInputs.permits)} budgeted</span>
               </div>
             </li>
           </ul>
+          <div style={{ background: 'rgba(241, 196, 15, 0.1)', padding: '12px', borderRadius: '8px', marginTop: '15px' }}>
+            <Row label="Phase 0 (excl. lot)" value={formatCurrency(phase0Total)} />
+            <Row label="Lot Purchase" value={formatCurrency(lotPrice)} />
+            <Row label="Total Phase 0 Investment" value={formatCurrency(totalPhase0WithLot)} total />
+          </div>
         </Card>
 
-        <Card title="📋 Project Summary">
+        <Card title="📊 Project Summary">
           <Results>
-            <Row label="Lot Value" value={formatCurrency(lotPrice)} />
-            <Row label="Current Equity in Lot" value={formatCurrency(lotEquity)} />
-            <Row label="Estimated Construction Cost" value={formatCurrency(constCost)} />
+            <div style={{ background: 'rgba(241, 196, 15, 0.1)', padding: '8px 10px', borderRadius: '6px', marginBottom: '10px' }}>
+              <Row label="Phase 0: Pre-Build + Lot" value={formatCurrency(totalPhase0WithLot)} style={{ fontWeight: 'bold' }} />
+            </div>
+            <Row label="Construction Cost (Phase 1 + 2)" value={formatCurrency(buildResults.financedTotal)} />
             <Row label="Estimated Completed Value" value={formatCurrency(estValue)} />
+            <Row label="Lot Loan After Build" value={formatCurrency(financeResults.newLoanAmount)} />
             <Row label="Projected Equity at Completion" value={formatCurrency(equity)} highlight />
           </Results>
         </Card>

@@ -2,22 +2,50 @@ import { createContext, useContext, useState, useEffect, useCallback, ReactNode 
 import { useBuild } from './BuildContext';
 
 export interface FinanceInputs {
+  // Property basics
   lotPrice: number;
   lotEquity: number;
   lotAppraisal: number;
   constCost: number;
   valueGain: string;
   estValue: number;
-  addCash: number;
+  
+  // Refinance inputs (cash build scenario) - these are calculated dynamically
+  financeClosingCostsRefi: boolean;  // Whether to roll closing costs into refinance loan
+  
+  // Loan terms (for refinance)
   rate: number;
   term: number;
-  downPct: number;
   closePct: number;
+  
+  // Legacy fields (for compatibility)
+  addCash: number;
+  downPct: number;
   pmiRate: number;
   financeClosingCosts: boolean;
 }
 
 export interface FinanceResults {
+  // Refinance results
+  propertyValue: number;      // Completed property value
+  totalInvested: number;      // Lot down payment + construction cash
+  instantEquity: number;      // Value - what you spent
+  maxLoanAmount: number;      // Based on target LTV
+  existingDebtPayoff: number; // Lot loan to pay off
+  cashOutAvailable: number;   // How much cash can be pulled out
+  newLoanAmount: number;      // The refinance loan amount
+  equityAfterRefi: number;    // Equity remaining after refinance
+  ltvAfterRefi: number;       // LTV after refinance
+  closeCost: number;          // Refinance closing costs
+  
+  // Monthly payment
+  monthlyPI: number;
+  monthlyPMI: number;
+  monthlyTax: number;
+  monthlyIns: number;
+  monthlyTotal: number;
+  
+  // Legacy fields (for compatibility)
   lotPayoff: number;
   totAcq: number;
   finNeed: number;
@@ -26,15 +54,7 @@ export interface FinanceResults {
   totDown: number;
   downGap: number;
   loanAmt: number;
-  closeCost: number;
   totCash: number;
-  // Monthly payment
-  monthlyPI: number;
-  monthlyPMI: number;
-  monthlyTax: number;
-  monthlyIns: number;
-  monthlyTotal: number;
-  // Equity
   ltv: number;
   equity: number;
   eqPct: number;
@@ -77,22 +97,50 @@ interface FinanceContextType {
 }
 
 const defaultInputs: FinanceInputs = {
+  // Property basics
   lotPrice: 402000,
   lotEquity: 90000,
   lotAppraisal: 402000,
   constCost: 575000,
   valueGain: '1.35',
-  estValue: Math.round((402000 + 575000) * 1.35), // Auto-calculated: (lotAppraisal + construction) × gain
-  addCash: 0,
-  rate: 6.0,
+  estValue: Math.round((402000 + 575000) * 1.35),
+  
+  // Refinance inputs
+  financeClosingCostsRefi: true,  // Roll closing costs into refinance loan
+  
+  // Loan terms
+  rate: 6.5,
   term: 30,
+  closePct: 2,
+  
+  // Legacy fields
+  addCash: 0,
   downPct: 20,
-  closePct: 3,
   pmiRate: 0.5,
   financeClosingCosts: true,
 };
 
 const defaultResults: FinanceResults = {
+  // Refinance results
+  propertyValue: 0,
+  totalInvested: 0,
+  instantEquity: 0,
+  maxLoanAmount: 0,
+  existingDebtPayoff: 0,
+  cashOutAvailable: 0,
+  newLoanAmount: 0,
+  equityAfterRefi: 0,
+  ltvAfterRefi: 0,
+  closeCost: 0,
+  
+  // Monthly payment
+  monthlyPI: 0,
+  monthlyPMI: 0,
+  monthlyTax: 0,
+  monthlyIns: 0,
+  monthlyTotal: 0,
+  
+  // Legacy fields
   lotPayoff: 0,
   totAcq: 0,
   finNeed: 0,
@@ -101,13 +149,7 @@ const defaultResults: FinanceResults = {
   totDown: 0,
   downGap: 0,
   loanAmt: 0,
-  closeCost: 0,
   totCash: 0,
-  monthlyPI: 0,
-  monthlyPMI: 0,
-  monthlyTax: 0,
-  monthlyIns: 0,
-  monthlyTotal: 0,
   ltv: 0,
   equity: 0,
   eqPct: 0,
@@ -164,81 +206,103 @@ export function FinanceProvider({ children }: { children: ReactNode }) {
     setInputs(prev => ({ ...prev, estValue: autoVal, constCost }));
   }, [inputs, buildResults.financedTotal]);
 
-  // Sync construction cost from build calculator AND auto-calculate estValue
+  // Sync construction cost from build calculator AND auto-calculate values
   useEffect(() => {
     if (buildResults.financedTotal > 0) {
-      // Use financedTotal (excludes pre-loan costs like permits)
       const constCost = Math.round(buildResults.financedTotal);
       const autoVal = Math.round((inputs.lotAppraisal + constCost) * parseFloat(inputs.valueGain));
       setInputs(prev => ({ ...prev, constCost, estValue: autoVal }));
     }
   }, [buildResults.financedTotal, inputs.lotAppraisal, inputs.valueGain]);
 
-  // Recalculate finance results
+  // Recalculate finance results (REFINANCE scenario)
   useEffect(() => {
     const {
-      lotPrice, lotEquity, lotAppraisal, constCost, estValue, addCash,
-      rate, term, downPct, closePct, pmiRate, financeClosingCosts
+      lotPrice, lotEquity, lotAppraisal, constCost, estValue,
+      financeClosingCostsRefi, rate, term, closePct, pmiRate
     } = inputs;
 
-    // Lot equity increases if appraisal > purchase price
-    const lotEquityWithAppraisal = lotEquity + Math.max(0, lotAppraisal - lotPrice);
-    
-    const lotPayoff = lotPrice - lotEquity;  // Still owe original mortgage
-    const totAcq = lotAppraisal + constCost;  // Use appraised value for total project
-    const finNeed = constCost + lotPayoff;
-    const reqDown = totAcq * (downPct / 100);
-    const totDown = lotEquityWithAppraisal + addCash;  // Use enhanced equity
-    const downGap = Math.max(0, reqDown - totDown);
-    
-    let loanAmt = totAcq - totDown;
-    let closeCost = loanAmt * (closePct / 100);
-    
-    // If financing closing costs, add them to loan
-    if (financeClosingCosts) {
-      loanAmt = loanAmt + closeCost;
-    }
-    
-    const totCash = financeClosingCosts 
-      ? downGap + addCash 
-      : downGap + closeCost + addCash;
+    // === CALCULATED VALUES ===
+    // Existing lot loan = lot price minus down payment made
+    const existingLotLoan = lotPrice - lotEquity;
+    // Total cash invested = lot down payment + construction costs
+    const totalCashInvested = lotEquity + constCost;
 
-    // LTV based on base loan (before closing costs) vs estValue
-    const baseLoan = totAcq - totDown;
-    const ltv = (baseLoan / estValue) * 100;
-    const needsPMI = ltv > 80;
-
-    // Monthly calculations
+    // === REFINANCE CALCULATIONS ===
+    const propertyValue = estValue;
+    const totalInvested = totalCashInvested;
+    // Instant equity = property value - total cost basis (cash + debt)
+    const instantEquity = propertyValue - (totalCashInvested + existingLotLoan);
+    
+    // Refinance: simply paying off the lot loan (no additional borrowing)
+    const existingDebtPayoff = existingLotLoan;
+    const closeCost = Math.round(existingDebtPayoff * (closePct / 100));
+    
+    // New loan amount = lot loan payoff + closing costs (if financed)
+    const newLoanAmount = financeClosingCostsRefi 
+      ? existingDebtPayoff + closeCost 
+      : existingDebtPayoff;
+    
+    // Max loan would be at 80% LTV (for reference only)
+    const maxLoanAmount = Math.round(propertyValue * 0.80);
+    // Cash-out available = what they COULD borrow minus what they ARE borrowing
+    const cashOutAvailable = Math.max(0, maxLoanAmount - newLoanAmount);
+    
+    const equityAfterRefi = propertyValue - newLoanAmount;
+    const ltvAfterRefi = (newLoanAmount / propertyValue) * 100;
+    
+    // Monthly calculations for refinance
     const mr = rate / 100 / 12;
     const np = term * 12;
     let monthlyPI = 0;
-    if (mr > 0) {
-      monthlyPI = loanAmt * (mr * Math.pow(1 + mr, np)) / (Math.pow(1 + mr, np) - 1);
+    if (mr > 0 && newLoanAmount > 0) {
+      monthlyPI = newLoanAmount * (mr * Math.pow(1 + mr, np)) / (Math.pow(1 + mr, np) - 1);
     }
-    const monthlyPMI = needsPMI ? (loanAmt * (pmiRate / 100)) / 12 : 0;
-    const monthlyTax = (estValue * 0.01) / 12;
-    const monthlyIns = 300;
+    const needsPMI = ltvAfterRefi > 80;
+    const monthlyPMI = needsPMI ? (newLoanAmount * (pmiRate / 100)) / 12 : 0;
+    const monthlyTax = (propertyValue * 0.01) / 12;
+    const monthlyIns = 350; // Higher for coastal property
     const monthlyTotal = monthlyPI + monthlyPMI + monthlyTax + monthlyIns;
 
-    const equity = estValue - loanAmt;
-    const eqPct = (equity / estValue) * 100;
+    // Legacy fields for backward compatibility
+    const lotEquityWithAppraisal = lotEquity + Math.max(0, lotAppraisal - lotPrice);
+    const lotPayoff = existingLotLoan;
+    const totAcq = lotAppraisal + constCost;
+    const loanAmt = newLoanAmount;
+    const ltv = ltvAfterRefi;
+    const equity = equityAfterRefi;
+    const eqPct = (equity / propertyValue) * 100;
 
     setResults({
-      lotPayoff,
-      totAcq,
-      finNeed,
-      reqDown,
-      lotEquityWithAppraisal,
-      totDown,
-      downGap,
-      loanAmt,
+      // Refinance results
+      propertyValue,
+      totalInvested,
+      instantEquity,
+      maxLoanAmount,
+      existingDebtPayoff,
+      cashOutAvailable,
+      newLoanAmount,
+      equityAfterRefi,
+      ltvAfterRefi,
       closeCost,
-      totCash,
+      
+      // Monthly payment
       monthlyPI,
       monthlyPMI,
       monthlyTax,
       monthlyIns,
       monthlyTotal,
+      
+      // Legacy fields
+      lotPayoff,
+      totAcq,
+      finNeed: constCost + existingLotLoan,
+      reqDown: 0,
+      lotEquityWithAppraisal,
+      totDown: totalCashInvested,
+      downGap: 0,
+      loanAmt,
+      totCash: totalCashInvested,
       ltv,
       equity,
       eqPct,

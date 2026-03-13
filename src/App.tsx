@@ -1,14 +1,13 @@
 import { useState } from 'react';
-import { Overview, BuildCosts, Calculator, Lenders, Requirements, Process, StatusTracker, CostSharing, STRAnalysis } from './components/tabs';
+import { Overview, BuildCosts, Calculator, Requirements, Process, StatusTracker, CostSharing, STRAnalysis } from './components/tabs';
 
-type TabId = 'overview' | 'buildcost' | 'calculator' | 'str' | 'lenders' | 'requirements' | 'process' | 'status' | 'costs';
+type TabId = 'overview' | 'buildcost' | 'calculator' | 'str' | 'requirements' | 'process' | 'status' | 'costs';
 
 const tabs: { id: TabId; label: string }[] = [
   { id: 'overview', label: 'Overview' },
   { id: 'buildcost', label: 'Build Costs' },
   { id: 'calculator', label: 'Finance Calculator' },
   { id: 'str', label: 'STR Analysis' },
-  { id: 'lenders', label: 'Lenders' },
   { id: 'requirements', label: 'Requirements' },
   { id: 'process', label: 'Building Process' },
   { id: 'status', label: 'Status Tracker' },
@@ -30,7 +29,6 @@ function App() {
       case 'buildcost': return <BuildCosts />;
       case 'calculator': return <Calculator />;
       case 'str': return <STRAnalysis />;
-      case 'lenders': return <Lenders />;
       case 'requirements': return <Requirements />;
       case 'process': return <Process />;
       case 'status': return <StatusTracker />;

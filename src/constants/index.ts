@@ -67,17 +67,6 @@ export const termOptions = [
   { value: 15, label: '15 Years' }
 ];
 
-export const lenders = [
-  { type: 'Regional Bank', name: 'Columbia Bank', description: 'Pacific Northwest regional bank with strong construction loan program in Oregon.', url: 'https://www.columbiabank.com/' },
-  { type: 'National Bank', name: 'US Bank', description: 'Major national bank with Oregon branches and construction lending.', url: 'https://www.usbank.com/home-loans/construction-loans.html' },
-  { type: 'National Bank', name: 'Wells Fargo', description: 'Large national lender with construction-to-permanent options.', url: 'https://www.wellsfargo.com/mortgage/construction-loan/' },
-  { type: 'Credit Union', name: 'OnPoint Community CU', description: 'Portland-based credit union offering home construction financing.', url: 'https://www.onpointcu.com/' },
-  { type: 'National Lender', name: 'Guild Mortgage', description: 'Strong presence in Pacific Northwest, offers construction loans.', url: 'https://www.guildmortgage.com/' },
-  { type: 'Credit Union', name: 'Oregon State CU', description: 'Oregon-based credit union with construction loan options.', url: 'https://www.oregonstatecu.com/' },
-  { type: 'Regional Bank', name: 'Banner Bank', description: 'Pacific Northwest regional bank with construction lending.', url: 'https://www.bannerbank.com/' },
-  { type: 'National Lender', name: 'Rocket Mortgage', description: 'Major online lender with construction loan products.', url: 'https://www.rocketmortgage.com/' }
-];
-
 export const statusItems = {
   preConstruction: [
     { id: 'lot', title: 'Lot Purchased', note: '$402,000 with ~$90,000 down', defaultStatus: 'done' },

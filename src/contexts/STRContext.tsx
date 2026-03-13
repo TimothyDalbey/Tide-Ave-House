@@ -133,8 +133,8 @@ const defaultInputs: STRInputs = {
   lodgingTaxRate: 0.095,
   utilitiesMonthly: 400,
   suppliesMonthly: 150,
-  maintenanceReserve: 0.05,
-  insuranceAnnual: 2500,
+  maintenanceReserve: 0.08,
+  insuranceAnnual: 4000,
   personalUseNights: 14,
   revenueGrowthRate: 0.03,
   appreciationRate: 0.04,
@@ -214,11 +214,12 @@ export function STRProvider({ children }: { children: ReactNode }) {
             personalUseNights, revenueGrowthRate, appreciationRate,
             marginalTaxRate, landValuePercent } = inputs;
 
-    // Property values from finance context
-    const propertyValue = financeInputs.estValue || 1000000;
-    const initialInvestment = financeResults.totDown || 200000;
+    // Property values from finance context (refinance scenario)
+    const propertyValue = financeResults.propertyValue || financeInputs.estValue || 1000000;
+    // Calculate total cash invested: lot down payment + construction costs
+    const initialInvestment = financeInputs.lotEquity + financeInputs.constCost;
     const annualMortgage = financeResults.monthlyPI * 12;
-    const loanBalance = financeResults.loanAmt || 800000;
+    const loanBalance = financeResults.newLoanAmount || (financeInputs.lotPrice - financeInputs.lotEquity);
     const rate = financeInputs.rate / 100;
     
     // Revenue calculation by season

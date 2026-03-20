@@ -150,7 +150,7 @@ export const termOptions = [
 export const statusItems = {
   preConstruction: [
     { id: 'lot', title: 'Lot Purchased', note: '$402,000 with ~$90,000 down', defaultStatus: 'done' },
-    { id: 'geo', title: 'Geotechnical Study', note: 'Helical piles recommended for west side', defaultStatus: 'done' },
+    { id: 'geo', title: 'Geotechnical Study', note: 'Deep pile foundation recommended', defaultStatus: 'done' },
     { id: 'sep', title: 'Septic Permits', note: 'Permits obtained', defaultStatus: 'done' },
     { id: 'util', title: 'Utilities Arranged', note: 'Electrical and water handled', defaultStatus: 'done' },
     { id: 'rough', title: 'Architect Rough Plans', note: 'Initial design complete', defaultStatus: 'done' },
@@ -161,9 +161,9 @@ export const statusItems = {
   ],
   construction: [
     // PHASE 1: Shell / Dry-In
-    { id: 'site', title: 'Site Preparation', note: 'Phase 1: Clearing, grading', defaultStatus: '' },
+    { id: 'site', title: 'Site Preparation', note: 'Phase 1: Minimal grading (no excavation needed)', defaultStatus: '' },
     { id: 'sepinst', title: 'Septic Installation', note: 'Phase 1: Alternative septic system', defaultStatus: '' },
-    { id: 'found', title: 'Foundation', note: 'Phase 1: Helical piles + crawl space', defaultStatus: '' },
+    { id: 'found', title: 'Foundation', note: 'Phase 1: Pier & beam (6 deep piles, 56-60 ft)', defaultStatus: '' },
     { id: 'utilinst', title: 'Utilities Connection', note: 'Phase 1: Electric, water, gas', defaultStatus: '' },
     { id: 'frame', title: 'Framing', note: 'Phase 1: Structure and sheathing', defaultStatus: '' },
     { id: 'roof', title: 'Roofing', note: 'Phase 1: Metal roof installation', defaultStatus: '' },

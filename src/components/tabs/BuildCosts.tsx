@@ -124,19 +124,9 @@ export function BuildCosts() {
           </Alert>
         )}
 
-        <Results title="🔨 Site Work & Foundation">
-          <CostRowWithExplanation label="Site Prep (grading already done)" value={inputs.sitePrep} field="sitePrep" setInput={setInput} explanation={costExplanations.sitePrep} show={showExplanations} />
-          <CostRowWithExplanation label="Tree Removal (large tree)" value={inputs.tree} field="tree" setInput={setInput} explanation={costExplanations.tree} show={showExplanations} />
-          <CostRowWithExplanation label="Excavation (foundation/misc)" value={inputs.excavation} field="excavation" setInput={setInput} explanation={costExplanations.excavation} show={showExplanations} />
-          <CostRowWithExplanation label="Retaining Wall (poured concrete, part of foundation)" value={inputs.retaining} field="retaining" setInput={setInput} explanation={costExplanations.retaining} show={showExplanations} />
-          <div className="row" style={{ background: 'rgba(39,174,96,.05)' }}>
-            <span className="lbl" style={{ paddingLeft: '20px' }}>↳ Neighbor Contribution</span>
-            <div>
-              <span className="val" style={{ color: 'var(--success)' }}>-{fmt(inputs.neighborShare)}</span>
-              <input type="number" value={inputs.neighborShare} onChange={e => setInput('neighborShare', +e.target.value)} style={{ width: '100px', marginLeft: '10px', padding: '4px 8px' }} />
-            </div>
-          </div>
-          <CostRowWithExplanation label="Foundation (crawl space w/ helical piles west side)" value={inputs.foundation} field="foundation" setInput={setInput} explanation={costExplanations.foundation} show={showExplanations} />
+        <Results title="🔨 Site Work & Pier and Beam Foundation">
+          <CostRowWithExplanation label="Site Prep (minimal grading/access)" value={inputs.sitePrep} field="sitePrep" setInput={setInput} explanation={costExplanations.sitePrep} show={showExplanations} />
+          <CostRowWithExplanation label="Deep Piles (6 × 56-60 ft) + Mobilization" value={inputs.piles} field="piles" setInput={setInput} explanation={costExplanations.piles} show={showExplanations} />
           <div className="row" style={{ background: 'rgba(46, 204, 113, 0.1)', borderLeft: '3px solid var(--success)' }}>
             <span className="lbl">✓ Septic System <span style={{ fontSize: '.8rem', color: 'var(--success)', fontWeight: 'normal' }}>(bid received)</span></span>
             <div>
@@ -417,9 +407,11 @@ export function BuildCosts() {
             </div>
             <Row label="Soft Costs (insurance)" value={fmt(results.catSoft)} />
             <Row label="Location Factor (Coastal)" value={`${results.locAdj >= 0 ? '+' : ''}${fmt(results.locAdj)}`} />
-            <Row label="Construction Cost (Phase 1 + 2 + Soft)" value={fmt(results.financedTotal)} total />
-            <Row label="Total Project Cost (Phase 0 + 1 + 2)" value={fmt(results.grandTotal)} highlight />
-            <Row label="Cost Per Square Foot" value={`${fmt(results.costPerSf)}/sf`} style={{ marginTop: '10px', color: 'var(--text-light)' }} />
+            <Row label="Construction Cost (Phase 1 + 2 + Soft)" value={fmt(results.financedTotal)} style={{ fontWeight: 'bold', marginTop: '10px' }} />
+            <Row label="Total Project Cost (Phase 0 + 1 + 2)" value={fmt(results.grandTotal)} total />
+            <div style={{ textAlign: 'right', marginTop: '10px', color: 'var(--text-light)', fontSize: '.9rem' }}>
+              Cost Per Square Foot: {fmt(results.costPerSf)}/sf
+            </div>
           </Results>
         </div>
         <Alert type="success" icon="💰">

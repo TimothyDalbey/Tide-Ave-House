@@ -4,277 +4,119 @@
 
 export const costExplanations: Record<string, { estimate: string; low: string; high: string; notes: string }> = {
   // ═══════════════════════════════════════════════════════════════════════════════════════
-  // SITE WORK & FOUNDATION
+  // SITE WORK & PIER AND BEAM FOUNDATION
   // ═══════════════════════════════════════════════════════════════════════════════════════
   
   sitePrep: {
     estimate: '$2,500',
     low: '$1,500',
-    high: '$5,000',
-    notes: `**CALCULATION:** Minimal prep since grading is substantially complete.
+    high: '$4,000',
+    notes: `**CALCULATION:** Minimal prep since site is already graded.
 
 **COST BREAKDOWN:**
-• Final grading: 1,600 SF building pad × $0.75/SF = $1,200 [38]
+• Final grading: 1,600 SF building pad × $0.50/SF = $800 [38]
 • Compaction (95% modified proctor): 1,600 SF × $0.40/SF = $640
 • Erosion control (silt fence, straw wattles): $300-$500
 • Construction entrance (gravel pad): $200-$400
+• Misc site access/cleanup: $300-$500
 
 **EQUIPMENT COSTS:**
 • Skid steer mobilization: $300-$500 (15 miles from Tillamook) [39]
-• Operator: 4-6 hours × $85/hr = $340-$510
+• Operator: 3-4 hours × $85/hr = $255-$340
 • Fuel allowance: $50-$100
 
 **WHY LOWER THAN TYPICAL:**
-National average for site prep is $5,000-$20,000 [1][38], but our site is ALREADY GRADED. Previous owner/seller completed major earthwork. We only need final prep for foundation placement.
+National average for site prep is $5,000-$20,000 [1][38], but:
+1. Site is ALREADY GRADED (previous owner completed major earthwork)
+2. Pier and beam foundation eliminates excavation needs
+3. No retaining wall required
+4. No tree removal required
+
+Deep pile foundation means NO mass excavation, NO trenching for footings, and NO crawl space digging.
 
 **GEOGRAPHIC FACTORS:**
 • Good site access eliminates difficult-access premiums
-• Tillamook contractor availability: moderate (not as remote as some coastal sites)
-• Coastal Oregon premium typically +15% [29] - partially offset by pre-graded condition
+• Tillamook contractor availability: moderate
+• Pre-graded condition offsets coastal premium [29]
 
 **RISK FACTORS:**
 • Unknown buried debris: +$500-$1,500 if encountered
-• Drainage issues discovered: +$1,000-$2,000`
+• Additional access grading: +$500-$1,000`
   },
   
-  tree: {
-    estimate: '$3,500',
-    low: '$2,000',
-    high: '$5,000',
-    notes: `**CALCULATION:** One large tree removal required.
+  piles: {
+    estimate: '$69,000',
+    low: '$58,000',
+    high: '$86,000',
+    notes: `**CALCULATION:** Pier and beam foundation using 6 deep-driven piles + mobilization.
 
-**TREE ASSESSMENT:**
-• Species: Likely Sitka spruce or Western red cedar (common coastal Oregon)
-• Estimated diameter: 24-36" DBH (diameter at breast height)
-• Height: Estimated 60-80 feet
-• Location: Near building envelope - requires careful felling
+**FOUNDATION SYSTEM CHANGE:**
+Per updated geotechnical review, switching from hybrid helical pile + crawl space foundation to full pier and beam using deep-driven piles. This eliminates the need for excavation, retaining walls, and tree removal.
 
-**COST BREAKDOWN:** [37]
-• Large tree removal (24"+ diameter): $1,500-$3,500
-  - Base rate for 24-36" tree: $1,200-$2,000
-  - Height premium (60+ ft): +$300-$800
-  - Difficulty factor (near structure): +$200-$500
-• Stump grinding (24-36" stump): $300-$500
-  - Rate: $3-$5 per inch of diameter
-  - 30" average × $4 = $120 grinding + setup fee
-• Debris removal/hauling: $200-$400
-  - Chips can stay on-site (reduces cost)
-  - Logs: may have salvage value or removal cost
+**═══ DEEP PILE SPECIFICATIONS ═══**
 
-**LABOR:**
-• Arborist crew (3 workers): 4-6 hours
-• Hourly rate: $150-$250/hr for crew with equipment [8]
-• Total labor: $600-$1,500
+**Why Deep Piles (56-60 ft):**
+Coastal Oregon sites often require reaching competent bearing stratum (dense sand, gravel, or bedrock) below layers of:
+• Soft organic soils
+• Loose sandy fill
+• Compressible coastal deposits
 
-**EQUIPMENT:**
-• Bucket truck or climbing gear
-• Chainsaw and rigging equipment
-• Chipper: $200-$400/day rental (if not crew-owned)
-• Stump grinder: $150-$300/day
+At 56-60 ft depth, piles reach stable load-bearing material with adequate skin friction and end bearing capacity.
 
-**GEOGRAPHIC FACTORS:**
-• Coastal access adds 20-30% to tree work [37][29]
-• Limited arborist availability in Tillamook County
-• Disposal: nearest green waste facility 15+ miles
+**Pile Details:**
+• Quantity: 6 piles
+• Depth: 56-60 feet each
+• Type: Driven steel pipe piles or drilled concrete piles
+• Placement: Strategic locations per structural engineer
 
-**PERMITS:**
-• Tree removal typically exempt under Oregon forest practices
-• Verify no county overlay zone restrictions`
-  },
-  
-  excavation: {
-    estimate: '$5,000',
-    low: '$2,000',
-    high: '$8,000',
-    notes: `**CALCULATION:** Minimal excavation due to hybrid foundation design.
+**═══ COST BREAKDOWN ═══**
 
-**SCOPE DRAMATICALLY REDUCED BY HELICAL PILES:**
-The west side of the foundation uses helical piles which require ZERO excavation [16]. This eliminates roughly 50% of typical foundation excavation costs.
+**Piles ($54,000):**
+• Industry Cost Data: [6][16]
+  - RSMeans 2024: Driven steel piles 12" dia, 60 ft = $7,500-$11,000/pile installed
+  - Homewyse: Deep foundation piles = $8,000-$15,000/pile (installed)
+  - Linear foot pricing: $150-$200/LF installed
+• Our Calculation: 60 ft depth × $150/LF = $9,000/pile × 6 piles = **$54,000**
 
-**REMAINING EXCAVATION WORK:**
+**What's Included in $9K/Pile:**
+• Steel pile material (12-14" diameter steel pipe or H-pile)
+• Pile driving/installation labor
+• Pile caps and connection hardware
+• Structural connections to grade beams
+• Equipment operation
+• Testing/verification
 
-1. **Crawl Space Prep (East Side Only):** [39]
-   • Area: ~800 SF (half of 1,600 SF footprint)
-   • Depth: 12-18" below grade for crawl space
-   • Volume: 800 SF × 1.25 ft avg = 37 cubic yards
-   • Cost: 37 CY × $80/CY = $2,960
+**Mobilization Fee ($15,000):**
+One-time fee to transport and set up pile driving equipment:
+• Equipment transport (Portland → Tillamook, 90 mi): $4,000-$6,000
+• Setup and positioning: $2,000-$3,000
+• Demobilization (out): $3,000-$4,000
+• Permits and logistics: $1,000-$2,000
+• Contingency: $2,000-$3,000
 
-2. **Utility Trenching:** (verify not in utility company bid)
-   • Water line: ~50 LF × $10/LF = $500
-   • Electrical conduit path: ~75 LF × $8/LF = $600
-   • Septic line to house: ~30 LF × $10/LF = $300
-   • **Subtotal:** $1,400 (IF not included in utility bids)
+**TOTAL: $54,000 + $15,000 = $69,000**
 
-3. **Contingency for Unknowns:**
-   • Rock/hard material: +$50-$100/CY surcharge
-   • High water table: +$500-$1,500 for dewatering
-   • Budget: $1,000-$2,000
+**═══ ADVANTAGES ═══**
 
-**EQUIPMENT REQUIRED:**
-• Mini excavator (5-10 ton): $350-$500/day
-• Operator: $65-$95/hr [8][28]
-• Dump truck (if spoils removed): $75-$100/load
-• Estimated 3-4 loads × $85 = $255-$340
+✓ **Eliminates excavation** — No digging required, piles driven from grade
+✓ **No retaining wall needed** — Piles accommodate grade change
+✓ **No tree removal** — Access path preserved
+✓ **Works in any soil** — Piles reach competent bearing regardless of surface conditions
+✓ **Immediate load capacity** — No concrete cure time (if steel piles)
+✓ **Minimal site disturbance** — Small equipment footprint
+✓ **Year-round installation** — Not weather-dependent
+✓ **100+ year design life** — Deep steel piles are extremely durable
 
-**DISPOSAL:**
-• Clean fill can often be spread on-site (cost: $0)
-• Off-site disposal: $30-$50/CY at nearest facility
-• Potential on-site use for grading/landscaping
+**═══ GEOGRAPHIC FACTORS ═══**
 
-**WHY THIS ESTIMATE:**
-• National average excavation: $10,000-$25,000 for full basement [39]
-• Our scope: Crawl space on HALF the house only
-• Helical piles eliminate west side excavation
-• Pre-graded site reduces depth needed
-
-**VERIFICATION NEEDED:**
-✓ Confirm septic bid includes its own excavation ($25K bid)
-✓ Confirm utility bids include trenching ($20.4K bids)
-✓ Get foundation contractor scope in writing`
-  },
-  
-  retaining: {
-    estimate: '$10,000',
-    low: '$7,000',
-    high: '$14,000',
-    notes: `**CALCULATION:** Poured concrete retaining wall integrated with foundation.
-
-**WALL SPECIFICATIONS:** [40]
-• Length: ~40 linear feet
-• Height: 4-6 feet (varies with grade)
-• Thickness: 8-12" (per structural engineer)
-• Footing: 16-24" wide × 8-12" deep
-
-**MATERIAL COSTS:**
-
-1. **Concrete:** [40]
-   • Wall volume: 40 LF × 5 ft H × 0.83 ft thick = 166 CF = 6.1 CY
-   • Footing volume: 40 LF × 1.5 ft W × 0.83 ft D = 50 CF = 1.9 CY
-   • Total concrete: ~8 cubic yards
-   • Cost: 8 CY × $140/CY delivered = $1,120
-   • Pump truck: $400-$600 (if needed for access)
-
-2. **Reinforcement:** [40]
-   • Rebar (#4 and #5): ~400 lbs × $0.85/lb = $340
-   • Rebar labor (tie and place): $200-$300
-
-3. **Formwork:**
-   • Form rental: 80 SF × $2/SF = $160 (reusable forms)
-   • Form labor: 10 hours × $55/hr = $550
-   • Form release agent, stakes, bracing: $150
-
-4. **Drainage:**
-   • Perforated drain pipe: 40 LF × $3/LF = $120
-   • Drain rock: 1 CY × $50/CY = $50
-   • Filter fabric: $50
-   • Outlet to daylight: $200-$300
-
-**LABOR COSTS:** [8][28]
-• Foundation crew: 3 workers × 2 days = 48 hours
-• Rate: $55-$75/hr (concrete work premium)
-• Labor total: $2,640-$3,600
-
-**TOTAL BREAKDOWN:**
-• Concrete: $1,120
-• Pump: $500
-• Rebar (materials + labor): $590
-• Formwork: $860
-• Drainage: $420
-• Labor: $3,120
-• Contingency (10%): $661
-• **SUBTOTAL: $7,271**
-
-**INTEGRATION SAVINGS:**
-Doing retaining wall WITH foundation pour saves 15-25%:
-• Shared mobilization: -$500
-• Shared concrete delivery: -$300
-• Efficient formwork transition: -$300
-• **Savings: ~$1,100**
-
-**ESTIMATED TOTAL: ~$8,500-$10,000**
+• Coastal Oregon: Deep pile contractors available (North Coast area)
+• Equipment transport: Factored into mobilization portion
+• Soil conditions: Typical for Tillamook County coastal sites
 
 **RANGE EXPLANATION:**
-• Low ($7K): Easy access, good conditions
-• Mid ($10K): Standard conditions ✓
-• High ($14K): Complex engineering, difficult soil`
-  },
-
-  foundation: {
-    estimate: '$40,000',
-    low: '$30,000',
-    high: '$50,000',
-    notes: `**CALCULATION:** Hybrid foundation system per geotechnical report.
-
-This is a UNIQUE foundation combining two systems optimized for our site's soil conditions [6][16].
-
-**═══ WEST SIDE: HELICAL PILES ═══**
-
-**Why Helical Piles:** Per geotechnical report, west side has sandy/shifting coastal soil unsuitable for conventional footings. Helical piles screw into stable soil below.
-
-**Pile Calculation:** [16]
-• West wall width: 65 feet
-• Pile spacing: 8 feet on center (per engineer)
-• Number of piles: 65 ÷ 8 = 9 piles (minimum)
-• May need 10-12 with corners and load points
-
-**Cost Per Pile:** [6][16]
-• Steel shaft (2.875" dia × 10-25 ft): $400-$700
-• Helical plates (8-14" diameter): $150-$300
-• Pile cap/bracket: $100-$200
-• Installation (hydraulic torque): $800-$1,500
-• **Total per pile: $1,800-$2,800**
-• Using $2,500 average × 9 piles = **$22,500**
-
-**Grade Beam (connects piles):**
-• Length: 65 LF
-• Size: 12" × 18" typical
-• Concrete: 65 × 1 × 1.5 ÷ 27 = 3.6 CY × $150 = $540
-• Rebar: 200 lbs × $0.90 = $180
-• Forms and labor: $1,200-$1,500
-• **Subtotal: $1,920-$2,220**
-
-**West Side Total: $24,420-$24,720**
-
-**═══ EAST SIDE: CONVENTIONAL CRAWL SPACE ═══**
-
-**Crawl Space Specs:** [6]
-• Area: ~800 SF (eastern half of footprint)
-• Perimeter: ~120 LF of stem wall
-• Height: 18-24" minimum clearance
-
-**Cost Breakdown:**
-• Continuous footing: 120 LF × $28/LF = $3,360
-• Stem walls: 120 LF × $38/LF = $4,560
-• Piers/posts (interior support): 6 × $350 = $2,100
-• Vapor barrier (6 mil poly): 800 SF × $0.20 = $160
-• Venting (per code): 4 vents × $100 = $400
-• Access hatch: $250
-• **East Side Total: $10,830**
-
-**═══ COMBINED FOUNDATION TOTAL ═══**
-• West (helical): $24,500
-• East (crawl): $10,830
-• Engineering oversight: $2,000
-• Contingency (10%): $3,733
-• **TOTAL: $41,063 ≈ $40,000**
-
-**ADVANTAGES OF HELICAL PILES:**
-✓ No excavation required (saves $5,000-$10,000)
-✓ Immediate load capacity (no 7-day concrete cure)
-✓ Works in sandy/wet coastal soil
-✓ Minimal site disturbance
-✓ Year-round installation (not weather dependent)
-✓ 75+ year design life [16]
-
-**GEOGRAPHIC FACTORS:**
-• Coastal Oregon specialty: limited helical contractors
-• Nearest suppliers: Portland area (90 miles) adds shipping
-• Soil testing/verification during install: required
-
-**RANGE EXPLANATION:**
-• Low ($30K): Fewer piles, shallow depth, competitive bids
-• Mid ($40K): Expected scope per calculations
-• High ($55K): More piles, deeper installation, complex soil`
+• Low ($58K): Competitive bidding, $8K/pile + $10K mob
+• Mid ($69K): Expected cost at $9K/pile + $15K mob ✓
+• High ($86K): Premium contractor, $11K/pile + $20K mob`
   },
 
   septic: {

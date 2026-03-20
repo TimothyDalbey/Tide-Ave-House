@@ -31,34 +31,28 @@ export const houseDescription = {
 
   // Foundation System (per geotechnical report)
   foundation: {
-    type: 'Hybrid system',
-    westSide: {
-      method: 'Helical piles',
-      reason: 'Per geotechnical report - coastal sandy/shifting soil conditions',
+    type: 'Pier and beam with deep piles',
+    piles: {
+      method: 'Deep-driven piles',
+      reason: 'Per geotechnical report - requires reaching competent bearing stratum below coastal soils',
       specs: {
-        wallWidth: 65, // feet
-        pileSpacing: 8, // feet
-        estimatedPiles: 9,
-        shaftDiameter: '2.875" - 3.5"',
-        helicalPlates: '8" - 14" diameter',
-        installDepth: '10-25 ft',
-        installMethod: 'Hydraulic torque installation',
+        quantity: 6,
+        depth: '56-60 ft',
+        type: 'Driven steel pipe or drilled concrete',
+        costPerPile: 9000,
+        mobilizationFee: 15000,
+        installMethod: 'Pile driving rig',
       },
-      benefits: ['No excavation required', 'Immediate load capacity', 'No cure time', 'Ideal for coastal soil'],
-    },
-    eastSide: {
-      method: 'Conventional crawl space',
-      reason: 'More stable soil conditions on uphill side',
-      specs: {
-        estimatedArea: 800, // SF
-        height: '18-24 inches minimum',
-        ventilation: 'Per IRC requirements',
-      },
-    },
-    retainingWall: {
-      type: 'Poured concrete',
-      integration: 'Combined with foundation pour for cost savings',
-      costSharing: 'Potential split with neighbor',
+      benefits: [
+        'Reaches stable bearing stratum at depth',
+        'No excavation required',
+        'No retaining wall needed',
+        'No tree removal necessary',
+        'Immediate load capacity',
+        'Minimal site disturbance',
+        'Works in any soil conditions',
+        '100+ year design life',
+      ],
     },
   },
 
@@ -232,12 +226,15 @@ export const houseDescription = {
       access: 'Good site access (reduces costs)',
     },
     required: {
-      sitePrep: 'Final grading and compaction only',
-      treeRemoval: 'One large tree',
-      excavation: 'Minimal - helical piles require none, crawl space prep only',
+      sitePrep: 'Minimal grading/access only (pier & beam eliminates excavation)',
       driveway: 'Small gravel parking pad (~400 SF, no turnaround)',
       landscaping: 'Owner DIY - native coastal plants, no lawn',
       deck: 'Single composite or cedar deck (9\' x 30\' = 270 SF) on back',
+    },
+    eliminated: {
+      treeRemoval: 'Not needed with pier & beam foundation',
+      excavation: 'Not needed - piles driven from grade',
+      retainingWall: 'Not needed - piles accommodate grade change',
     },
     utilities: {
       septic: 'Alternative septic system, permits obtained, bids received ($25K)',

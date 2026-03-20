@@ -8,13 +8,9 @@ export interface BuildInputs {
   wallHt: number;
   finishGrade: string;
   locFactor: number;
-  // Site Work
+  // Site Work & Foundation
   sitePrep: number;
-  tree: number;
-  excavation: number;
-  retaining: number;
-  neighborShare: number;
-  foundation: number;
+  piles: number;         // 6 deep piles @ 56-60 ft depth (includes mobilization)
   septic: number;
   utility: number;
   // Framing
@@ -131,14 +127,10 @@ const defaultInputs: BuildInputs = {
   wallHt: 10,
   finishGrade: '1.15',
   locFactor: 1,
-  // Site Work - reduced due to pre-graded site and helical pile foundation
-  sitePrep: 2500,    // Pre-graded site = minimal prep needed
-  tree: 3500,        // Single large tree, coastal arborist rates
-  excavation: 5000,  // 50% reduced - helical piles eliminate west side excavation
-  retaining: 10000,   // ~40 linear feet poured concrete
-  neighborShare: 0,
-  foundation: 40000, // 9 helical piles ($22.5K) + crawl space east ($10K) + caps ($7.5K)
-  septic: 28000,     // Bid received
+  // Site Work & Pier and Beam Foundation
+  sitePrep: 2500,       // Minimal grading/access - site already prepped
+  piles: 69000,         // 6 deep piles × $9K each + $15K mobilization (56-60 ft depth)
+  septic: 28000,        // Bid received
   utility: 22000,    // Bid received
   // Framing (labor $9/sf verified + all materials incl. sheathing & housewrap)
   framing: 16,       // $9 labor (verified) + ~$7 materials (lumber, sheathing, housewrap)
@@ -265,7 +257,7 @@ export function BuildProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const {
       sqft, roofSqft, locFactor,
-      sitePrep, tree, excavation, retaining, neighborShare, foundation, septic, utility,
+      sitePrep, piles, septic, utility,
       framing, roofing, siding, windows, extDoors, gutters,
       electric, plumbing, hvac, radiantHeat, insulation, drywall, paint,
       flooring, ceiling, intDoors, trim,
@@ -297,7 +289,7 @@ export function BuildProvider({ children }: { children: ReactNode }) {
     const ceilingCost = ceiling * sqft;
 
     // Category totals
-    const catSite = sitePrep + tree + excavation + (retaining - neighborShare) + foundation + septic + utility;
+    const catSite = sitePrep + piles + septic + utility;
     const catFrame = framingCost;
     const catExt = roofCost + siding + windows + extDoors + gutters;
     const catMep = electric + plumbing + hvac + radiantHeat;

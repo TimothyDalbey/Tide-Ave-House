@@ -14,8 +14,8 @@ export const costExplanations: Record<string, { estimate: string; low: string; h
     notes: `**CALCULATION:** Minimal prep since site is already graded.
 
 **COST BREAKDOWN:**
-• Final grading: 1,600 SF building pad × $0.50/SF = $800 [38]
-• Compaction (95% modified proctor): 1,600 SF × $0.40/SF = $640
+• Final grading: 1,900 SF building pad × $0.50/SF = $950 [38]
+• Compaction (95% modified proctor): 1,900 SF × $0.40/SF = $760
 • Erosion control (silt fence, straw wattles): $300-$500
 • Construction entrance (gravel pad): $200-$400
 • Misc site access/cleanup: $300-$500
@@ -45,10 +45,10 @@ Deep pile foundation means NO mass excavation, NO trenching for footings, and NO
   },
   
   piles: {
-    estimate: '$69,000',
-    low: '$58,000',
-    high: '$86,000',
-    notes: `**CALCULATION:** Pier and beam foundation using 6 deep-driven piles + mobilization.
+    estimate: '$54,000',
+    low: '$54,000',
+    high: '$54,000',
+    notes: `**CONFIRMED BID:** RamJack proposal for full deep pile foundation system = **$54,000**.
 
 **FOUNDATION SYSTEM CHANGE:**
 Per updated geotechnical review, switching from hybrid helical pile + crawl space foundation to full pier and beam using deep-driven piles. This eliminates the need for excavation, retaining walls, and tree removal.
@@ -69,7 +69,7 @@ At 56-60 ft depth, piles reach stable load-bearing material with adequate skin f
 • Type: Driven steel pipe piles or drilled concrete piles
 • Placement: Strategic locations per structural engineer
 
-**═══ COST BREAKDOWN ═══**
+**═══ COST CONTEXT ═══**
 
 **Piles ($54,000):**
 • Industry Cost Data: [6][16]
@@ -86,15 +86,7 @@ At 56-60 ft depth, piles reach stable load-bearing material with adequate skin f
 • Equipment operation
 • Testing/verification
 
-**Mobilization Fee ($15,000):**
-One-time fee to transport and set up pile driving equipment:
-• Equipment transport (Portland → Tillamook, 90 mi): $4,000-$6,000
-• Setup and positioning: $2,000-$3,000
-• Demobilization (out): $3,000-$4,000
-• Permits and logistics: $1,000-$2,000
-• Contingency: $2,000-$3,000
-
-**TOTAL: $54,000 + $15,000 = $69,000**
+RamJack provided this as a confirmed lump-sum bid for the deep pile foundation system.
 
 **═══ ADVANTAGES ═══**
 
@@ -110,13 +102,12 @@ One-time fee to transport and set up pile driving equipment:
 **═══ GEOGRAPHIC FACTORS ═══**
 
 • Coastal Oregon: Deep pile contractors available (North Coast area)
-• Equipment transport: Factored into mobilization portion
+• Equipment transport: Included in confirmed bid
 • Soil conditions: Typical for Tillamook County coastal sites
 
 **RANGE EXPLANATION:**
-• Low ($58K): Competitive bidding, $8K/pile + $10K mob
-• Mid ($69K): Expected cost at $9K/pile + $15K mob ✓
-• High ($86K): Premium contractor, $11K/pile + $20K mob`
+• Low/Mid/High currently all shown as $54K because this is a confirmed bid
+• Update this line item if final contracted scope changes`
   },
 
   septic: {
@@ -254,14 +245,46 @@ This is FIRM pricing from utility companies - low variance expected unless scope
   },
   
   // Framing (includes sheathing & housewrap)
+  framingLabor: {
+    estimate: '$9/sf',
+    low: '$8/sf',
+    high: '$11/sf',
+    notes: `**CONFIRMED BID:** Framing labor is bid at **$9/SF**.
+
+**CALCULATION:** 1,900 SF × $9/SF = $17,100
+
+**Includes labor for:**
+• Structural framing installation
+• Sheathing and housewrap labor
+• Crew mobilization and typical framing workflow
+
+**Notes:**
+• This line item is labor only
+• Materials are tracked separately for clearer bid comparison`
+  },
+  framingMaterials: {
+    estimate: '$7/sf',
+    low: '$6/sf',
+    high: '$9/sf',
+    notes: `**ESTIMATE:** Framing materials tracked separately from labor.
+
+**CALCULATION:** 1,900 SF × $7/SF = $13,300
+
+**Typical scope includes:**
+• Lumber package (studs, joists, beams, headers)
+• Sheathing and housewrap materials
+• Fasteners, connectors, ties, and hardware
+
+Combined with labor ($9/SF), the default framing total remains **$16/SF**.`
+  },
   framing: {
     estimate: '$16/sf',
     low: '$14/sf',
     high: '$20/sf',
     notes: `**✓ VERIFIED BID: Framing labor $9/SF (includes sheathing labor)**
 
-**CALCULATION:** 1,600 SF × $16/SF = $25,600
-• Labor: 1,600 SF × $9/SF = $14,400 ✓ VERIFIED (framing + sheathing + housewrap)
+**CALCULATION:** 1,900 SF × $16/SF = $30,400
+• Labor: 1,900 SF × $9/SF = $17,100 ✓ VERIFIED (framing + sheathing + housewrap)
 • All Materials: ~$11,200 (lumber, sheathing, housewrap, fasteners)
 
 **═══ MATERIAL COSTS ═══** [5][21]
@@ -293,27 +316,27 @@ This is FIRM pricing from utility companies - low variance expected unless scope
 **═══ LABOR COSTS ═══** [8][28]
 
 **✓ VERIFIED BID RECEIVED: $9/SF (labor only)**
-• 1,600 SF × $9/SF = **$14,400 labor cost**
+• 1,900 SF × $9/SF = **$17,100 labor cost**
 • Does NOT include building materials
 • Bid date: March 2026
 
 **Labor Breakdown (for reference):**
 • Crew Requirements: Lead carpenter + 2-3 carpenters + helper
-• Shed roof single-story is SIMPLE framing
+• Simple stacked two-story layout keeps framing efficient
 • Rectangular footprint minimizes complexity
 
 **═══ TOTAL FRAMING + SHEATHING + HOUSEWRAP ═══**
 • Framing lumber & hardware: ~$8,000
 • Sheathing (wall + roof OSB): ~$2,400
 • Housewrap & tape: ~$900
-• Labor: $14,400 ✓ VERIFIED
-• **TOTAL: ~$25,700**
-• **Per SF: $25,700 ÷ 1,600 = $16/SF**
+• Labor: $17,100 ✓ VERIFIED
+• **TOTAL: ~$30,400**
+• **Per SF: $30,400 ÷ 1,900 = $16/SF**
 
 **═══ COMPLEXITY ADJUSTMENTS ═══**
 
 **Simplicity Factors (reduce cost):**
-✓ Single story: -15% (no second floor, stairs, or balloon framing)
+✓ Stacked two-story footprint: efficient spans and lower roof area
 ✓ Rectangular shape: -10% (fewer corners = efficient cuts, less waste)
 ✓ Shed roof: -20% (single pitch, no valleys, hips, or dormers)
 ✓ Open floor plan: -5% (fewer interior walls)
@@ -332,40 +355,66 @@ Standard framing costs $25-$40/SF [5][21] but our simple design drops us to $15-
 • **Coastal Oregon premium: +10-15%**
 • Distance to lumber yard: Tillamook 15 miles (minimal surcharge)
 • Delivery: Standard lumber trucks can access site ✓
-• No crane needed for single-story ✓
+• Lower roof square footage reduces upper-structure material volume ✓
 • Labor availability: Moderate in coastal Tillamook
 
 **RANGE EXPLANATION:**
-• Low ($14/SF = $22,400): Favorable lumber prices, efficient crew
-• Mid ($16/SF = $25,600): Expected cost with verified labor
-• High ($20/SF = $32,000): Lumber spike, complex changes, difficult conditions`
+• Low ($14/SF = $26,600): Favorable lumber prices, efficient crew
+• Mid ($16/SF = $30,400): Expected cost with verified labor
+• High ($20/SF = $38,000): Lumber spike, complex changes, difficult conditions`
   },
   
   // Exterior
+  roofingLabor: {
+    estimate: '$4/sf',
+    low: '$3/sf',
+    high: '$6/sf',
+    notes: `**CALCULATION:** 950 SF × $4/SF = $3,800 labor allowance.
+
+**Scope:**
+• Standing seam panel installation
+• Underlayment and flashing installation labor
+• Trim, ridge, and detail work
+
+Labor pricing varies with roof pitch, access, and installer availability.`
+  },
+  roofingMaterials: {
+    estimate: '$8/sf',
+    low: '$5/sf',
+    high: '$12/sf',
+    notes: `**CALCULATION:** 950 SF × $8/SF = $7,600 materials allowance.
+
+**Includes:**
+• Standing seam panels
+• Synthetic underlayment
+• Flashing, trim, fasteners, sealants
+
+This is tracked separately from labor for cleaner bid comparisons.`
+  },
   roofing: {
     estimate: '$12/sf',
     low: '$8/sf',
     high: '$18/sf',
-    notes: `**CALCULATION:** 1,600 SF × $12/SF = $19,200
+    notes: `**CALCULATION:** 950 SF × $12/SF = $11,400
 
 **═══ ROOF SPECIFICATIONS ═══**
 
 • **Type:** Standing seam metal roof [4][19]
 • **Style:** Shed roof (single pitch)
 • **Pitch:** Low slope, estimated 2:12 to 4:12
-• **Area:** 1,600 SF (matches floor plan for shed roof)
+• **Area:** 950 SF (matches second-floor footprint)
 • **Material:** 24-26 gauge steel with Kynar 500 finish (coastal durability)
 
 **═══ MATERIAL COSTS ═══** [4][19]
 
 **Standing Seam Panels:**
-• Coverage: 1,600 SF
+• Coverage: 950 SF
 • Panel cost (24 ga, Kynar): $4.50-$6.00/SF
-• 1,600 × $5.25/SF = $8,400
+• 950 × $5.25/SF = $4,988
 
 **Underlayment:**
-• Synthetic underlayment (superior to felt): 1,600 SF
-• Cost: $0.50/SF × 1,600 = $800
+• Synthetic underlayment (superior to felt): 950 SF
+• Cost: $0.50/SF × 950 = $475
 
 **Ridge Cap / Trim:**
 • Shed roof has ONE ridge (high side): ~65 LF
@@ -389,7 +438,7 @@ Standard framing costs $25-$40/SF [5][21] but our simple design drops us to $15-
 • Standing seam clips (concealed): 400 × $2 = $800
 • Screws, sealant: $200
 
-**MATERIALS SUBTOTAL: $11,850**
+**MATERIALS SUBTOTAL: ~$8,113**
 
 **═══ LABOR COSTS ═══** [8][28]
 
@@ -411,9 +460,9 @@ Standard framing costs $25-$40/SF [5][21] but our simple design drops us to $15-
 • Materials: $11,850
 • Labor: $5,040
 • Contingency (5%): $844
-• **TOTAL: $17,734**
+• **TOTAL: ~$13,811**
 
-**Per SF: $17,734 ÷ 1,600 = $11.08/SF**
+**Per SF: ~$13,811 ÷ 950 = $14.54/SF**
 
 **Our $12/SF estimate provides small buffer.**
 
@@ -450,24 +499,19 @@ Standard framing costs $25-$40/SF [5][21] but our simple design drops us to $15-
 
 **═══ SIDING AREA CALCULATION ═══**
 
-**Gross Wall Area:** (9'-11' shed roof sloping to ocean)
-• North wall: 65 ft × 10 ft avg = 650 SF
-• South wall: 25 ft × 10 ft avg = 250 SF
-• East wall: 25 ft × 9 ft = 225 SF (low side)
-• West wall (ocean side): 65 ft × 11 ft = 715 SF (high side for views)
-• **Gross: 1,620 SF**
+**Gross Wall Area:** (36' x 27' footprint)
+• Perimeter: 36 + 27 + 36 + 27 = 126 LF
+• Average wall height: 20 ft (two-story exterior wall height)
+• **Gross: 126 × 20 = 2,520 SF**
 
 **Deductions:**
-• West wall: 3 large sliding doors (10×8 ft each) = -240 SF
-• West wall: Additional windows = -80 SF
-• West wall: Net siding = 715 - 350 = **365 SF only!**
-• Other windows (8-10 total): ~150 SF total
-• Entry door: 21 SF
-• Other doors: ~40 SF
+• Large west openings (sliders + windows): ~450 SF
+• Other windows: ~120 SF total
+• Front entry and other doors: ~60 SF
 
 **Net Siding Area:**
-• 1,620 - 320 (west openings) - 150 (windows) - 60 (doors) = **1,090 SF**
-• Round up for waste: **~1,200 SF**
+• 2,520 - 630 (openings/doors) = **1,890 SF**
+• Round up for waste: **~1,900 SF**
 
 **═══ MATERIAL CHOICE: FIBER CEMENT ═══** [33]
 
@@ -516,7 +560,7 @@ Standard framing costs $25-$40/SF [5][21] but our simple design drops us to $15-
 
 **═══ REDUCED AREA = MAJOR SAVINGS ═══**
 
-**Typical 1,600 SF home:** 1,800+ SF of siding
+**Typical 1,900 SF home:** 2,000+ SF of siding
 **Our design:** ~1,200 SF (33% less!)
 
 **Why Less:**
@@ -534,27 +578,28 @@ Standard framing costs $25-$40/SF [5][21] but our simple design drops us to $15-
     estimate: '$21,000',
     low: '$14,000',
     high: '$28,000',
-    notes: `**CALCULATION:** Based on actual window schedule for 1,600 SF modern coastal home.
+    notes: `**CALCULATION:** Based on actual window schedule for ~1,900 SF modern coastal home.
 
 **═══ WINDOW SCHEDULE ═══** [32]
 
-**Total: 15 windows**
+**Total: 16 windows**
 
 | Description | Size | Qty | Type | Unit Cost | Subtotal |
 |-------------|------|-----|------|-----------|----------|
 | Small fixed/awning | 2'6" × 2'9" | 6 | Fixed or awning | $450 | $2,700 |
-| Large horizontal | 9' × 2'9" | 1 | Fixed w/2'6" operable | $2,200 | $2,200 |
+| Large horizontal | 9' × 2'9" | 2 | Fixed w/operable section | $2,200 | $4,400 |
 | Medium horizontal | 6'6" × 2'9" | 4 | Fixed | $1,100 | $4,400 |
-| Large picture | 7'6" × 46" | 1 | Fixed w/2'6" operable | $2,400 | $2,400 |
+| Large picture | 7'6" × 46" | 1 | Fixed w/operable section | $2,400 | $2,400 |
 | Picture window | 8' × 8' | 1 | Fixed (ocean view) | $4,500 | $4,500 |
 | Tall narrow | 1'9" × 6' | 2 | Fixed | $850 | $1,700 |
-| **WINDOW SUBTOTAL** | | **15** | | | **$17,900** |
+| Extra awning/fixed | varies | 0 | Reserved / final plan | $0 | $0 |
+| **WINDOW SUBTOTAL** | | **16** | | | **$20,100** |
 
 **Window Sizes Summary:**
 • 6 small: 2'6" × 2'9" (30" × 33") - bathrooms, utility, etc.
-• 1 large horizontal: 9' × 2'9" with 2'6" operable section
+• 2 large horizontals: 9' × 2'9" with operable sections
 • 4 medium: 6'6" × 2'9"
-• 1 large: 7'6" × 46" (3'10") with 2'6" operable section
+• 1 large: 7'6" × 46" (3'10") with operable section
 • 1 picture: 8' × 8' - large fixed ocean view window
 • 2 tall narrow: 1'9" × 6' (21" × 72")
 
@@ -582,16 +627,16 @@ Standard framing costs $25-$40/SF [5][21] but our simple design drops us to $15-
 **Labor:**
 • Windows typically installed by general framing crew
 • OR window contractor: $150-$300 per window
-• 15 windows × $200 = $3,000
+• 16 windows × $200 = $3,200
 
 **Often included in window purchase** - verify with vendor
 
 **═══ TOTAL CALCULATION ═══**
-• Windows (15): $17,900
+• Windows (16): $20,100
 • Coastal upgrade: $1,800
-• Installation: $3,000
+• Installation: $3,200
 • Flashing/sealant: $400
-• **TOTAL: $23,100 ≈ $21,000** (mid-range pricing)
+• **TOTAL: $25,500 ≈ $21,000** (mid-range pricing)
 
 **═══ NOT IN THIS LINE ITEM ═══**
 
@@ -603,40 +648,25 @@ Standard framing costs $25-$40/SF [5][21] but our simple design drops us to $15-
 • High ($28K): Premium brands (Marvin, Pella), custom sizes`
   },
   extDoors: {
-    estimate: '$22,000',
-    low: '$15,000',
-    high: '$28,000',
+    estimate: '$16,000',
+    low: '$12,000',
+    high: '$22,000',
     notes: `**CALCULATION:** ⭐ INVESTMENT PRIORITY - Ocean Views + Premium Entry
 
-This line item is CRITICAL to the home's value and lifestyle. Premium CVG fir front entry with frosted glass, plus large sliding glass door to living area and two door/window combos to master bedrooms.
+This line item covers the revised exterior openings: 2 large sliding glass doors and 1 front entry door.
 
 **═══ DOOR SCHEDULE ═══**
 
-**1. LARGE SLIDING GLASS DOOR - Living Area**
+**1. LARGE SLIDING GLASS DOORS (2) - West Wall**
 
 | Location | Size | Type | Unit Cost |
 |----------|------|------|-----------|
 | Living Area | 12' × 10' | Multi-slide | $8,000 |
+| Living/secondary view | 12' × 10' | Multi-slide | $8,000 |
 
-**Slider Subtotal: $8,000**
+**Slider Subtotal: $16,000**
 
-**2. DOOR/WINDOW COMBOS (2) - Master Bedrooms**
-
-| Location | Size | Type | Unit Cost | Subtotal |
-|----------|------|------|-----------|----------|
-| Master BR #1 | 8' × 6' | Door w/window on left | $3,500 | $3,500 |
-| Master BR #2 | 8' × 6' | Door w/window on left | $3,500 | $3,500 |
-
-**Door/Window Combo Subtotal: $7,000**
-
-**Specifications:**
-• Frame: Aluminum-clad fiberglass OR thermally-broken aluminum
-• Glass: Dual-pane Low-E, tempered safety glass
-• Hardware: Stainless steel (CRITICAL for salt air)
-• Threshold: ADA-compliant, water-resistant
-• Weathersealing: Marine-grade gaskets
-
-**3. FRONT ENTRY DOOR**
+**2. FRONT ENTRY DOOR**
 
 | Component | Specification | Cost |
 |-----------|--------------|------|
@@ -647,41 +677,24 @@ This line item is CRITICAL to the home's value and lifestyle. Premium CVG fir fr
 
 CVG (Clear Vertical Grain) fir: Premium old-growth appearance, tight grain, excellent stability. Frosted glass provides privacy while allowing natural light. Requires proper finishing/sealing for coastal climate.
 
-**3. SAUNA EXTERIOR DOOR**
-
-| Component | Specification | Cost |
-|-----------|--------------|------|
-| Door | 2'6"×6'8" tempered glass | $800 |
-| Frame | Cedar or fiberglass | $200 |
-| Hardware | Magnetic catch, SS hinges | $150 |
-
-**Sauna Subtotal: $1,150**
-
-Sauna door allows: Natural light, exterior access for ventilation/cleaning
-
 **═══ INSTALLATION ═══** [8]
 
-**Sliding Door:**
-• Large slider requires 2-3 person crew
+**Sliding Doors:**
+• Large sliders require 2-3 person crew each
 • Professional install REQUIRED for warranty
-• 1 large door: $500
+• 2 doors × $500 = $1,000
 
-**Door/Window Combos:**
-• 2 units × $300 each = $600
+**Entry Door:**
+• Standard door install: $250
 
-**Entry & Sauna:**
-• Standard door install: $250 each × 2 = $500
-
-**INSTALLATION SUBTOTAL: $1,600**
+**INSTALLATION SUBTOTAL: $1,250**
 
 **═══ TOTAL CALCULATION ═══**
-• Large slider (12'×10'): $8,000
-• Door/window combos (2): $7,000
+• Large sliders (2): $16,000
 • Entry door package: $4,400
-• Sauna door: $1,150
-• Installation: $1,600
-• Flashing/sealant: $400
-• **TOTAL: $22,550 ≈ $22,000**
+• Installation: $1,250
+• Flashing/sealant: $350
+• **TOTAL: $22,000**
 
 **═══ WHY THIS IS AN INVESTMENT PRIORITY ═══**
 
@@ -710,29 +723,29 @@ Sauna door allows: Natural light, exterior access for ventilation/cleaning
 • UV resistance: Frames won't fade/chalk
 
 **RANGE EXPLANATION:**
-• Low ($15K): Smaller slider, basic entry, no sauna door
-• Mid ($22K): Full scope as designed with premium CVG fir entry ✓
-• High ($28K): Premium brands (La Cantina, Fleetwood), larger panels`
+• Low ($12K): Smaller sliders, basic entry
+• Mid ($16K): Full scope as revised ✓
+• High ($22K): Premium brands (La Cantina, Fleetwood), larger panels`
   },
   gutters: {
-    estimate: '$1,000',
-    low: '$600',
-    high: '$1,500',
+    estimate: '$500',
+    low: '$350',
+    high: '$900',
     notes: `**CALCULATION:** Single-pitch shed roof = gutters on ONE SIDE only.
 
 **═══ SHED ROOF GUTTER ADVANTAGE ═══**
 
 **Typical House:** Gutters around entire perimeter (150-200 LF)
-**Our Design:** Gutters on LOW side of shed roof only (~65 LF)
+**Our Design:** Gutters on LOW side of shed roof only (~35 LF)
 
 This is a MAJOR simplification and cost savings.
 
 **═══ GUTTER SPECIFICATIONS ═══**
 
 **Linear Footage:**
-• Low side of roof (south): ~65 LF
-• Add for corners: +5 LF
-• **Total: ~70 LF**
+• Low side of roof (south): ~35 LF
+• Add for corners: +0 LF
+• **Total: ~35 LF**
 
 **Material Options:**
 
@@ -745,34 +758,34 @@ This is a MAJOR simplification and cost savings.
 **Recommendation:** Aluminum or galvanized for coastal.
 
 **Size:**
-• 5" standard is adequate for 1,600 SF roof
+• 5" standard is adequate for 950 SF roof
 • 6" oversized for heavy rain areas (optional +$2/LF)
 
 **═══ COST BREAKDOWN ═══**
 
 **Materials:** [uses aluminum]
-• Gutters: 70 LF × $4/LF (materials only) = $280
-• Downspouts: 2 × 10 LF × $3/LF = $60
-• Elbows: 6 × $8 = $48
+• Gutters: 35 LF × $4/LF (materials only) = $140
+• Downspouts: 1 × 10 LF × $3/LF = $30
+• Elbows: 4 × $8 = $32
 • End caps: 2 × $6 = $12
-• Hangers: 14 × $4 = $56
-• Splash blocks: 2 × $15 = $30
+• Hangers: 7 × $4 = $28
+• Splash blocks: 1 × $15 = $15
 
-**Materials Subtotal: $486**
+**Materials Subtotal: $257**
 
 **Labor:**
 • Install rate: $5-$8/LF
-• 70 LF × $6/LF = $420
+• 35 LF × $6/LF = $210
 
-**Labor Subtotal: $420**
+**Labor Subtotal: $210**
 
 **═══ TOTAL ═══**
-• Materials: $486
-• Labor: $420
-• Contingency: $94
-• **TOTAL: $1,000**
+• Materials: $257
+• Labor: $210
+• Contingency: $33
+• **TOTAL: $500**
 
-**Per LF: $1,000 ÷ 70 = $14.29/LF** (reasonable for installed)
+**Per LF: $500 ÷ 35 = $14.29/LF** (reasonable for installed)
 
 **═══ COASTAL CONSIDERATIONS ═══**
 
@@ -786,7 +799,7 @@ This is a MAJOR simplification and cost savings.
 Standard gutter bids for homes this size: $1,500-$2,500
 
 **Our savings:**
-• 70 LF vs. 150 LF typical = **50%+ reduction**
+• 35 LF vs. 150 LF typical = **75%+ reduction**
 • No corners (straight run) = faster install
 • Shed roof = no complex multi-level routing
 
@@ -805,13 +818,13 @@ Standard gutter bids for homes this size: $1,500-$2,500
     estimate: '$20,000',
     low: '$14,000',
     high: '$25,000',
-    notes: `**CALCULATION:** Complete electrical system for 1,600 SF coastal home.
+    notes: `**CALCULATION:** Complete electrical system for 1,900 SF coastal home.
 
 **═══ ELECTRICAL SPECIFICATIONS ═══** [23]
 
 **Service:**
 • Main panel: 200-amp (standard for modern home)
-• Sub-panels: None needed (single-story, efficient layout)
+• Sub-panels: None needed (efficient stacked layout)
 • Service entrance: Included in utility connection bid ($9,000)
 
 **═══ COMPONENT BREAKDOWN ═══**
@@ -907,7 +920,7 @@ Standard gutter bids for homes this size: $1,500-$2,500
 **═══ SIMPLICITY FACTORS ═══**
 
 **Why $18K is sufficient:**
-✓ Single-story: All runs at one level (no stacking, easy pulls)
+✓ Stacked wet walls and chases keep runs efficient
 ✓ Open floor plan: Fewer walls = fewer boxes
 ✓ No mini-splits: Eliminates dedicated circuits
 ✓ Simple layout: Direct runs, minimal junction boxes
@@ -1079,7 +1092,7 @@ All wet areas (baths, kitchen, laundry) are on ONE SIDE of the house. This reduc
 
 **Stove Selection:**
 • Style: Modern, EPA-certified (required in Oregon)
-• BTU output: 30,000-50,000 BTU (adequate for 1,600 SF)
+• BTU output: 35,000-55,000 BTU (adequate for 1,900 SF)
 • Efficiency: 75%+ (modern EPA stoves)
 • Brands: Jøtul, Blaze King, Lopi, Hearthstone
 
@@ -1171,9 +1184,9 @@ This is the PRIMARY heating system. Investment in comfort and efficiency.
 **═══ COMPONENT BREAKDOWN ═══**
 
 **1. PEX Tubing:** [18]
-• Coverage: 1,600 SF
+• Coverage: 1,900 SF
 • Spacing: 6-8" on center (closer = more responsive)
-• Linear feet needed: 1,600 SF ÷ 0.5' spacing = 3,200 LF
+• Linear feet needed: 1,900 SF ÷ 0.5' spacing = 3,800 LF
 • Add 15% for headers/manifolds: 3,680 LF
 • Cost: 3,680 LF × $0.75/LF = $2,760
 
@@ -1185,7 +1198,7 @@ This is the PRIMARY heating system. Investment in comfort and efficiency.
 
 **3. Boiler:** [18][26]
 • Type: High-efficiency condensing gas boiler
-• Input: 80,000-100,000 BTU (sized for 1,600 SF)
+• Input: 90,000-110,000 BTU (sized for 1,900 SF)
 • Efficiency: 95%+ AFUE
 • Brands: Navien, Rinnai, Viessmann, Triangle Tube
 
@@ -1301,14 +1314,14 @@ Per Oregon Residential Specialty Code:
 
 **═══ AREA CALCULATIONS ═══**
 
-**Exterior Walls:** (shed roof: 9' low side to 11' high side)
-• Perimeter: 65+25+65+25 = 180 LF
-• Average height: 10 ft (9'-11' varies with roof slope)
-• Gross area: 180 × 10 = 1,800 SF
-• Less openings (~25%): 1,800 × 0.75 = **1,350 SF net walls**
+**Exterior Walls:** (36' x 27' footprint)
+• Perimeter: 36+27+36+27 = 126 LF
+• Average height: 20 ft (two-story exterior wall height)
+• Gross area: 126 × 20 = 2,520 SF
+• Less openings (~25%): 2,520 × 0.75 = **1,890 SF net walls**
 
 **Ceiling/Roof Assembly:**
-• Area: **1,600 SF**
+• Area: **950 SF**
 • Cathedral/vaulted: Use rigid + batt combination
 
 **Floor (Crawl Space Side Only):**
@@ -1333,9 +1346,9 @@ Per Oregon Residential Specialty Code:
 
 | Option | Cost/SF | Coverage | Total |
 |--------|---------|----------|-------|
-| Blown fiberglass | $1.50 | 1,600 SF | $2,400 |
-| Blown cellulose | $1.25 | 1,600 SF | $2,000 |
-| Batt + rigid combo | $2.00 | 1,600 SF | $3,200 |
+| Blown fiberglass | $1.50 | 950 SF | $1,425 |
+| Blown cellulose | $1.25 | 950 SF | $1,188 |
+| Batt + rigid combo | $2.00 | 950 SF | $1,900 |
 
 **Note:** With T&G wood ceiling, insulation goes ABOVE ceiling boards. Method depends on roof assembly design.
 
@@ -1413,7 +1426,7 @@ Included in estimate:
 • **0 SF** - Exposed rafters with T&G wood ceiling (separate line item)
 • This is a SIGNIFICANT REDUCTION from typical drywall scope
 
-**Typical 1,600 SF home:** 5,000+ SF of drywall
+**Typical 1,900 SF home:** 5,700+ SF of drywall
 **Our design:** ~3,850 SF (25% less!)
 
 **═══ MATERIALS ═══** [25]
@@ -1606,7 +1619,7 @@ Consider hiring for:
 
 **═══ FLOORING PLAN ═══**
 
-**Ground Floor (1,600 SF):**
+**Ground Floor (950 SF):**
 • Living/Kitchen/Dining: ~1,000 SF → **Polished concrete**
 • Bedrooms: ~500 SF → **Polished concrete** (no carpet - modern + hypoallergenic)
 • Bathrooms: ~100 SF → **Tile** (required for wet areas)
@@ -1712,12 +1725,12 @@ Consider hiring for:
 
 **Material:** Tongue & groove cedar or fir [29]
 **Finish:** Natural stain + clear sealer (warm wood tones)
-**Coverage:** Entire ceiling area = **~1,600 SF**
+**Coverage:** Primary roof-level ceiling area = **~950 SF**
 **Height:** Varies with shed roof (9-12 ft typical)
 
 **═══ MATERIAL OPTIONS ═══** [29]
 
-| Wood Type | Cost/SF | 1,600 SF Total | Character |
+| Wood Type | Cost/SF | 950 SF Total | Character |
 |-----------|---------|----------------|-----------|
 | Cedar 1×6 T&G | $4-$6 | $6,400-$9,600 | Premium, aromatic |
 | Doug fir 1×6 T&G | $3-$5 | $4,800-$8,000 | Strong grain |
@@ -1726,7 +1739,7 @@ Consider hiring for:
 | Beetle-kill pine | $4-$6 | $6,400-$9,600 | Blue/gray character |
 
 **SELECTED:** Cedar T&G @ $5/SF
-**Materials:** 1,600 SF × $5 = **$8,000**
+**Materials:** 950 SF × $5 = **$4,750**
 **Add 15% waste:** $9,200
 
 **═══ INSTALLATION LABOR ═══** [8][29]
@@ -1738,7 +1751,7 @@ Consider hiring for:
 • Pattern (straight vs. diagonal)
 
 **Labor Rate:** $5-$8/SF for T&G ceiling [8]
-**Calculation:** 1,600 SF × $6.50 = **$10,400**
+**Calculation:** 950 SF × $6.50 = **$6,175**
 
 **Labor Breakdown:**
 • 2 carpenters × 6 days × 8 hrs = 96 hours
@@ -1965,12 +1978,12 @@ Consider hiring for:
 **Option B: CVG fir baseboard** ✓
 • 3-4" CVG fir to match doors/trim
 • Stained + clear finish
-• ~180 LF perimeter
-• Cost: 180 × $4 = $720
+• ~126 LF perimeter
+• Cost: 126 × $4 = $504
 
 **Option C: Minimal MDF**
 • 2-3" painted MDF (not our style)
-• 180 LF × $2 = $360
+• 126 LF × $2 = $252
 
 **BUDGET:** Option B (CVG fir to match all trim)
 
@@ -1982,8 +1995,8 @@ Consider hiring for:
 **Calculation:**
 • Door casing: 224 LF × $5 = $1,120
 • Window casing: 204 LF × $5 = $1,020
-• Baseboard: 180 LF × $3 = $540
-• **Labor total: $2,680**
+• Baseboard: 126 LF × $3 = $378
+• **Labor total: $2,518**
 
 **═══ TOTAL CALCULATION ═══**
 
@@ -2525,7 +2538,7 @@ Could match polished concrete floors!
 Based on project valuation formula:
 • Tillamook uses ICC valuation tables
 • New residential: ~$150-$200/SF valuation
-• 1,600 SF × $175 = $280,000 valuation
+• 1,900 SF × $175 = $332,500 valuation
 
 **Permit Fee Calculation:**
 • Base fee + per-thousand rate
@@ -2558,7 +2571,7 @@ Based on project valuation formula:
 
 | Fee | Amount | Notes |
 |-----|--------|-------|
-| School Excise Tax | $1,600 | $1.00/SF (Neah-Kah-Nie SD) |
+| School Excise Tax | $1,900 | $1.00/SF (Neah-Kah-Nie SD) |
 | Address assignment | $50-$100 | New construction |
 | Zoning review | $100-$200 | Land use verification |
 | **Other Total** | **$1,750-$1,900** | |
@@ -2584,7 +2597,7 @@ Based on project valuation formula:
 | Plan review | $1,600 | $2,300 |
 | Trade permits | $950 | $1,450 |
 | Septic | $1,350 | $2,100 |
-| Excise tax | $1,600 | $1,600 |
+| Excise tax | $1,900 | $1,900 |
 | Other fees | $150 | $300 |
 | Coastal overlay | $0 | $600 |
 | **TOTAL** | **$8,150** | **$11,850** |
@@ -3572,7 +3585,7 @@ The utility connection in the main budget covers:
 
 **Professional Cleaning:**
 • Rate: $0.50-$1.00/SF [8]
-• 1,600 SF × $0.75 = **$1,200**
+• 1,900 SF × $0.75 = **$1,425**
 
 **Includes:**
 • Window cleaning (interior + exterior)

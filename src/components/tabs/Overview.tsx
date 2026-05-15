@@ -13,7 +13,7 @@ export function Overview() {
   const lotPrice = financeInputs.lotPrice;
   const lotEquity = financeInputs.lotEquity;
   // Calculate estimated value from price per sqft 
-  const sqft = buildResults.sqft || 1600;
+  const sqft = buildResults.sqft || 1900;
   const pricePerSqft = parseInt(financeInputs.valueGain) || 800;
   const estValue = financeInputs.estValue || (sqft * pricePerSqft);
   const equity = estValue - financeResults.loanAmt;
@@ -28,13 +28,13 @@ export function Overview() {
         <p style={{ fontSize: '1.1rem', marginBottom: '20px' }}>
           The Tide Ave. House is a planned coastal residence in Tillamook County, Oregon. 
           <strong>Beachfront lot with full ocean view.</strong> This project involves constructing 
-          a single-floor home on an already-owned lot, paid for with cash. 
+          a two-story home on an already-owned lot, paid for with cash. 
           utilizing a <strong>conventional construction-to-permanent loan</strong>.
         </p>
         <div className="specs">
           <Spec value="2" label="Bedrooms" />
           <Spec value="2.5" label="Bathrooms" />
-          <Spec value="1" label="Story" />
+          <Spec value="2" label="Stories" />
           <Spec value={formatCurrency(estValue)} label="Est. Value" />
         </div>
       </Card>

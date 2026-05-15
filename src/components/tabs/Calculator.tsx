@@ -12,7 +12,7 @@ export function Calculator() {
   const existingLotLoan = inputs.lotPrice - inputs.lotEquity;
   const totalCashInvested = inputs.lotEquity + inputs.constCost;
   const costBasis = totalCashInvested + existingLotLoan;
-  const sqft = buildResults.sqft || 1600;
+  const sqft = buildResults.sqft || 1900;
   const pricePerSqft = parseInt(inputs.valueGain) || 800;
 
   return (

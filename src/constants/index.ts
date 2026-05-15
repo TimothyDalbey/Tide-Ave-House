@@ -168,7 +168,7 @@ export const statusItems = {
     { id: 'frame', title: 'Framing', note: 'Phase 1: Structure and sheathing', defaultStatus: '' },
     { id: 'roof', title: 'Roofing', note: 'Phase 1: Metal roof installation', defaultStatus: '' },
     { id: 'siding', title: 'Siding', note: 'Phase 1: Fiber cement siding', defaultStatus: '' },
-    { id: 'windows', title: 'Windows', note: 'Phase 1: 15 windows installed', defaultStatus: '' },
+    { id: 'windows', title: 'Windows', note: 'Phase 1: 16 windows installed', defaultStatus: '' },
     { id: 'extdoors', title: 'Exterior Doors', note: 'Phase 1: Slider + door/window combos + entry', defaultStatus: '' },
     // PHASE 2: Interior Finishes
     { id: 'mep', title: 'MEP Rough-In', note: 'Phase 2: Electrical, plumbing, radiant heat', defaultStatus: '' },

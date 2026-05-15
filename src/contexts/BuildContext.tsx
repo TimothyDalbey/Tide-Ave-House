@@ -14,9 +14,11 @@ export interface BuildInputs {
   septic: number;
   utility: number;
   // Framing
-  framing: number;
+  framingLabor: number;
+  framingMaterials: number;
   // Exterior
-  roofing: number;
+  roofingLabor: number;
+  roofingMaterials: number;
   siding: number;
   windows: number;
   extDoors: number;
@@ -121,25 +123,27 @@ interface BuildContextType {
 }
 
 const defaultInputs: BuildInputs = {
-  sqft: 1600,
-  roofSqft: 1600,
-  wallLf: 180,
-  wallHt: 10,
+  sqft: 1900,
+  roofSqft: 950,
+  wallLf: 126,
+  wallHt: 20,
   finishGrade: '1.15',
   locFactor: 1,
   // Site Work & Pier and Beam Foundation
   sitePrep: 2500,       // Minimal grading/access - site already prepped
-  piles: 69000,         // 6 deep piles × $9K each + $15K mobilization (56-60 ft depth)
+  piles: 54000,         // Confirmed RamJack bid for deep pile foundation system
   septic: 28000,        // Bid received
   utility: 22000,    // Bid received
-  // Framing (labor $9/sf verified + all materials incl. sheathing & housewrap)
-  framing: 16,       // $9 labor (verified) + ~$7 materials (lumber, sheathing, housewrap)
+  // Framing
+  framingLabor: 9,       // Verified framing labor bid
+  framingMaterials: 7,   // Estimated lumber + sheathing + housewrap + hardware
   // Exterior
-  roofing: 12,
-  siding: 15000,     // Fiber cement, 1,620 SF wall area
-  windows: 21000,    // 15 windows per actual schedule
-  extDoors: 22000,   // 12'x10' slider + 2 door/window combos + CVG fir entry + sauna
-  gutters: 1200,
+  roofingLabor: 4,       // Installed standing-seam labor rate ($/SF)
+  roofingMaterials: 8,   // Panels, underlayment, flashing, trim ($/SF)
+  siding: 15000,     // Fiber cement, updated wall area based on 36' x 27' footprint
+  windows: 21000,    // 16 windows per updated actual schedule
+  extDoors: 16000,   // 2 large sliders + 1 front entry door
+  gutters: 500,
   // MEP
   electric: 20000,   // Calc shows $18K, +$2K buffer for coastal
   plumbing: 20000,   // 2 master baths with single sinks each, minimal aesthetic
@@ -199,7 +203,7 @@ const defaultResults: BuildResults = {
   roofCost: 0,
   flooringCost: 0,
   ceilingCost: 0,
-  sqft: 1600,
+  sqft: 1900,
   catSite: 0,
   catFrame: 0,
   catExt: 0,
@@ -258,7 +262,7 @@ export function BuildProvider({ children }: { children: ReactNode }) {
     const {
       sqft, roofSqft, locFactor,
       sitePrep, piles, septic, utility,
-      framing, roofing, siding, windows, extDoors, gutters,
+      framingLabor, framingMaterials, roofingLabor, roofingMaterials, siding, windows, extDoors, gutters,
       electric, plumbing, hvac, radiantHeat, insulation, drywall, paint,
       flooring, ceiling, intDoors, trim,
       cabinets, counters, appliances, bathFixtures,
@@ -283,8 +287,8 @@ export function BuildProvider({ children }: { children: ReactNode }) {
       diyTrimSaveAmt + diyCabinetsSaveAmt + diyPaintSaveAmt + diyLandscapeSaveAmt + diyDeckSaveAmt;
 
     // Per-sf calculations
-    const framingCost = framing * sqft;
-    const roofCost = roofing * roofSqft;
+    const framingCost = (framingLabor + framingMaterials) * sqft;
+    const roofCost = (roofingLabor + roofingMaterials) * roofSqft;
     const flooringCost = flooring * sqft;
     const ceilingCost = ceiling * sqft;
 

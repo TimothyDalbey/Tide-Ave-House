@@ -18,7 +18,7 @@ export function BuildCosts() {
           Adjust values to match your specifications.
         </p>
         <Alert type="info" icon="📐">
-          <strong>Home Specs:</strong> 1,600 sq ft single-story | Wood frame | Shed metal roof | 
+          <strong>Home Specs:</strong> 1,900 sq ft (950 sf first + 950 sf second) | Wood frame | Shed metal roof | 
           Drywall interior | Wood floors & ceiling | Mid-to-high-mid grade finishes | Fiberglass windows
         </Alert>
 
@@ -34,7 +34,7 @@ export function BuildCosts() {
                 />
               </InputWrap>
             </FormGroup>
-            <FormGroup label="Roof Area" hint="Single-pitch shed roof ≈ floor area">
+            <FormGroup label="Roof Area" hint="Single-pitch shed roof ≈ upper floor footprint">
               <InputWrap suffix="sf">
                 <input
                   type="number"
@@ -52,7 +52,7 @@ export function BuildCosts() {
                 />
               </InputWrap>
             </FormGroup>
-            <FormGroup label="Wall Height">
+            <FormGroup label="Average Exterior Wall Height" hint="Two-story default shown; update to match plans">
               <InputWrap suffix="ft">
                 <input
                   type="number"
@@ -146,28 +146,24 @@ export function BuildCosts() {
         </Results>
 
         <Results title="🪵 Framing & Structure">
+          <CostRowWithExplanation label="✓ Framing Labor Rate (bid, $/sf)" value={inputs.framingLabor} field="framingLabor" setInput={setInput} explanation={costExplanations.framingLabor} show={showExplanations} />
+          <CostRowWithExplanation label="Framing Materials Rate ($/sf)" value={inputs.framingMaterials} field="framingMaterials" setInput={setInput} explanation={costExplanations.framingMaterials} show={showExplanations} />
           <div className="row" style={{ background: 'rgba(46, 204, 113, 0.1)', borderLeft: '3px solid var(--success)' }}>
-            <span className="lbl">✓ Framing, Sheathing & Housewrap ($/sf: ${inputs.framing}) <span style={{ fontSize: '.8rem', color: 'var(--success)', fontWeight: 'normal' }}>(labor $9/sf verified)</span></span>
-            <div>
-              <span className="val">{fmt(results.framingCost)}</span>
-              <input type="number" value={inputs.framing} onChange={e => setInput('framing', +e.target.value)} style={{ width: '80px', marginLeft: '10px', padding: '4px 8px' }} />/sf
-            </div>
+            <span className="lbl">Total Framing, Sheathing & Housewrap ({inputs.framingLabor + inputs.framingMaterials}/sf)</span>
+            <span className="val">{fmt(results.framingCost)}</span>
           </div>
-          {showExplanations && <ExplanationRow explanation={costExplanations.framing} />}
         </Results>
 
         <Results title="🏠 Exterior">
+          <CostRowWithExplanation label="Metal Roof Labor Rate ($/sf)" value={inputs.roofingLabor} field="roofingLabor" setInput={setInput} explanation={costExplanations.roofingLabor} show={showExplanations} />
+          <CostRowWithExplanation label="Metal Roof Materials Rate ($/sf)" value={inputs.roofingMaterials} field="roofingMaterials" setInput={setInput} explanation={costExplanations.roofingMaterials} show={showExplanations} />
           <div className="row">
-            <span className="lbl">Metal Shed Roof - Single Pitch ($/sf: ${inputs.roofing})</span>
-            <div>
-              <span className="val">{fmt(results.roofCost)}</span>
-              <input type="number" value={inputs.roofing} onChange={e => setInput('roofing', +e.target.value)} style={{ width: '80px', marginLeft: '10px', padding: '4px 8px' }} />/sf
-            </div>
+            <span className="lbl">Metal Shed Roof - Single Pitch Total ({inputs.roofingLabor + inputs.roofingMaterials}/sf)</span>
+            <span className="val">{fmt(results.roofCost)}</span>
           </div>
-          {showExplanations && <ExplanationRow explanation={costExplanations.roofing} />}
           <CostRowWithExplanation label="Exterior Siding & Trim" value={inputs.siding} field="siding" setInput={setInput} explanation={costExplanations.siding} show={showExplanations} />
           <CostRowWithExplanation label="⭐ Premium Windows (coastal-grade)" value={inputs.windows} field="windows" setInput={setInput} explanation={costExplanations.windows} show={showExplanations} />
-          <CostRowWithExplanation label="⭐ Exterior Doors (3 sliders + entry + sauna)" value={inputs.extDoors} field="extDoors" setInput={setInput} explanation={costExplanations.extDoors} show={showExplanations} />
+          <CostRowWithExplanation label="⭐ Exterior Doors (2 sliders + entry)" value={inputs.extDoors} field="extDoors" setInput={setInput} explanation={costExplanations.extDoors} show={showExplanations} />
           <CostRowWithExplanation label="Gutters & Downspouts" value={inputs.gutters} field="gutters" setInput={setInput} explanation={costExplanations.gutters} show={showExplanations} />
         </Results>
 
@@ -274,7 +270,7 @@ export function BuildCosts() {
                   <tr><td>Mechanical Permit (mini-splits)</td><td style={{ textAlign: 'right' }}>$150 - $300</td></tr>
                   <tr><td>Zoning Permit</td><td style={{ textAlign: 'right' }}>$150 - $250</td></tr>
                   <tr><td>Septic/Sanitation Permit</td><td style={{ textAlign: 'right' }}>$800 - $1,200</td></tr>
-                  <tr><td><strong>School Excise Tax</strong> (Neah-Kah-Nie SD @ $1.00/sf)</td><td style={{ textAlign: 'right' }}><strong>$1,600</strong></td></tr>
+                  <tr><td><strong>School Excise Tax</strong> (Neah-Kah-Nie SD @ $1.00/sf)</td><td style={{ textAlign: 'right' }}><strong>$1,900</strong></td></tr>
                   <tr style={{ borderTop: '1px solid var(--border)' }}><td><em>Subtotal (typical permits)</em></td><td style={{ textAlign: 'right' }}><em>$5,250 - $7,250</em></td></tr>
                 </tbody>
               </table>
@@ -348,14 +344,14 @@ export function BuildCosts() {
 
         <Results title="📉 Cost Reductions">
           <div className="row">
-            <span className="lbl">Single-Story Accessibility Savings</span>
+            <span className="lbl">Design Simplicity Savings</span>
             <div>
               <span className="val">-{fmt(inputs.accessSave)}</span>
               <input type="number" value={inputs.accessSave} onChange={e => setInput('accessSave', +e.target.value)} style={{ width: '100px', marginLeft: '10px', padding: '4px 8px' }} />
             </div>
           </div>
           <div className="hint" style={{ marginTop: '5px', paddingLeft: '10px' }}>
-            Single-level = no stairs, simpler framing, easier trade access, reduced scaffolding
+            Credit for layout and site efficiencies (simple footprint, straightforward access, reduced complexity)
           </div>
           {results.totalDiySavings > 0 && (
             <Row label="Owner Labor Savings (DIY)" value={`-${fmt(results.totalDiySavings)}`} style={{ marginTop: '10px', color: 'var(--success)' }} />
@@ -390,7 +386,7 @@ export function BuildCosts() {
               <Row label="Phase 2 Subtotal" value={fmt(results.phase2Total)} total />
             </div>
             <div className="row" style={{ marginTop: '10px', color: 'var(--success)' }}>
-              <span className="lbl">Total Savings (Single-Story + DIY Labor)</span>
+              <span className="lbl">Total Savings (Design + DIY Labor)</span>
               <span className="val">-{fmt(results.catSavings)}</span>
             </div>
           </Results>

@@ -17,15 +17,15 @@ export const houseDescription = {
 
   // Structure & Architecture
   structure: {
-    style: 'Modern coastal single-story',
-    squareFootage: 1600,
-    stories: 1,
+    style: 'Modern coastal two-story',
+    squareFootage: 1900,
+    stories: 2,
     bedrooms: 2,
     bathrooms: 2.5,
     roofStyle: 'Shed roof (single pitch)',
     roofPitch: 'Low slope (~2:12 to 4:12)',
     frameType: 'Wood frame construction',
-    shape: 'Rectangular footprint for cost efficiency',
+    shape: 'Rectangular 36 ft x 27 ft footprint for cost efficiency',
     ceilingHeight: '9-11 ft (sloped shed roof with exposed rafters)',
   },
 
@@ -62,26 +62,26 @@ export const houseDescription = {
       material: 'Standing seam metal',
       gauge: '24-26 gauge steel',
       finish: 'Kynar 500 coating for coastal durability',
-      area: 1600, // SF
+      area: 950, // SF
       features: ['Single pitch simplifies installation', 'Minimal penetrations', 'Excellent wind resistance'],
     },
     siding: {
       material: 'Fiber cement (HardiePlank or equivalent)',
       style: 'Horizontal lap or board-and-batten',
       reducedArea: true,
-      actualArea: 1200, // SF (reduced from typical 1800 due to door/window coverage)
-      reason: 'West wall (65 ft) mostly sliding doors/windows; south wall has foundation running up',
+      actualArea: 1890, // SF (based on 36' x 27' perimeter with openings deducted)
+      reason: 'Large west-facing openings reduce siding area, but the 36 ft x 27 ft footprint still drives a larger exterior wall takeoff',
     },
     windows: {
       type: 'Coastal-grade fiberglass',
       features: ['Salt-air resistant frames', 'Low-E glass', 'Impact-rated where required'],
-      quantity: '8-10 standard + 2-3 large living room',
+      quantity: '16 total windows',
       standardSize: '$800-$1,200 each',
       largeSize: '$1,500-$2,500 each',
     },
     doors: {
       slidingGlass: {
-        quantity: 3,
+        quantity: 2,
         location: 'West wall (ocean views)',
         size: 'Large format (8-12 ft wide)',
         priceRange: '$4,000-$6,000 each',
@@ -92,15 +92,10 @@ export const houseDescription = {
         priceRange: '$2,500-$4,000',
         features: ['Fiberglass or steel core', 'Decorative glass optional'],
       },
-      sauna: {
-        type: 'Exterior sauna door',
-        priceRange: '$800-$1,200',
-        features: ['Tempered glass', 'Sealed frame'],
-      },
     },
     gutters: {
       configuration: 'Single side only (shed roof)',
-      linearFeet: 50-60,
+      linearFeet: 35,
       material: 'Aluminum or steel',
     },
   },
@@ -119,7 +114,7 @@ export const houseDescription = {
       style: 'Exposed rafter ceiling (coastal aesthetic)',
       height: '9-11 ft varies with shed roof slope',
       skylights: 'Several fixed skylights for natural light',
-      area: 1600, // SF
+      area: 950, // SF (top floor under roof)
       diyFeasible: true,
       savings: '$4-6/sf labor savings',
     },
@@ -144,7 +139,7 @@ export const houseDescription = {
       primary: {
         type: 'Hydronic radiant floor',
         location: 'Under polished concrete slab',
-        coverage: 1600, // SF
+        coverage: 1900, // SF
         components: ['PEX tubing', 'Manifolds', 'High-efficiency boiler', 'Controls'],
         benefits: ['Even heat distribution', 'Silent operation', 'No ductwork/forced air', 'Works with thermal mass floor'],
       },
@@ -160,7 +155,7 @@ export const houseDescription = {
     },
     electrical: {
       service: '200-amp panel',
-      complexity: 'Standard - simple floor plan, single story = easy runs',
+      complexity: 'Standard - simple floor plan with efficient stacked runs',
       features: ['LED lighting throughout', 'Dedicated circuits for appliances'],
     },
     plumbing: {
@@ -248,7 +243,7 @@ export const houseDescription = {
     locationMultiplier: 1.15,
     locationReason: 'Coastal Oregon: higher transport costs, weather delays, limited contractor availability',
     simplifications: [
-      'Single story (no stairs, simpler structure)',
+      'Simple two-story stacked footprint (efficient structure)',
       'Rectangular footprint (efficient framing)',
       'Shed roof (single pitch, simple)',
       'Minimal trim (modern aesthetic = cost savings)',
@@ -276,10 +271,10 @@ export const houseDescription = {
 
 // Summary for quick reference
 export const houseSummary = {
-  shortDescription: '1,600 SF modern coastal single-story residence with ocean views',
+  shortDescription: '1,900 SF modern coastal two-story residence with ocean views',
   location: 'Tide Ave, Arch Cape, Tillamook County, Oregon',
   keyFeatures: [
-    '2 bed / 2.5 bath single-story',
+    '2 bed / 2.5 bath two-story',
     'Hybrid foundation (helical piles + crawl space)',
     'Standing seam metal shed roof',
     'Hydronic radiant floor heating',

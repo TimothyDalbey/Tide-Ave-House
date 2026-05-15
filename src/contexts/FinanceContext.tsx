@@ -103,7 +103,7 @@ const defaultInputs: FinanceInputs = {
   lotAppraisal: 402000,
   constCost: 575000,
   valueGain: '950',
-  estValue: 1600 * 950,  // sqft × price per sqft (beachfront with ocean view)
+  estValue: 1900 * 950,  // sqft × price per sqft (beachfront with ocean view)
   
   // Refinance inputs
   financeClosingCostsRefi: true,  // Roll closing costs into refinance loan
@@ -159,7 +159,7 @@ const defaultResults: FinanceResults = {
 const defaultShareInputs: ShareInputs = {
   timLot: 15000,
   timMtg: 1500,
-  timArch: 4450,
+  timArch: 9385,
   timOther: 0,
   laniLot: 75666,
   laniMtg: 1500,
@@ -201,7 +201,7 @@ export function FinanceProvider({ children }: { children: ReactNode }) {
   const calcAutoValue = useCallback(() => {
     const { valueGain } = inputs;
     // Use sqft from build context, price per sqft from valueGain
-    const sqft = buildResults.sqft || 1600;
+    const sqft = buildResults.sqft || 1900;
     const pricePerSqft = parseInt(valueGain) || 800;
     const autoVal = Math.round(sqft * pricePerSqft);
     setInputs(prev => ({ ...prev, estValue: autoVal }));
@@ -211,7 +211,7 @@ export function FinanceProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (buildResults.financedTotal > 0) {
       const constCost = Math.round(buildResults.financedTotal);
-      const sqft = buildResults.sqft || 1600;
+      const sqft = buildResults.sqft || 1900;
       const pricePerSqft = parseInt(inputs.valueGain) || 800;
       const autoVal = Math.round(sqft * pricePerSqft);
       setInputs(prev => ({ ...prev, constCost, estValue: autoVal }));

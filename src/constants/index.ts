@@ -154,8 +154,8 @@ export const statusItems = {
     { id: 'sep', title: 'Septic Permits', note: 'Permits obtained', defaultStatus: 'done' },
     { id: 'util', title: 'Utilities Arranged', note: 'Electrical and water handled', defaultStatus: 'done' },
     { id: 'rough', title: 'Architect Rough Plans', note: 'Initial design complete', defaultStatus: 'done' },
-    { id: 'eng', title: 'Structural Engineering', note: 'Plans currently with engineer', defaultStatus: 'wip' },
-    { id: 'final', title: 'Final Architectural Plans', note: 'In progress with engineering', defaultStatus: 'wip' },
+    { id: 'eng', title: 'Structural Engineering', note: 'Engineering complete', defaultStatus: 'done' },
+    { id: 'final', title: 'Final Architectural Plans', note: 'In progress post-engineering', defaultStatus: 'wip' },
     { id: 'bperm', title: 'Building Permit Application', note: 'Submit to Tillamook County (2-6 weeks)', defaultStatus: '' },
     { id: 'bpermapp', title: 'Building Permit Approved', note: 'Required before construction begins', defaultStatus: '' }
   ],

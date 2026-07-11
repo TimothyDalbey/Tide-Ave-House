@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect, useCallback, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, useCallback, useMemo, ReactNode } from 'react';
 import { useBuild } from './BuildContext';
 
 export interface FinanceInputs {
@@ -86,13 +86,25 @@ export interface ShareInputs {
   laniOther: number;
 }
 
+export interface ShareTransaction {
+  id: string;
+  party: 'Tim' | 'Lani';
+  category: 'lot' | 'mortgage' | 'architect' | 'engineering' | 'refund' | 'other';
+  label: string;
+  date: string;
+  amount: number;
+}
+
 interface FinanceContextType {
   inputs: FinanceInputs;
   results: FinanceResults;
   shareInputs: ShareInputs;
+  shareTransactions: ShareTransaction[];
   shareResults: ShareResults;
   setInput: <K extends keyof FinanceInputs>(key: K, value: FinanceInputs[K]) => void;
   setShareInput: <K extends keyof ShareInputs>(key: K, value: ShareInputs[K]) => void;
+  setShareTransactionAmount: (id: string, amount: number) => void;
+  setShareTransactionDate: (id: string, date: string) => void;
   calcAutoValue: () => void;
 }
 
@@ -160,11 +172,11 @@ const defaultShareInputs: ShareInputs = {
   timLot: 15000,
   timMtg: 1500,
   timArch: 9385,
-  timOther: 0,
+  timOther: 6750,
   laniLot: 75666,
   laniMtg: 1500,
   laniArch: 4450,
-  laniOther: 0,
+  laniOther: -264,
 };
 
 const defaultShareResults: ShareResults = {
@@ -181,21 +193,116 @@ const defaultShareResults: ShareResults = {
   whoOwes: 'balanced',
 };
 
+const defaultShareTransactions: ShareTransaction[] = [
+  { id: 'tim-lot', party: 'Tim', category: 'lot', label: 'Lot Down Payment', date: '', amount: 15000 },
+  { id: 'tim-architect-1', party: 'Tim', category: 'architect', label: 'Architect Payment 1', date: '', amount: 4450 },
+  { id: 'tim-architect-2', party: 'Tim', category: 'architect', label: 'Architect Payment 2', date: '', amount: 4935 },
+  { id: 'tim-engineering-1', party: 'Tim', category: 'engineering', label: 'Engineering Payment 1', date: '', amount: 1500 },
+  { id: 'tim-engineering-2', party: 'Tim', category: 'engineering', label: 'Engineering Payment 2', date: '', amount: 5250 },
+  { id: 'tim-bamboo-gardens-1', party: 'Tim', category: 'other', label: 'Bamboo Gardens Invoice', date: '', amount: 210 },
+  { id: 'lani-lot', party: 'Lani', category: 'lot', label: 'Lot Down Payment', date: '', amount: 75666 },
+  { id: 'lani-architect-1', party: 'Lani', category: 'architect', label: 'Architect Payment', date: '', amount: 4450 },
+  { id: 'lani-escrow-refund', party: 'Lani', category: 'refund', label: 'Escrow Refund', date: '', amount: -264 },
+];
+
+function summarizeShareTransactions(transactions: ShareTransaction[]): ShareInputs {
+  return transactions.reduce<ShareInputs>((totals, transaction) => {
+    if (transaction.party === 'Tim') {
+      if (transaction.category === 'lot') totals.timLot += transaction.amount;
+      else if (transaction.category === 'mortgage') totals.timMtg += transaction.amount;
+      else if (transaction.category === 'architect') totals.timArch += transaction.amount;
+      else totals.timOther += transaction.amount;
+    } else {
+      if (transaction.category === 'lot') totals.laniLot += transaction.amount;
+      else if (transaction.category === 'mortgage') totals.laniMtg += transaction.amount;
+      else if (transaction.category === 'architect') totals.laniArch += transaction.amount;
+      else totals.laniOther += transaction.amount;
+    }
+    return totals;
+  }, {
+    timLot: 0,
+    timMtg: 0,
+    timArch: 0,
+    timOther: 0,
+    laniLot: 0,
+    laniMtg: 0,
+    laniArch: 0,
+    laniOther: 0,
+  });
+}
+
+function sumTransactionsByParty(transactions: ShareTransaction[], party: 'Tim' | 'Lani') {
+  return transactions
+    .filter(transaction => transaction.party === party && transaction.category !== 'mortgage')
+    .reduce((sum, transaction) => sum + transaction.amount, 0);
+}
+
+function updateDerivedShareField(transactions: ShareTransaction[], field: keyof ShareInputs, value: number): ShareTransaction[] {
+  const directIds: Partial<Record<keyof ShareInputs, string>> = {
+    timLot: 'tim-lot',
+    laniLot: 'lani-lot',
+  };
+
+  const directId = directIds[field];
+  if (directId) {
+    return transactions.map(transaction =>
+      transaction.id === directId ? { ...transaction, amount: value } : transaction
+    );
+  }
+
+  const adjustmentConfig: Record<Exclude<keyof ShareInputs, 'timLot' | 'laniLot'>, ShareTransaction> = {
+    timMtg: { id: 'tim-mortgage-adjustment', party: 'Tim', category: 'mortgage', label: 'Mortgage Adjustment', amount: 0 },
+    timArch: { id: 'tim-architect-adjustment', party: 'Tim', category: 'architect', label: 'Architect Adjustment', amount: 0 },
+    timOther: { id: 'tim-other-adjustment', party: 'Tim', category: 'other', label: 'Other Adjustment', amount: 0 },
+    laniMtg: { id: 'lani-mortgage-adjustment', party: 'Lani', category: 'mortgage', label: 'Mortgage Adjustment', amount: 0 },
+    laniArch: { id: 'lani-architect-adjustment', party: 'Lani', category: 'architect', label: 'Architect Adjustment', amount: 0 },
+    laniOther: { id: 'lani-other-adjustment', party: 'Lani', category: 'other', label: 'Other Adjustment', amount: 0 },
+  };
+
+  const current = summarizeShareTransactions(transactions)[field];
+  const delta = value - current;
+  const adjustment = adjustmentConfig[field as Exclude<keyof ShareInputs, 'timLot' | 'laniLot'>];
+  const existing = transactions.find(transaction => transaction.id === adjustment.id);
+
+  if (existing) {
+    return transactions.map(transaction =>
+      transaction.id === adjustment.id
+        ? { ...transaction, amount: transaction.amount + delta }
+        : transaction
+    );
+  }
+
+  return [...transactions, { ...adjustment, amount: delta }];
+}
+
 const FinanceContext = createContext<FinanceContextType | undefined>(undefined);
 
 export function FinanceProvider({ children }: { children: ReactNode }) {
   const { results: buildResults } = useBuild();
   const [inputs, setInputs] = useState<FinanceInputs>(defaultInputs);
   const [results, setResults] = useState<FinanceResults>(defaultResults);
-  const [shareInputs, setShareInputs] = useState<ShareInputs>(defaultShareInputs);
+  const [shareTransactions, setShareTransactions] = useState<ShareTransaction[]>(defaultShareTransactions);
   const [shareResults, setShareResults] = useState<ShareResults>(defaultShareResults);
+  const shareInputs = useMemo(() => summarizeShareTransactions(shareTransactions), [shareTransactions]);
 
   const setInput = useCallback(<K extends keyof FinanceInputs>(key: K, value: FinanceInputs[K]) => {
     setInputs(prev => ({ ...prev, [key]: value }));
   }, []);
 
   const setShareInput = useCallback(<K extends keyof ShareInputs>(key: K, value: ShareInputs[K]) => {
-    setShareInputs(prev => ({ ...prev, [key]: value }));
+    setShareTransactions(prev => updateDerivedShareField(prev, key, Number(value)));
+  }, []);
+
+  const setShareTransactionAmount = useCallback((id: string, amount: number) => {
+    setShareTransactions(prev => prev.map(transaction =>
+      transaction.id === id ? { ...transaction, amount } : transaction
+    ));
+  }, []);
+
+  const setShareTransactionDate = useCallback((id: string, date: string) => {
+    setShareTransactions(prev => prev.map(transaction =>
+      transaction.id === id ? { ...transaction, date } : transaction
+    ));
   }, []);
 
   const calcAutoValue = useCallback(() => {
@@ -322,17 +429,13 @@ export function FinanceProvider({ children }: { children: ReactNode }) {
     const totCash = lotEquity + closeCost + addCash + downGap;
     const eachRequired = totCash / 2;
 
-    const { timLot, timMtg, timArch, timOther, laniLot, laniMtg, laniArch, laniOther } = shareInputs;
-
-    const timOtherContrib = timMtg + timArch + timOther;
-    const laniOtherContrib = laniMtg + laniArch + laniOther;
-    const timTowardShare = timLot + timOtherContrib;
-    const laniTowardShare = laniLot + laniOtherContrib;
+    const timTowardShare = sumTransactionsByParty(shareTransactions, 'Tim');
+    const laniTowardShare = sumTransactionsByParty(shareTransactions, 'Lani');
     const timStillNeeds = Math.max(0, eachRequired - timTowardShare);
     const laniStillNeeds = Math.max(0, eachRequired - laniTowardShare);
 
-    const timTotal = timLot + timMtg + timArch + timOther;
-    const laniTotal = laniLot + laniMtg + laniArch + laniOther;
+    const timTotal = timTowardShare;
+    const laniTotal = laniTowardShare;
     const combined = timTotal + laniTotal;
     const each = combined / 2;
     const diff = Math.abs(timTotal - laniTotal) / 2;
@@ -354,16 +457,19 @@ export function FinanceProvider({ children }: { children: ReactNode }) {
       diff,
       whoOwes,
     });
-  }, [inputs, results, shareInputs]);
+  }, [inputs, results, shareTransactions]);
 
   return (
     <FinanceContext.Provider value={{ 
       inputs, 
       results, 
       shareInputs, 
+      shareTransactions,
       shareResults, 
       setInput, 
       setShareInput, 
+      setShareTransactionAmount,
+      setShareTransactionDate,
       calcAutoValue 
     }}>
       {children}

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Card, Alert, Row, Results, FormGroup, InputWrap } from '../ui';
 import { useFinance } from '../../contexts/FinanceContext';
 import { fmt } from '../../utils/format';
@@ -6,31 +6,98 @@ import { ProtectedSection } from '../auth/ProtectedSection';
 import { authConfig } from '../../config/auth.config';
 
 export function CostSharing() {
-  const { inputs, results, shareInputs, shareResults, setShareInput } = useFinance();
+  const { inputs, results, shareInputs, shareTransactions, shareResults, setShareTransactionAmount, setShareTransactionDate } = useFinance();
   const [showDetails, setShowDetails] = useState(false);
 
   // If auth is disabled, render content directly
   if (!authConfig.costSharingEnabled) {
-    return <CostSharingContent inputs={inputs} results={results} shareInputs={shareInputs} shareResults={shareResults} setShareInput={setShareInput} showDetails={showDetails} setShowDetails={setShowDetails} />;
+    return <CostSharingContent inputs={inputs} results={results} shareInputs={shareInputs} shareTransactions={shareTransactions} shareResults={shareResults} setShareTransactionAmount={setShareTransactionAmount} setShareTransactionDate={setShareTransactionDate} showDetails={showDetails} setShowDetails={setShowDetails} />;
   }
 
   return (
     <ProtectedSection title="Cost Sharing - Login Required">
-      <CostSharingContent inputs={inputs} results={results} shareInputs={shareInputs} shareResults={shareResults} setShareInput={setShareInput} showDetails={showDetails} setShowDetails={setShowDetails} />
+      <CostSharingContent inputs={inputs} results={results} shareInputs={shareInputs} shareTransactions={shareTransactions} shareResults={shareResults} setShareTransactionAmount={setShareTransactionAmount} setShareTransactionDate={setShareTransactionDate} showDetails={showDetails} setShowDetails={setShowDetails} />
     </ProtectedSection>
   );
 }
 
 // Extracted content component
-function CostSharingContent({ inputs, results, shareInputs, shareResults, setShareInput, showDetails, setShowDetails }: {
+function CostSharingContent({ inputs, results, shareInputs, shareTransactions, shareResults, setShareTransactionAmount, setShareTransactionDate, showDetails, setShowDetails }: {
   inputs: ReturnType<typeof useFinance>['inputs'];
   results: ReturnType<typeof useFinance>['results'];
   shareInputs: ReturnType<typeof useFinance>['shareInputs'];
+  shareTransactions: ReturnType<typeof useFinance>['shareTransactions'];
   shareResults: ReturnType<typeof useFinance>['shareResults'];
-  setShareInput: ReturnType<typeof useFinance>['setShareInput'];
+  setShareTransactionAmount: ReturnType<typeof useFinance>['setShareTransactionAmount'];
+  setShareTransactionDate: ReturnType<typeof useFinance>['setShareTransactionDate'];
   showDetails: boolean;
   setShowDetails: (v: boolean) => void;
 }) {
+  const [sortMode, setSortMode] = useState<'recorded' | 'date-asc' | 'date-desc'>('recorded');
+
+  const sortedTransactions = useMemo(() => {
+    const withIndex = shareTransactions.map((transaction, index) => ({ transaction, index }));
+
+    if (sortMode === 'recorded') {
+      return withIndex.map(item => item.transaction);
+    }
+
+    return [...withIndex]
+      .sort((left, right) => {
+        const leftDate = left.transaction.date || '9999-12-31';
+        const rightDate = right.transaction.date || '9999-12-31';
+
+        if (leftDate === rightDate) {
+          return left.index - right.index;
+        }
+
+        return sortMode === 'date-asc'
+          ? leftDate.localeCompare(rightDate)
+          : rightDate.localeCompare(leftDate);
+      })
+      .map(item => item.transaction);
+  }, [shareTransactions, sortMode]);
+
+  const ledgerRows = useMemo(() => {
+    let timPaid = 0;
+    let laniPaid = 0;
+
+    return sortedTransactions.map(transaction => {
+      if (transaction.party === 'Tim') timPaid += transaction.amount;
+      else laniPaid += transaction.amount;
+
+      const netDifference = timPaid - laniPaid;
+      const settlement = Math.abs(netDifference) / 2;
+      const runningBalance = settlement === 0
+        ? 'Balanced'
+        : netDifference > 0
+          ? `Lani owes Tim ${fmt(settlement)}`
+          : `Tim owes Lani ${fmt(settlement)}`;
+
+      return { ...transaction, runningBalance };
+    });
+  }, [sortedTransactions]);
+
+  const transactionSummary = useMemo(() => {
+    const categories: Record<string, { tim: number; lani: number; label: string }> = {
+      lot: { tim: 0, lani: 0, label: 'Lot Down Payment' },
+      architect: { tim: 0, lani: 0, label: 'Architect Fees' },
+      engineering: { tim: 0, lani: 0, label: 'Engineering Fees' },
+      refund: { tim: 0, lani: 0, label: 'Refunds / Credits' },
+      other: { tim: 0, lani: 0, label: 'Other Adjustments' },
+    };
+
+    shareTransactions.forEach(transaction => {
+      if (transaction.category === 'mortgage') return;
+      const bucket = categories[transaction.category];
+      if (!bucket) return;
+      if (transaction.party === 'Tim') bucket.tim += transaction.amount;
+      else bucket.lani += transaction.amount;
+    });
+
+    return Object.values(categories).filter(row => row.tim !== 0 || row.lani !== 0);
+  }, [shareTransactions]);
+
   return (
     <>
       <Card title="Project Funding Breakdown">
@@ -59,7 +126,7 @@ function CostSharingContent({ inputs, results, shareInputs, shareResults, setSha
             <div>
               <Row label="Tim's Required Contribution" value={fmt(shareResults.eachRequired)} highlight />
               <Row label="Tim's Lot Equity Paid" value={fmt(shareInputs.timLot)} />
-              <Row label="Tim's Other Paid (pre-const)" value={fmt(shareInputs.timMtg + shareInputs.timArch + shareInputs.timOther)} />
+              <Row label="Tim's Other Paid (pre-const)" value={fmt(shareResults.timTotal - shareInputs.timLot)} />
               <Row label="Tim's Cash at Closing" value={fmt(shareResults.timStillNeeds)} />
               <div className="row" style={{ background: 'rgba(26,95,122,.1)' }}>
                 <span className="lbl"><strong>Tim Still Needs to Bring</strong></span>
@@ -69,7 +136,7 @@ function CostSharingContent({ inputs, results, shareInputs, shareResults, setSha
             <div>
               <Row label="Lani's Required Contribution" value={fmt(shareResults.eachRequired)} highlight />
               <Row label="Lani's Lot Equity Paid" value={fmt(shareInputs.laniLot)} />
-              <Row label="Lani's Other Paid (pre-const)" value={fmt(shareInputs.laniMtg + shareInputs.laniArch + shareInputs.laniOther)} />
+              <Row label="Lani's Other Paid (pre-const)" value={fmt(shareResults.laniTotal - shareInputs.laniLot)} />
               <Row label="Lani's Cash at Closing" value={fmt(shareResults.laniStillNeeds)} />
               <div className="row" style={{ background: 'rgba(87,131,123,.1)' }}>
                 <span className="lbl"><strong>Lani Still Needs to Bring</strong></span>
@@ -102,6 +169,61 @@ function CostSharingContent({ inputs, results, shareInputs, shareResults, setSha
               Tracking contributions to ensure equitable cost sharing. Updates dynamically based on finance calculator values.
             </p>
 
+            <Results title="Line-Item Transactions" style={{ marginBottom: '20px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px', gap: '12px', flexWrap: 'wrap' }}>
+                <p style={{ margin: 0, fontSize: '.9rem', color: 'var(--text-light)' }}>
+                  Running balance follows the current ledger sort order.
+                </p>
+                <FormGroup label="Sort Transactions" hint="Use dates once you add them to view strict chronology.">
+                  <select value={sortMode} onChange={e => setSortMode(e.target.value as 'recorded' | 'date-asc' | 'date-desc')}>
+                    <option value="recorded">Recorded order</option>
+                    <option value="date-asc">Date ascending</option>
+                    <option value="date-desc">Date descending</option>
+                  </select>
+                </FormGroup>
+              </div>
+              <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: '10px' }}>
+                <thead>
+                  <tr style={{ borderBottom: '2px solid var(--border)' }}>
+                    <th style={{ textAlign: 'left', padding: '12px 8px', color: 'var(--text-light)' }}>Date</th>
+                    <th style={{ textAlign: 'left', padding: '12px 8px', color: 'var(--text-light)' }}>Party</th>
+                    <th style={{ textAlign: 'left', padding: '12px 8px', color: 'var(--text-light)' }}>Category</th>
+                    <th style={{ textAlign: 'left', padding: '12px 8px', color: 'var(--text-light)' }}>Transaction</th>
+                    <th style={{ textAlign: 'right', padding: '12px 8px', color: 'var(--text-light)' }}>Amount</th>
+                    <th style={{ textAlign: 'left', padding: '12px 8px', color: 'var(--text-light)' }}>Running Balance</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {ledgerRows.map(transaction => (
+                    <tr key={transaction.id} style={{ borderBottom: '1px solid var(--border)' }}>
+                      <td style={{ padding: '12px 8px' }}>
+                        <input
+                          type="date"
+                          value={transaction.date}
+                          onChange={e => setShareTransactionDate(transaction.id, e.target.value)}
+                          style={{ width: '150px' }}
+                        />
+                      </td>
+                      <td style={{ padding: '12px 8px', color: transaction.party === 'Tim' ? 'var(--primary)' : 'var(--secondary)' }}>{transaction.party}</td>
+                      <td style={{ padding: '12px 8px', textTransform: 'capitalize' }}>{transaction.category}</td>
+                      <td style={{ padding: '12px 8px' }}>{transaction.label}</td>
+                      <td style={{ textAlign: 'right', padding: '12px 8px' }}>
+                        <InputWrap prefix="$">
+                          <input
+                            type="number"
+                            value={transaction.amount}
+                            onChange={e => setShareTransactionAmount(transaction.id, +e.target.value)}
+                            style={{ width: '120px' }}
+                          />
+                        </InputWrap>
+                      </td>
+                      <td style={{ padding: '12px 8px' }}>{transaction.runningBalance}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </Results>
+
             <div className="grid">
               <Results title="Contributions to Date">
                 <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: '10px' }}>
@@ -114,24 +236,14 @@ function CostSharingContent({ inputs, results, shareInputs, shareResults, setSha
                     </tr>
                   </thead>
                   <tbody>
-                    <tr style={{ borderBottom: '1px solid var(--border)' }}>
-                      <td style={{ padding: '12px 8px' }}>Lot Down Payment</td>
-                      <td style={{ textAlign: 'right', padding: '12px 8px' }}>{fmt(shareInputs.timLot)}</td>
-                      <td style={{ textAlign: 'right', padding: '12px 8px' }}>{fmt(shareInputs.laniLot)}</td>
-                      <td style={{ textAlign: 'right', padding: '12px 8px', color: 'var(--text-light)' }}>{fmt(shareInputs.timLot + shareInputs.laniLot)}</td>
-                    </tr>
-                    <tr style={{ borderBottom: '1px solid var(--border)' }}>
-                      <td style={{ padding: '12px 8px' }}>Mortgage Payments</td>
-                      <td style={{ textAlign: 'right', padding: '12px 8px' }}>{fmt(shareInputs.timMtg)}</td>
-                      <td style={{ textAlign: 'right', padding: '12px 8px' }}>{fmt(shareInputs.laniMtg)}</td>
-                      <td style={{ textAlign: 'right', padding: '12px 8px', color: 'var(--text-light)' }}>{fmt(shareInputs.timMtg + shareInputs.laniMtg)}</td>
-                    </tr>
-                    <tr style={{ borderBottom: '1px solid var(--border)' }}>
-                      <td style={{ padding: '12px 8px' }}>Architect Fees</td>
-                      <td style={{ textAlign: 'right', padding: '12px 8px' }}>{fmt(shareInputs.timArch)}</td>
-                      <td style={{ textAlign: 'right', padding: '12px 8px' }}>{fmt(shareInputs.laniArch)}</td>
-                      <td style={{ textAlign: 'right', padding: '12px 8px', color: 'var(--text-light)' }}>{fmt(shareInputs.timArch + shareInputs.laniArch)}</td>
-                    </tr>
+                    {transactionSummary.map(row => (
+                      <tr key={row.label} style={{ borderBottom: '1px solid var(--border)' }}>
+                        <td style={{ padding: '12px 8px' }}>{row.label}</td>
+                        <td style={{ textAlign: 'right', padding: '12px 8px' }}>{fmt(row.tim)}</td>
+                        <td style={{ textAlign: 'right', padding: '12px 8px' }}>{fmt(row.lani)}</td>
+                        <td style={{ textAlign: 'right', padding: '12px 8px', color: 'var(--text-light)' }}>{fmt(row.tim + row.lani)}</td>
+                      </tr>
+                    ))}
                     <tr style={{ background: 'var(--bg)', fontWeight: 600 }}>
                       <td style={{ padding: '12px 8px' }}>Total Paid</td>
                       <td style={{ textAlign: 'right', padding: '12px 8px', color: 'var(--primary)' }}>{fmt(shareResults.timTotal)}</td>
@@ -160,7 +272,7 @@ function CostSharingContent({ inputs, results, shareInputs, shareResults, setSha
             </div>
 
             <Alert type="info" icon="💡">
-              <strong>Joint Financing Note:</strong> Since the construction loan will be in both names, ongoing mortgage payments will naturally be shared. 
+              <strong>Joint Financing Note:</strong> This calculator is focused on pre-construction contributions only. 
               The imbalance represents pre-construction contributions. You can settle this by:<br />
               • Paying before or at closing<br />
               • Contributing more to closing costs<br />
@@ -169,56 +281,10 @@ function CostSharingContent({ inputs, results, shareInputs, shareResults, setSha
             </Alert>
 
             <Card style={{ marginTop: '20px', padding: '20px' }}>
-              <h3 style={{ color: 'var(--secondary)', marginBottom: '15px' }}>Custom Calculator</h3>
+              <h3 style={{ color: 'var(--secondary)', marginBottom: '15px' }}>Transaction-Driven Balance</h3>
               <p style={{ marginBottom: '15px', fontSize: '.9rem', color: 'var(--text-light)' }}>
-                Update values as expenses change:
+                Edit the line-item transactions above. All totals and who-owes-who calculations update directly from that ledger.
               </p>
-              <div className="grid">
-                <div>
-                  <FormGroup label="Tim - Lot Down Payment">
-                    <InputWrap prefix="$">
-                      <input type="number" value={shareInputs.timLot} onChange={e => setShareInput('timLot', +e.target.value)} />
-                    </InputWrap>
-                  </FormGroup>
-                  <FormGroup label="Tim - Mortgage Payments">
-                    <InputWrap prefix="$">
-                      <input type="number" value={shareInputs.timMtg} onChange={e => setShareInput('timMtg', +e.target.value)} />
-                    </InputWrap>
-                  </FormGroup>
-                  <FormGroup label="Tim - Architect Fees">
-                    <InputWrap prefix="$">
-                      <input type="number" value={shareInputs.timArch} onChange={e => setShareInput('timArch', +e.target.value)} />
-                    </InputWrap>
-                  </FormGroup>
-                  <FormGroup label="Tim - Other Expenses">
-                    <InputWrap prefix="$">
-                      <input type="number" value={shareInputs.timOther} onChange={e => setShareInput('timOther', +e.target.value)} />
-                    </InputWrap>
-                  </FormGroup>
-                </div>
-                <div>
-                  <FormGroup label="Lani - Lot Down Payment">
-                    <InputWrap prefix="$">
-                      <input type="number" value={shareInputs.laniLot} onChange={e => setShareInput('laniLot', +e.target.value)} />
-                    </InputWrap>
-                  </FormGroup>
-                  <FormGroup label="Lani - Mortgage Payments">
-                    <InputWrap prefix="$">
-                      <input type="number" value={shareInputs.laniMtg} onChange={e => setShareInput('laniMtg', +e.target.value)} />
-                    </InputWrap>
-                  </FormGroup>
-                  <FormGroup label="Lani - Architect Fees">
-                    <InputWrap prefix="$">
-                      <input type="number" value={shareInputs.laniArch} onChange={e => setShareInput('laniArch', +e.target.value)} />
-                    </InputWrap>
-                  </FormGroup>
-                  <FormGroup label="Lani - Other Expenses">
-                    <InputWrap prefix="$">
-                      <input type="number" value={shareInputs.laniOther} onChange={e => setShareInput('laniOther', +e.target.value)} />
-                    </InputWrap>
-                  </FormGroup>
-                </div>
-              </div>
               <Results title="Updated Balance" style={{ marginTop: '20px' }}>
                 <Row label="Tim Total" value={fmt(shareResults.timTotal)} />
                 <Row label="Lani Total" value={fmt(shareResults.laniTotal)} />

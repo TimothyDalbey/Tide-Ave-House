@@ -36,6 +36,8 @@ function loadFromStorage(): StatusMap {
         }
         merged[key] = savedValue;
       }
+      // Timeline update: engineering is complete and should display done.
+      merged.eng = 'done';
       return merged;
     }
   } catch {

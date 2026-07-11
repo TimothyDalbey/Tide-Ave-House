@@ -90,6 +90,15 @@ function App() {
         <p style={{ marginTop: '5px' }}>
           <a href="/tide-ave/sources.html">Sources & Citations</a>
         </p>
+        <p style={{ marginTop: '5px' }}>
+          <a
+            href="https://drive.google.com/drive/folders/11EtLzvrzSvco4fOwA8-Wy_TvQsFzIISe"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Tide Avenue Project Files (Google Drive)
+          </a>
+        </p>
         <p style={{ marginTop: '5px' }}>© 2026 | Tillamook County, Oregon</p>
       </footer>
     </>

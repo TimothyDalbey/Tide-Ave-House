@@ -168,17 +168,6 @@ const defaultResults: FinanceResults = {
   needsPMI: false,
 };
 
-const defaultShareInputs: ShareInputs = {
-  timLot: 15000,
-  timMtg: 1500,
-  timArch: 9385,
-  timOther: 6750,
-  laniLot: 75666,
-  laniMtg: 1500,
-  laniArch: 4450,
-  laniOther: -264,
-};
-
 const defaultShareResults: ShareResults = {
   eachRequired: 0,
   timTowardShare: 0,
@@ -251,12 +240,12 @@ function updateDerivedShareField(transactions: ShareTransaction[], field: keyof 
   }
 
   const adjustmentConfig: Record<Exclude<keyof ShareInputs, 'timLot' | 'laniLot'>, ShareTransaction> = {
-    timMtg: { id: 'tim-mortgage-adjustment', party: 'Tim', category: 'mortgage', label: 'Mortgage Adjustment', amount: 0 },
-    timArch: { id: 'tim-architect-adjustment', party: 'Tim', category: 'architect', label: 'Architect Adjustment', amount: 0 },
-    timOther: { id: 'tim-other-adjustment', party: 'Tim', category: 'other', label: 'Other Adjustment', amount: 0 },
-    laniMtg: { id: 'lani-mortgage-adjustment', party: 'Lani', category: 'mortgage', label: 'Mortgage Adjustment', amount: 0 },
-    laniArch: { id: 'lani-architect-adjustment', party: 'Lani', category: 'architect', label: 'Architect Adjustment', amount: 0 },
-    laniOther: { id: 'lani-other-adjustment', party: 'Lani', category: 'other', label: 'Other Adjustment', amount: 0 },
+    timMtg: { id: 'tim-mortgage-adjustment', party: 'Tim', category: 'mortgage', label: 'Mortgage Adjustment', date: '', amount: 0 },
+    timArch: { id: 'tim-architect-adjustment', party: 'Tim', category: 'architect', label: 'Architect Adjustment', date: '', amount: 0 },
+    timOther: { id: 'tim-other-adjustment', party: 'Tim', category: 'other', label: 'Other Adjustment', date: '', amount: 0 },
+    laniMtg: { id: 'lani-mortgage-adjustment', party: 'Lani', category: 'mortgage', label: 'Mortgage Adjustment', date: '', amount: 0 },
+    laniArch: { id: 'lani-architect-adjustment', party: 'Lani', category: 'architect', label: 'Architect Adjustment', date: '', amount: 0 },
+    laniOther: { id: 'lani-other-adjustment', party: 'Lani', category: 'other', label: 'Other Adjustment', date: '', amount: 0 },
   };
 
   const current = summarizeShareTransactions(transactions)[field];

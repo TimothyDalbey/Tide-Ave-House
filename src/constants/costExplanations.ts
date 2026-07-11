@@ -2130,7 +2130,7 @@ Consider hiring for:
 
 **═══ TOTAL CALCULATION ═══**
 • Kitchen cabinets: $8,700
-• Bathroom vanities: $3,500 (two 60\" double vanities + powder room)
+• Bathroom vanities: $3,500 (two 60" double vanities + powder room)
 • Installation: $3,900 (or $0 DIY)
 • **TOTAL: $16,100**
 

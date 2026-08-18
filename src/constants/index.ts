@@ -15,7 +15,6 @@ export const baseCosts = {
 // Grade multipliers relative to mid-to-high-mid (1.15) base
 export const gradeMultipliers: Record<string, number> = {
   '0.85': 0.65,  // Budget
-  '1.0': 0.80,   // Standard
   '1.15': 1.0,   // Mid-to-High-Mid (reference)
   '1.35': 1.25,  // High-End
   '1.6': 1.65    // Luxury
@@ -150,13 +149,65 @@ export const termOptions = [
 export const statusItems = {
   preConstruction: [
     { id: 'lot', title: 'Lot Purchased', note: '$402,000 with ~$90,000 down', defaultStatus: 'done' },
-    { id: 'geo', title: 'Geotechnical Study', note: 'Deep pile foundation recommended', defaultStatus: 'done' },
     { id: 'sep', title: 'Septic Permits', note: 'Permits obtained', defaultStatus: 'done' },
     { id: 'util', title: 'Utilities Arranged', note: 'Electrical and water handled', defaultStatus: 'done' },
     { id: 'rough', title: 'Architect Rough Plans', note: 'Initial design complete', defaultStatus: 'done' },
-    { id: 'eng', title: 'Structural Engineering', note: 'Engineering complete', defaultStatus: 'done' },
-    { id: 'final', title: 'Final Architectural Plans', note: 'In progress post-engineering', defaultStatus: 'wip' },
-    { id: 'bperm', title: 'Building Permit Application', note: 'Submit to Tillamook County (2-6 weeks)', defaultStatus: '' },
+    { id: 'final', title: 'Final Architectural Plans', note: 'In progress; required for Redmond Engineering sign-off', defaultStatus: 'wip' },
+    { id: 'fireletter', title: 'Fire Letter', note: 'Complete', defaultStatus: 'done' },
+    { id: 'waterletter', title: 'Water Availability Letter', note: 'Complete', defaultStatus: 'done' },
+    {
+      id: 'roadapproach',
+      title: 'Road Approach Permit',
+      note: 'Tillamook County Public Works - preparing for submittal',
+      defaultStatus: 'wip',
+      details: 'Tax lot 65299 fronts County-maintained Tide Avenue. Confirm field location, sight distance, culvert, drainage, construction access, and any paving condition with Public Works.',
+      sources: [
+        { label: 'Road Approach Application', url: 'https://www.tillamookcounty.gov/sites/default/files/fileattachments/public_works/page/25400/roadapproachapplication.pdf' },
+        { label: 'Ordinance 44 and amendments', url: 'https://www.tillamookcounty.gov/ordinances/establishing-standards-road-approaches-all-public-roads-tillamook-county-outside' }
+      ]
+    },
+    {
+      id: 'georeexec',
+      title: 'Geotechnical Survey Re-Execution',
+      note: 'In progress - estimated cost: $10,000',
+      defaultStatus: 'wip',
+      details: 'Estimated cost: $10,000. The County geohazard package requires a stamped, signed report. Reports are valid for five years, although Planning may require an addendum if site conditions have changed.',
+      sources: [
+        { label: 'Geohazard and Beach & Dune requirements', url: 'https://www.tillamookcounty.gov/sites/default/files/fileattachments/community_development/page/2851/updated_list_for_geologic_hazard_assessment_submittal.pdf' }
+      ]
+    },
+    {
+      id: 'redmond',
+      title: 'Redmond Engineering Sign-Off',
+      note: 'Plans and geotechnical survey require approval',
+      defaultStatus: '',
+      details: 'Obtain a stamped, signed certification from the project engineer, geotechnical engineer, or engineering geologist that the submitted plans conform to the geohazard assessment.',
+      sources: [
+        { label: 'Geohazard submittal checklist', url: 'https://www.tillamookcounty.gov/sites/default/files/fileattachments/community_development/page/2851/updated_list_for_geologic_hazard_assessment_submittal.pdf' }
+      ]
+    },
+    {
+      id: 'zperm',
+      title: 'Zoning Permit Application',
+      note: 'Submit after engineering sign-off',
+      defaultStatus: '',
+      details: 'The lot is mapped RR-2 and is about 0.371 acres. Confirm legal lot-of-record buildability before submittal because the RR-2 minimum is two acres unless the undersized lot qualifies as legally established before December 18, 2002.',
+      sources: [
+        { label: 'RR-2 zone standards', url: 'https://www.tillamookcounty.gov/sites/default/files/fileattachments/community_development/page/104106/final_rr-2_rr-10_3.010.pdf' },
+        { label: 'Land Use Ordinance', url: 'https://www.tillamookcounty.gov/commdev/page/land-use-ordinance-luo-zoning-ordinance' }
+      ]
+    },
+    {
+      id: 'bperm',
+      title: 'Building Permit Application',
+      note: 'Submit after zoning permit application',
+      defaultStatus: '',
+      details: 'Include the approved road approach permit, geohazard report and engineering certification, stormwater, erosion control, grading, vegetation, water, and sanitation documentation in the consolidated package.',
+      sources: [
+        { label: 'Consolidated Building/Zoning Permit Application', url: 'https://www.tillamookcounty.gov/commdev/page/buildingzoning-permit-application' },
+        { label: 'Geohazard submittal checklist', url: 'https://www.tillamookcounty.gov/sites/default/files/fileattachments/community_development/page/2851/updated_list_for_geologic_hazard_assessment_submittal.pdf' }
+      ]
+    },
     { id: 'bpermapp', title: 'Building Permit Approved', note: 'Required before construction begins', defaultStatus: '' }
   ],
   construction: [

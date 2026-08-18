@@ -2637,10 +2637,12 @@ Based on project valuation formula:
 • High ($10K): Multiple overlays, complex review`
   },
   engineering: {
-    estimate: '$8,000',
-    low: '$5,000',
-    high: '$12,000',
-    notes: `**CALCULATION:** Required engineering for helical pile foundation and coastal site.
+    estimate: '$8,200',
+    low: '$6,700',
+    high: '$9,700+',
+    notes: `**CURRENT STRUCTURAL ENGINEERING BUDGET:** $6,700 paid to engineering and approximately $1,500 remaining. The $10,000 geotechnical re-execution is tracked separately in the Project Status Tracker.
+
+**CALCULATION:** Required engineering for helical pile foundation and coastal site.
 
 **═══ REQUIRED ENGINEERING SERVICES ═══** [18][19]
 
@@ -2688,10 +2690,9 @@ Based on project valuation formula:
 
 | Service | Budget |
 |---------|--------|
-| Geotechnical report | $3,500 |
-| Structural engineering | $4,000 |
-| Contingency (misc.) | $500 |
-| **TOTAL** | **$8,000** |
+| Engineering paid to date | $6,700 |
+| Remaining engineering allowance | $1,500 |
+| **TOTAL STRUCTURAL ENGINEERING BUDGET** | **$8,200** |
 
 **═══ WHY ENGINEERING IS ESSENTIAL ═══**
 
@@ -2730,9 +2731,9 @@ Based on project valuation formula:
 **Total engineering timeline: 4-8 weeks**
 
 **RANGE EXPLANATION:**
-• Low ($5K): Simple site, standard foundation
-• Mid ($8K): Helical piles, moderate complexity ✓
-• High ($12K): Complex site, multiple engineers`
+• The current $8.2K budget reflects known paid structural engineering and the remaining allowance.
+• The new $10K geotechnical report is a separate in-progress requirement and is not included in this budget.
+• Additional engineering beyond this allowance remains possible if the updated report requires design changes.`
   },
   insurance: {
     estimate: '$4,000',

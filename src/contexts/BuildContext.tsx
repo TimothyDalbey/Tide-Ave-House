@@ -131,7 +131,7 @@ const defaultInputs: BuildInputs = {
   locFactor: 1,
   // Site Work & Pier and Beam Foundation
   sitePrep: 2500,       // Minimal grading/access - site already prepped
-  piles: 54000,         // Confirmed RamJack bid for deep pile foundation system
+  piles: 57000,         // RamJack estimate for deep pile foundation system
   septic: 28000,        // Bid received
   utility: 22000,    // Bid received
   // Framing
@@ -165,7 +165,7 @@ const defaultInputs: BuildInputs = {
   bathFixtures: 12000, // Two master baths with single sinks, minimal aesthetic
   // Soft Costs
   permits: 8000,     // Tillamook County full permit package + excise tax
-  engineering: 8000,
+  engineering: 8200,    // $6,700 paid + $1,500 remaining structural engineering
   architect: 14000,
   insurance: 4000,
   gcFee: 15,

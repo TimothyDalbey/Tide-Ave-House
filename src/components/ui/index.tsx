@@ -143,10 +143,12 @@ interface StatusItemProps {
   status: '' | 'wip' | 'done';
   title: string;
   note: string;
+  details?: string;
+  sources?: { label: string; url: string }[];
   onClick: () => void;
 }
 
-export function StatusItem({ status, title, note, onClick }: StatusItemProps) {
+export function StatusItem({ status, title, note, details, sources, onClick }: StatusItemProps) {
   const className = ['stat-item', status].filter(Boolean).join(' ');
   const checkContent = status === 'done' ? '✓' : status === 'wip' ? '●' : '';
 
@@ -156,6 +158,21 @@ export function StatusItem({ status, title, note, onClick }: StatusItemProps) {
       <div>
         <div className="stat-title">{title}</div>
         <div className="stat-note">{note}</div>
+        {details && (
+          <details className="stat-details" onClick={event => event.stopPropagation()}>
+            <summary>Details</summary>
+            <p>{details}</p>
+            {sources && (
+              <div className="stat-sources">
+                {sources.map(source => (
+                  <a key={source.url} href={source.url} target="_blank" rel="noopener noreferrer">
+                    {source.label}
+                  </a>
+                ))}
+              </div>
+            )}
+          </details>
+        )}
       </div>
     </div>
   );

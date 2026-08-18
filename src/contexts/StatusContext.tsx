@@ -36,8 +36,8 @@ function loadFromStorage(): StatusMap {
         }
         merged[key] = savedValue;
       }
-      // Timeline update: engineering is complete and should display done.
-      merged.eng = 'done';
+      // The prior geotechnical work must be re-executed before permit submittal.
+      merged.georeexec = 'wip';
       return merged;
     }
   } catch {

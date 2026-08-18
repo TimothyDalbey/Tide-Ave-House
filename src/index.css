@@ -377,6 +377,35 @@ input:focus, select:focus {
   color: var(--text-light);
 }
 
+.stat-details {
+  margin-top: 8px;
+  font-size: .85rem;
+  color: var(--text-light);
+}
+
+.stat-details summary {
+  color: var(--primary);
+  cursor: pointer;
+  font-weight: 600;
+  width: fit-content;
+}
+
+.stat-details p {
+  margin-top: 8px;
+}
+
+.stat-sources {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  margin-top: 8px;
+}
+
+.stat-sources a {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
 .tl {
   padding-left: 30px;
   border-left: 3px solid var(--border);

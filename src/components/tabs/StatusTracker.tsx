@@ -23,6 +23,8 @@ export function StatusTracker() {
               status={status[item.id] || ''}
               title={item.title}
               note={item.note}
+              details={item.details}
+              sources={item.sources}
               onClick={() => toggle(item.id)}
             />
           ))}

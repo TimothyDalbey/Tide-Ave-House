@@ -6,3 +6,4 @@ export { Process } from './Process';
 export { StatusTracker } from './StatusTracker';
 export { CostSharing } from './CostSharing';
 export { STRAnalysis } from './STRAnalysis';
+export { GCLicense } from './GCLicense';

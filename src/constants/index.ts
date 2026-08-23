@@ -147,6 +147,18 @@ export const termOptions = [
 ];
 
 export const statusItems = {
+  gcLicense: [
+    { id: 'gc-determine', title: 'Determine License Category', note: 'Residential general contractor endorsement under review', defaultStatus: 'done' },
+    { id: 'gc-requirements', title: 'Confirm License Path, Endorsement & RMI', note: 'Choose owner-builder exemption or Residential General Contractor license', defaultStatus: '' },
+    { id: 'gc-education', title: 'Complete Pre-License Education', note: 'Complete the required 16-hour CCB class', defaultStatus: '' },
+    { id: 'gc-exam-prep', title: 'Prepare for Licensing Exam', note: 'Study Oregon CCB law and business practices', defaultStatus: '' },
+    { id: 'gc-exam-sit', title: 'Take CCB Exam', note: 'Schedule and pass the licensing examination', defaultStatus: '' },
+    { id: 'gc-insurance', title: 'Obtain Liability & Workers Comp Insurance', note: 'Secure required insurance and bond', defaultStatus: '' },
+    { id: 'gc-rmi', title: 'Designate Responsible Managing Individual (RMI)', note: 'Identify the RMI for the business entity', defaultStatus: '' },
+    { id: 'gc-apply', title: 'Submit License Application', note: 'Submit application and supporting documentation', defaultStatus: '' },
+    { id: 'gc-approval', title: 'License Approved & Issued', note: 'Receive the CCB license number', defaultStatus: '' },
+    { id: 'gc-maintain', title: 'Maintain Compliance & Renew', note: 'Maintain insurance and renew every two years', defaultStatus: '' }
+  ],
   preConstruction: [
     { id: 'lot', title: 'Lot Purchased', note: '$402,000 with ~$90,000 down', defaultStatus: 'done' },
     { id: 'sep', title: 'Septic Permits', note: 'Permits obtained', defaultStatus: 'done' },
@@ -158,8 +170,8 @@ export const statusItems = {
     {
       id: 'roadapproach',
       title: 'Road Approach Permit',
-      note: 'Tillamook County Public Works - preparing for submittal',
-      defaultStatus: 'wip',
+      note: 'Tillamook County Public Works - submitted ($782)',
+      defaultStatus: 'done',
       details: 'Tax lot 65299 fronts County-maintained Tide Avenue. Confirm field location, sight distance, culvert, drainage, construction access, and any paving condition with Public Works.',
       sources: [
         { label: 'Road Approach Application', url: 'https://www.tillamookcounty.gov/sites/default/files/fileattachments/public_works/page/25400/roadapproachapplication.pdf' },

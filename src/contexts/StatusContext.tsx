@@ -38,6 +38,8 @@ function loadFromStorage(): StatusMap {
       }
       // The prior geotechnical work must be re-executed before permit submittal.
       merged.georeexec = 'wip';
+      // GC License Guide Step 1 was completed before its tracker key was fixed.
+      merged['gc-determine'] = 'done';
       return merged;
     }
   } catch {

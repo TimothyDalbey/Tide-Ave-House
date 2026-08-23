@@ -189,6 +189,7 @@ const defaultShareTransactions: ShareTransaction[] = [
   { id: 'tim-engineering-1', party: 'Tim', category: 'engineering', label: 'Engineering Payment 1', date: '', amount: 1500 },
   { id: 'tim-engineering-2', party: 'Tim', category: 'engineering', label: 'Engineering Payment 2', date: '', amount: 5250 },
   { id: 'tim-bamboo-gardens-1', party: 'Tim', category: 'other', label: 'Bamboo Gardens Invoice', date: '', amount: 210 },
+  { id: 'tim-roadapproach', party: 'Tim', category: 'other', label: 'Road Approach Permit', date: '', amount: 782 },
   { id: 'lani-lot', party: 'Lani', category: 'lot', label: 'Lot Down Payment', date: '', amount: 75666 },
   { id: 'lani-architect-1', party: 'Lani', category: 'architect', label: 'Architect Payment', date: '', amount: 4450 },
   { id: 'lani-escrow-refund', party: 'Lani', category: 'refund', label: 'Escrow Refund', date: '', amount: -264 },

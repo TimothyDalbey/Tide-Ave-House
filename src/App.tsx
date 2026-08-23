@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { Overview, BuildCosts, Calculator, Requirements, Process, StatusTracker, CostSharing, STRAnalysis } from './components/tabs';
+import { Overview, BuildCosts, Calculator, Requirements, Process, StatusTracker, CostSharing, STRAnalysis, GCLicense } from './components/tabs';
 
-type TabId = 'overview' | 'buildcost' | 'calculator' | 'str' | 'requirements' | 'process' | 'status' | 'costs';
+type TabId = 'overview' | 'buildcost' | 'calculator' | 'str' | 'requirements' | 'process' | 'status' | 'costs' | 'gclicense';
 
 const tabs: { id: TabId; label: string }[] = [
   { id: 'overview', label: 'Overview' },
@@ -10,6 +10,7 @@ const tabs: { id: TabId; label: string }[] = [
   { id: 'str', label: 'STR Analysis' },
   { id: 'requirements', label: 'Requirements' },
   { id: 'process', label: 'Building Process' },
+  { id: 'gclicense', label: 'GC License Guide' },
   { id: 'status', label: 'Status Tracker' },
   { id: 'costs', label: 'Cost Sharing' },
 ];
@@ -31,6 +32,7 @@ function App() {
       case 'str': return <STRAnalysis />;
       case 'requirements': return <Requirements />;
       case 'process': return <Process />;
+      case 'gclicense': return <GCLicense />;
       case 'status': return <StatusTracker />;
       case 'costs': return <CostSharing />;
       default: return <Overview />;
